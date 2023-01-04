@@ -14,6 +14,10 @@ public class Category {
     @Column(name = "name")
     private String name;
 
+    @Basic
+    @Column(name = "image")
+    private String image;
+
     public Integer getId() {
         return id;
     }
@@ -30,16 +34,25 @@ public class Category {
         this.name = name;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Category category = (Category) o;
-        return Objects.equals(id, category.id) && Objects.equals(name, category.name);
+        return Objects.equals(id, category.id) && Objects.equals(name, category.name) && Objects.equals(image, category.image);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);
+        return Objects.hash(id, name, image);
     }
 }

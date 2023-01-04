@@ -139,6 +139,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `online-marketing`.`category` (
   `id` INT NOT NULL,
   `name` VARCHAR(45) NOT NULL,
+  `image` TEXT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE)
 ENGINE = InnoDB;
