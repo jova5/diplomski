@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/user")
-public class UserController extends GenericController<UserResponse, UserRequest, User, Long> {
+public class UserController extends GenericController<UserResponse, UserRequest, User, Integer> {
     private final UserService service;
 
     public UserController(UserService service) {

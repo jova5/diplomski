@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/store")
-public class StoreController extends GenericController<StoreResponse, StoreRequest, Store, Long> {
+public class StoreController extends GenericController<StoreResponse, StoreRequest, Store, Integer> {
     private final StoreService service;
 
     public StoreController(StoreService service) {

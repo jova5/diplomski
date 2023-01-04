@@ -7,7 +7,7 @@ import com.diplomski.onlinemarketing.service.generic.GenericServiceImpl;
 import org.springframework.stereotype.Service;
 
 @Service
-public class StoreServiceImpl extends GenericServiceImpl<Store, Long> implements StoreService {
+public class StoreServiceImpl extends GenericServiceImpl<Store, Integer> implements StoreService {
     private final StoreRepository repository;
 
     public StoreServiceImpl(StoreRepository repository) {
