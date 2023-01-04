@@ -36,7 +36,7 @@ public class Add {
     @ManyToOne
     @JoinColumn(name = "store_id", referencedColumnName = "id", nullable = false)
     private Store store;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     private Collection<Category> categories;
 
     public Integer getId() {

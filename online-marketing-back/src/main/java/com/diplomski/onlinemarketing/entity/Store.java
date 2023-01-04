@@ -32,11 +32,11 @@ public class Store {
     @Basic
     @Column(name = "num_of_visit")
     private Integer numOfVisit;
-    @OneToMany(mappedBy = "store")
+    @OneToMany(mappedBy = "store", fetch = FetchType.LAZY)
     private Collection<Add> adds;
-    @OneToMany(mappedBy = "store")
+    @OneToMany(mappedBy = "store", fetch = FetchType.LAZY)
     private Collection<Contact> contacts;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     private Collection<Category> categories;
     @OneToOne
     private User user;

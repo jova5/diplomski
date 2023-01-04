@@ -17,11 +17,11 @@ public class Category {
     @Basic
     @Column(name = "image")
     private String image;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     private Collection<Add> adds;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     private Collection<Store> stores;
-    @OneToMany(mappedBy = "category")
+    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
     private Collection<Subcategory> subcategories;
 
     public Integer getId() {

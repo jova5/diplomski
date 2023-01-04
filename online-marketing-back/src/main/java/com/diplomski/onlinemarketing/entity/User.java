@@ -2,8 +2,6 @@ package com.diplomski.onlinemarketing.entity;
 
 import jakarta.persistence.*;
 
-import java.util.Objects;
-
 @Entity
 public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)

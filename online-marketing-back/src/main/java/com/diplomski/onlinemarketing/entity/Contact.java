@@ -26,9 +26,9 @@ public class Contact {
     @ManyToOne
     @JoinColumn(name = "store_id", referencedColumnName = "id", nullable = false)
     private Store store;
-    @OneToMany(mappedBy = "contact")
+    @OneToMany(mappedBy = "contact", fetch = FetchType.LAZY)
     private Collection<Email> emails;
-    @OneToMany(mappedBy = "contact")
+    @OneToMany(mappedBy = "contact", fetch = FetchType.LAZY)
     private Collection<Phone> phones;
 
     public Integer getId() {
