@@ -8,42 +8,42 @@ import jakarta.persistence.Id;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class EmailEntityPK implements Serializable {
+public class AddPK implements Serializable {
     @Column(name = "id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @Column(name = "contact_id")
+    private Integer id;
+    @Column(name = "store_id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long contactId;
+    private Integer storeId;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public Long getContactId() {
-        return contactId;
+    public Integer getStoreId() {
+        return storeId;
     }
 
-    public void setContactId(Long contactId) {
-        this.contactId = contactId;
+    public void setStoreId(Integer storeId) {
+        this.storeId = storeId;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        EmailEntityPK that = (EmailEntityPK) o;
-        return Objects.equals(id, that.id) && Objects.equals(contactId, that.contactId);
+        AddPK addPK = (AddPK) o;
+        return Objects.equals(id, addPK.id) && Objects.equals(storeId, addPK.storeId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, contactId);
+        return Objects.hash(id, storeId);
     }
 }

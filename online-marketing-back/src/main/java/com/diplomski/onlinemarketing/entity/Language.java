@@ -5,12 +5,11 @@ import jakarta.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "language", schema = "online-marketing")
-public class LanguageEntity {
+public class Language {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id")
-    private Long id;
+    private Integer id;
     @Basic
     @Column(name = "key")
     private String key;
@@ -21,11 +20,11 @@ public class LanguageEntity {
     @Column(name = "english")
     private String english;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -57,8 +56,8 @@ public class LanguageEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LanguageEntity that = (LanguageEntity) o;
-        return id == that.id && Objects.equals(key, that.key) && Objects.equals(serbian, that.serbian) && Objects.equals(english, that.english);
+        Language language = (Language) o;
+        return Objects.equals(id, language.id) && Objects.equals(key, language.key) && Objects.equals(serbian, language.serbian) && Objects.equals(english, language.english);
     }
 
     @Override

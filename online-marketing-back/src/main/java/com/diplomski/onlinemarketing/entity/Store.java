@@ -5,12 +5,11 @@ import jakarta.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "store", schema = "online-marketing")
-public class StoreEntity {
+public class Store {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id")
-    private Long id;
+    private Integer id;
     @Basic
     @Column(name = "name")
     private String name;
@@ -19,10 +18,10 @@ public class StoreEntity {
     private String description;
     @Basic
     @Column(name = "num_of_rating")
-    private int numOfRating;
+    private Integer numOfRating;
     @Basic
     @Column(name = "sum_of_rating")
-    private int sumOfRating;
+    private Integer sumOfRating;
     @Basic
     @Column(name = "banner_image")
     private String bannerImage;
@@ -33,11 +32,11 @@ public class StoreEntity {
     @Column(name = "num_of_visit")
     private Integer numOfVisit;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -57,19 +56,19 @@ public class StoreEntity {
         this.description = description;
     }
 
-    public int getNumOfRating() {
+    public Integer getNumOfRating() {
         return numOfRating;
     }
 
-    public void setNumOfRating(int numOfRating) {
+    public void setNumOfRating(Integer numOfRating) {
         this.numOfRating = numOfRating;
     }
 
-    public int getSumOfRating() {
+    public Integer getSumOfRating() {
         return sumOfRating;
     }
 
-    public void setSumOfRating(int sumOfRating) {
+    public void setSumOfRating(Integer sumOfRating) {
         this.sumOfRating = sumOfRating;
     }
 
@@ -101,8 +100,8 @@ public class StoreEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        StoreEntity that = (StoreEntity) o;
-        return Objects.equals(id, that.id) && numOfRating == that.numOfRating && sumOfRating == that.sumOfRating && Objects.equals(name, that.name) && Objects.equals(description, that.description) && Objects.equals(bannerImage, that.bannerImage) && Objects.equals(storeImage, that.storeImage) && Objects.equals(numOfVisit, that.numOfVisit);
+        Store store = (Store) o;
+        return Objects.equals(id, store.id) && Objects.equals(name, store.name) && Objects.equals(description, store.description) && Objects.equals(numOfRating, store.numOfRating) && Objects.equals(sumOfRating, store.sumOfRating) && Objects.equals(bannerImage, store.bannerImage) && Objects.equals(storeImage, store.storeImage) && Objects.equals(numOfVisit, store.numOfVisit);
     }
 
     @Override

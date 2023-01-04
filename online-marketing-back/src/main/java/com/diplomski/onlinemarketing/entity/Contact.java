@@ -5,17 +5,16 @@ import jakarta.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "contact", schema = "online-marketing")
-@IdClass(ContactEntityPK.class)
-public class ContactEntity {
+@IdClass(ContactPK.class)
+public class Contact {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id")
-    private Long id;
+    private Integer id;
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "store_id")
-    private Long storeId;
+    private Integer storeId;
     @Basic
     @Column(name = "type")
     private String type;
@@ -29,19 +28,19 @@ public class ContactEntity {
     @Column(name = "longitude")
     private Double longitude;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public Long getStoreId() {
+    public Integer getStoreId() {
         return storeId;
     }
 
-    public void setStoreId(Long storeId) {
+    public void setStoreId(Integer storeId) {
         this.storeId = storeId;
     }
 
@@ -81,8 +80,8 @@ public class ContactEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ContactEntity that = (ContactEntity) o;
-        return Objects.equals(id, that.id) && Objects.equals(storeId, that.storeId) && Objects.equals(type, that.type) && Objects.equals(address, that.address) && Objects.equals(latitude, that.latitude) && Objects.equals(longitude, that.longitude);
+        Contact contact = (Contact) o;
+        return Objects.equals(id, contact.id) && Objects.equals(storeId, contact.storeId) && Objects.equals(type, contact.type) && Objects.equals(address, contact.address) && Objects.equals(latitude, contact.latitude) && Objects.equals(longitude, contact.longitude);
     }
 
     @Override

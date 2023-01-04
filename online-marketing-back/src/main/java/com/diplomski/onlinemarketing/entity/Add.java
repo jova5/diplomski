@@ -6,17 +6,16 @@ import java.sql.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "add", schema = "online-marketing")
-@IdClass(AddEntityPK.class)
-public class AddEntity {
+@IdClass(AddPK.class)
+public class Add {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id")
-    private Long id;
+    private Integer id;
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "store_id")
-    private Long storeId;
+    private Integer storeId;
     @Basic
     @Column(name = "image")
     private String image;
@@ -34,24 +33,24 @@ public class AddEntity {
     private String description;
     @Basic
     @Column(name = "num_of_visit")
-    private int numOfVisit;
+    private Integer numOfVisit;
     @Basic
     @Column(name = "premium")
-    private boolean premium;
+    private Boolean premium;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public Long getStoreId() {
+    public Integer getStoreId() {
         return storeId;
     }
 
-    public void setStoreId(Long storeId) {
+    public void setStoreId(Integer storeId) {
         this.storeId = storeId;
     }
 
@@ -95,19 +94,19 @@ public class AddEntity {
         this.description = description;
     }
 
-    public int getNumOfVisit() {
+    public Integer getNumOfVisit() {
         return numOfVisit;
     }
 
-    public void setNumOfVisit(int numOfVisit) {
+    public void setNumOfVisit(Integer numOfVisit) {
         this.numOfVisit = numOfVisit;
     }
 
-    public boolean isPremium() {
+    public Boolean getPremium() {
         return premium;
     }
 
-    public void setPremium(boolean premium) {
+    public void setPremium(Boolean premium) {
         this.premium = premium;
     }
 
@@ -115,8 +114,8 @@ public class AddEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        AddEntity addEntity = (AddEntity) o;
-        return Objects.equals(id, addEntity.id) && Objects.equals(storeId, addEntity.storeId) && numOfVisit == addEntity.numOfVisit && premium == addEntity.premium && Objects.equals(image, addEntity.image) && Objects.equals(dateFrom, addEntity.dateFrom) && Objects.equals(dateTo, addEntity.dateTo) && Objects.equals(header, addEntity.header) && Objects.equals(description, addEntity.description);
+        Add add = (Add) o;
+        return Objects.equals(id, add.id) && Objects.equals(storeId, add.storeId) && Objects.equals(image, add.image) && Objects.equals(dateFrom, add.dateFrom) && Objects.equals(dateTo, add.dateTo) && Objects.equals(header, add.header) && Objects.equals(description, add.description) && Objects.equals(numOfVisit, add.numOfVisit) && Objects.equals(premium, add.premium);
     }
 
     @Override

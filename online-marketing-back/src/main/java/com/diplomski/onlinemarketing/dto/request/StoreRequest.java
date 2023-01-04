@@ -4,7 +4,6 @@ import lombok.Data;
 
 @Data
 public class StoreRequest {
-    private Long id;
     private String name;
     private String description;
     private int numOfRating;

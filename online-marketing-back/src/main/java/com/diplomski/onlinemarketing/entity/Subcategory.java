@@ -5,26 +5,25 @@ import jakarta.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "subcategory", schema = "online-marketing")
-@IdClass(SubcategoryEntityPK.class)
-public class SubcategoryEntity {
+@IdClass(SubcategoryPK.class)
+public class Subcategory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id")
-    private Long id;
+    private Integer id;
     @Basic
     @Column(name = "name")
     private String name;
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "category_id")
-    private Long categoryId;
+    private Integer categoryId;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -36,11 +35,11 @@ public class SubcategoryEntity {
         this.name = name;
     }
 
-    public Long getCategoryId() {
+    public Integer getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(Long categoryId) {
+    public void setCategoryId(Integer categoryId) {
         this.categoryId = categoryId;
     }
 
@@ -48,8 +47,8 @@ public class SubcategoryEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        SubcategoryEntity that = (SubcategoryEntity) o;
-        return Objects.equals(id, that.id) && Objects.equals(categoryId, that.categoryId) && Objects.equals(name, that.name);
+        Subcategory that = (Subcategory) o;
+        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(categoryId, that.categoryId);
     }
 
     @Override

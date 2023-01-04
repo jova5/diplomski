@@ -8,42 +8,42 @@ import jakarta.persistence.Id;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class AddEntityPK implements Serializable {
+public class SubcategoryPK implements Serializable {
     @Column(name = "id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @Column(name = "store_id")
+    private Integer id;
+    @Column(name = "category_id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long storeId;
+    private Integer categoryId;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public Long getStoreId() {
-        return storeId;
+    public Integer getCategoryId() {
+        return categoryId;
     }
 
-    public void setStoreId(Long storeId) {
-        this.storeId = storeId;
+    public void setCategoryId(Integer categoryId) {
+        this.categoryId = categoryId;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        AddEntityPK that = (AddEntityPK) o;
-        return Objects.equals(id, that.id) && Objects.equals(storeId, that.storeId);
+        SubcategoryPK that = (SubcategoryPK) o;
+        return Objects.equals(id, that.id) && Objects.equals(categoryId, that.categoryId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, storeId);
+        return Objects.hash(id, categoryId);
     }
 }

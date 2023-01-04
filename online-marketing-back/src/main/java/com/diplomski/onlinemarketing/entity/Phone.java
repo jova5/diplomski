@@ -5,26 +5,25 @@ import jakarta.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "phone", schema = "online-marketing")
-@IdClass(PhoneEntityPK.class)
-public class PhoneEntity {
+@IdClass(PhonePK.class)
+public class Phone {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id")
-    private Long id;
+    private Integer id;
     @Basic
     @Column(name = "number")
     private String number;
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "contact_id")
-    private Long contactId;
+    private Integer contactId;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -36,11 +35,11 @@ public class PhoneEntity {
         this.number = number;
     }
 
-    public Long getContactId() {
+    public Integer getContactId() {
         return contactId;
     }
 
-    public void setContactId(Long contactId) {
+    public void setContactId(Integer contactId) {
         this.contactId = contactId;
     }
 
@@ -48,8 +47,8 @@ public class PhoneEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        PhoneEntity that = (PhoneEntity) o;
-        return Objects.equals(id, that.id) && Objects.equals(contactId, that.contactId) && Objects.equals(number, that.number);
+        Phone phone = (Phone) o;
+        return Objects.equals(id, phone.id) && Objects.equals(number, phone.number) && Objects.equals(contactId, phone.contactId);
     }
 
     @Override
