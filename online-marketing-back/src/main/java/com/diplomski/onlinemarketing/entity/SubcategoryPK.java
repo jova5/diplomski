@@ -33,17 +33,4 @@ public class SubcategoryPK implements Serializable {
     public void setCategoryId(Integer categoryId) {
         this.categoryId = categoryId;
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        SubcategoryPK that = (SubcategoryPK) o;
-        return Objects.equals(id, that.id) && Objects.equals(categoryId, that.categoryId);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, categoryId);
-    }
 }

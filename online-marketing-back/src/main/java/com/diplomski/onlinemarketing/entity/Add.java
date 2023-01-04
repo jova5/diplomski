@@ -3,19 +3,15 @@ package com.diplomski.onlinemarketing.entity;
 import jakarta.persistence.*;
 
 import java.sql.Date;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
-@IdClass(AddPK.class)
 public class Add {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id")
     private Integer id;
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
-    @Column(name = "store_id")
-    private Integer storeId;
     @Basic
     @Column(name = "image")
     private String image;
@@ -37,6 +33,11 @@ public class Add {
     @Basic
     @Column(name = "premium")
     private Boolean premium;
+    @ManyToOne
+    @JoinColumn(name = "store_id", referencedColumnName = "id", nullable = false)
+    private Store store;
+    @ManyToMany
+    private Collection<Category> categories;
 
     public Integer getId() {
         return id;
@@ -44,14 +45,6 @@ public class Add {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Integer getStoreId() {
-        return storeId;
-    }
-
-    public void setStoreId(Integer storeId) {
-        this.storeId = storeId;
     }
 
     public String getImage() {
@@ -110,16 +103,19 @@ public class Add {
         this.premium = premium;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Add add = (Add) o;
-        return Objects.equals(id, add.id) && Objects.equals(storeId, add.storeId) && Objects.equals(image, add.image) && Objects.equals(dateFrom, add.dateFrom) && Objects.equals(dateTo, add.dateTo) && Objects.equals(header, add.header) && Objects.equals(description, add.description) && Objects.equals(numOfVisit, add.numOfVisit) && Objects.equals(premium, add.premium);
+    public Store getStore() {
+        return store;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, storeId, image, dateFrom, dateTo, header, description, numOfVisit, premium);
+    public void setStore(Store store) {
+        this.store = store;
+    }
+
+    public Collection<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Collection<Category> categories) {
+        this.categories = categories;
     }
 }

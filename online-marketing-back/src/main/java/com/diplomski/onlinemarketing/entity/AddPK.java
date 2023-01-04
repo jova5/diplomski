@@ -33,17 +33,4 @@ public class AddPK implements Serializable {
     public void setStoreId(Integer storeId) {
         this.storeId = storeId;
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        AddPK addPK = (AddPK) o;
-        return Objects.equals(id, addPK.id) && Objects.equals(storeId, addPK.storeId);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, storeId);
-    }
 }

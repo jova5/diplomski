@@ -33,17 +33,4 @@ public class PhonePK implements Serializable {
     public void setContactId(Integer contactId) {
         this.contactId = contactId;
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        PhonePK phonePK = (PhonePK) o;
-        return Objects.equals(id, phonePK.id) && Objects.equals(contactId, phonePK.contactId);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, contactId);
-    }
 }

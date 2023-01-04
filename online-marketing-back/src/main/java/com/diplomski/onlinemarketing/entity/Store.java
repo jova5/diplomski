@@ -2,6 +2,7 @@ package com.diplomski.onlinemarketing.entity;
 
 import jakarta.persistence.*;
 
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
@@ -31,6 +32,14 @@ public class Store {
     @Basic
     @Column(name = "num_of_visit")
     private Integer numOfVisit;
+    @OneToMany(mappedBy = "store")
+    private Collection<Add> adds;
+    @OneToMany(mappedBy = "store")
+    private Collection<Contact> contacts;
+    @ManyToMany
+    private Collection<Category> categories;
+    @OneToOne
+    private User user;
 
     public Integer getId() {
         return id;
@@ -96,16 +105,35 @@ public class Store {
         this.numOfVisit = numOfVisit;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Store store = (Store) o;
-        return Objects.equals(id, store.id) && Objects.equals(name, store.name) && Objects.equals(description, store.description) && Objects.equals(numOfRating, store.numOfRating) && Objects.equals(sumOfRating, store.sumOfRating) && Objects.equals(bannerImage, store.bannerImage) && Objects.equals(storeImage, store.storeImage) && Objects.equals(numOfVisit, store.numOfVisit);
+    public Collection<Add> getAdds() {
+        return adds;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, description, numOfRating, sumOfRating, bannerImage, storeImage, numOfVisit);
+    public void setAdds(Collection<Add> adds) {
+        this.adds = adds;
+    }
+
+    public Collection<Contact> getContacts() {
+        return contacts;
+    }
+
+    public void setContacts(Collection<Contact> contacts) {
+        this.contacts = contacts;
+    }
+
+    public Collection<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Collection<Category> categories) {
+        this.categories = categories;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

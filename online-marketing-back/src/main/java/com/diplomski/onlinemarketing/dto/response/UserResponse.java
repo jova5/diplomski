@@ -1,4 +1,4 @@
-package com.diplomski.onlinemarketing.dto.request;
+package com.diplomski.onlinemarketing.dto.response;
 
 import lombok.Data;
 

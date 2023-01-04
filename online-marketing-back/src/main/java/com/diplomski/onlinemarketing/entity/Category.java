@@ -2,6 +2,7 @@ package com.diplomski.onlinemarketing.entity;
 
 import jakarta.persistence.*;
 
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
@@ -13,10 +14,15 @@ public class Category {
     @Basic
     @Column(name = "name")
     private String name;
-
     @Basic
     @Column(name = "image")
     private String image;
+    @ManyToMany
+    private Collection<Add> adds;
+    @ManyToMany
+    private Collection<Store> stores;
+    @OneToMany(mappedBy = "category")
+    private Collection<Subcategory> subcategories;
 
     public Integer getId() {
         return id;
@@ -42,17 +48,27 @@ public class Category {
         this.image = image;
     }
 
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Category category = (Category) o;
-        return Objects.equals(id, category.id) && Objects.equals(name, category.name) && Objects.equals(image, category.image);
+    public Collection<Add> getAdds() {
+        return adds;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, image);
+    public void setAdds(Collection<Add> adds) {
+        this.adds = adds;
+    }
+
+    public Collection<Store> getStores() {
+        return stores;
+    }
+
+    public void setStores(Collection<Store> stores) {
+        this.stores = stores;
+    }
+
+    public Collection<Subcategory> getSubcategories() {
+        return subcategories;
+    }
+
+    public void setSubcategories(Collection<Subcategory> subcategories) {
+        this.subcategories = subcategories;
     }
 }

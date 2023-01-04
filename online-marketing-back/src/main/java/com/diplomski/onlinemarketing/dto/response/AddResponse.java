@@ -15,4 +15,5 @@ public class AddResponse {
     private String description;
     private Integer numOfVisit;
     private Boolean premium;
+    private StoreResponse store;
 }

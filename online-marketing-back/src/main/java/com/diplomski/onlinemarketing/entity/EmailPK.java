@@ -33,17 +33,4 @@ public class EmailPK implements Serializable {
     public void setContactId(Integer contactId) {
         this.contactId = contactId;
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        EmailPK emailPK = (EmailPK) o;
-        return Objects.equals(id, emailPK.id) && Objects.equals(contactId, emailPK.contactId);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, contactId);
-    }
 }

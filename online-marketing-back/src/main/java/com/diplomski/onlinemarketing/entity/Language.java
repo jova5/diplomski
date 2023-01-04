@@ -51,17 +51,4 @@ public class Language {
     public void setEnglish(String english) {
         this.english = english;
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Language language = (Language) o;
-        return Objects.equals(id, language.id) && Objects.equals(key, language.key) && Objects.equals(serbian, language.serbian) && Objects.equals(english, language.english);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, key, serbian, english);
-    }
 }

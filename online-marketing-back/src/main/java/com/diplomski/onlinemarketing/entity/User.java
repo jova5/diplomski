@@ -20,11 +20,10 @@ public class User {
     @Column(name = "email")
     private String email;
     @Basic
-    @Column(name = "store_id")
-    private Integer storeId;
-    @Basic
     @Column(name = "type")
     private String type;
+    @OneToOne
+    private Store store;
 
     public Integer getId() {
         return id;
@@ -58,14 +57,6 @@ public class User {
         this.email = email;
     }
 
-    public Integer getStoreId() {
-        return storeId;
-    }
-
-    public void setStoreId(Integer storeId) {
-        this.storeId = storeId;
-    }
-
     public String getType() {
         return type;
     }
@@ -74,16 +65,11 @@ public class User {
         this.type = type;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(password, user.password) && Objects.equals(email, user.email) && Objects.equals(storeId, user.storeId) && Objects.equals(type, user.type);
+    public Store getStore() {
+        return store;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, password, email, storeId, type);
+    public void setStore(Store store) {
+        this.store = store;
     }
 }

@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import java.util.Objects;
 
 @Entity
-@IdClass(SubcategoryPK.class)
 public class Subcategory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -14,10 +13,9 @@ public class Subcategory {
     @Basic
     @Column(name = "name")
     private String name;
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
-    @Column(name = "category_id")
-    private Integer categoryId;
+    @ManyToOne
+    @JoinColumn(name = "category_id", referencedColumnName = "id", nullable = false)
+    private Category category;
 
     public Integer getId() {
         return id;
@@ -35,24 +33,11 @@ public class Subcategory {
         this.name = name;
     }
 
-    public Integer getCategoryId() {
-        return categoryId;
+    public Category getCategoryByCategoryId() {
+        return category;
     }
 
-    public void setCategoryId(Integer categoryId) {
-        this.categoryId = categoryId;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Subcategory that = (Subcategory) o;
-        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(categoryId, that.categoryId);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, categoryId);
+    public void setCategoryByCategoryId(Category categoryByCategoryId) {
+        this.category = categoryByCategoryId;
     }
 }

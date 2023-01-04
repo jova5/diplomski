@@ -2,6 +2,8 @@ package com.diplomski.onlinemarketing.dto.response;
 
 import lombok.Data;
 
+import java.util.Collection;
+
 @Data
 public class StoreResponse {
     private Long id;
@@ -12,4 +14,6 @@ public class StoreResponse {
     private String bannerImage;
     private String storeImage;
     private Integer numOfVisit;
+    private Collection<AddResponse> adds;
+    private Collection<ContactResponse> contacts;
 }

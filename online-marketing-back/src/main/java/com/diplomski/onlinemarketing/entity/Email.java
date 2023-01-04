@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import java.util.Objects;
 
 @Entity
-@IdClass(EmailPK.class)
 public class Email {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -14,10 +13,9 @@ public class Email {
     @Basic
     @Column(name = "email")
     private String email;
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
-    @Column(name = "contact_id")
-    private Integer contactId;
+    @ManyToOne
+    @JoinColumn(name = "contact_id", referencedColumnName = "id", nullable = false)
+    private Contact contact;
 
     public Integer getId() {
         return id;
@@ -35,24 +33,11 @@ public class Email {
         this.email = email;
     }
 
-    public Integer getContactId() {
-        return contactId;
+    public Contact getContact() {
+        return contact;
     }
 
-    public void setContactId(Integer contactId) {
-        this.contactId = contactId;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Email email1 = (Email) o;
-        return Objects.equals(id, email1.id) && Objects.equals(email, email1.email) && Objects.equals(contactId, email1.contactId);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, email, contactId);
+    public void setContact(Contact contact) {
+        this.contact = contact;
     }
 }

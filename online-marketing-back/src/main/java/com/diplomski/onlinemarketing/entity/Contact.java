@@ -2,19 +2,15 @@ package com.diplomski.onlinemarketing.entity;
 
 import jakarta.persistence.*;
 
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
-@IdClass(ContactPK.class)
 public class Contact {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id")
     private Integer id;
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
-    @Column(name = "store_id")
-    private Integer storeId;
     @Basic
     @Column(name = "type")
     private String type;
@@ -27,6 +23,13 @@ public class Contact {
     @Basic
     @Column(name = "longitude")
     private Double longitude;
+    @ManyToOne
+    @JoinColumn(name = "store_id", referencedColumnName = "id", nullable = false)
+    private Store store;
+    @OneToMany(mappedBy = "contact")
+    private Collection<Email> emails;
+    @OneToMany(mappedBy = "contact")
+    private Collection<Phone> phones;
 
     public Integer getId() {
         return id;
@@ -34,14 +37,6 @@ public class Contact {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Integer getStoreId() {
-        return storeId;
-    }
-
-    public void setStoreId(Integer storeId) {
-        this.storeId = storeId;
     }
 
     public String getType() {
@@ -76,16 +71,27 @@ public class Contact {
         this.longitude = longitude;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Contact contact = (Contact) o;
-        return Objects.equals(id, contact.id) && Objects.equals(storeId, contact.storeId) && Objects.equals(type, contact.type) && Objects.equals(address, contact.address) && Objects.equals(latitude, contact.latitude) && Objects.equals(longitude, contact.longitude);
+    public Store getStore() {
+        return store;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, storeId, type, address, latitude, longitude);
+    public void setStore(Store store) {
+        this.store = store;
+    }
+
+    public Collection<Email> getEmails() {
+        return emails;
+    }
+
+    public void setEmails(Collection<Email> emails) {
+        this.emails = emails;
+    }
+
+    public Collection<Phone> getPhones() {
+        return phones;
+    }
+
+    public void setPhones(Collection<Phone> phones) {
+        this.phones = phones;
     }
 }
