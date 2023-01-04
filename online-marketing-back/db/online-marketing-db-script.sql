@@ -41,6 +41,7 @@ CREATE TABLE IF NOT EXISTS `online-marketing`.`user` (
   `password` VARCHAR(255) NOT NULL,
   `email` VARCHAR(255) NOT NULL,
   `store_id` INT NULL,
+  `type` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
   UNIQUE INDEX `name_UNIQUE` (`name` ASC) VISIBLE,
@@ -120,6 +121,7 @@ CREATE TABLE IF NOT EXISTS `online-marketing`.`add` (
   `header` VARCHAR(45) NOT NULL,
   `description` VARCHAR(255) NOT NULL,
   `num_of_visit` INT NOT NULL,
+  `premium` BIT NOT NULL,
   PRIMARY KEY (`id`, `store_id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
   INDEX `fk_add_store1_idx` (`store_id` ASC) VISIBLE,
@@ -193,7 +195,7 @@ CREATE TABLE IF NOT EXISTS `online-marketing`.`subcategory` (
   `id` INT NOT NULL,
   `name` VARCHAR(45) NULL,
   `category_id` INT NOT NULL,
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`id`, `category_id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
   INDEX `fk_subcategory_category1_idx` (`category_id` ASC) VISIBLE,
   CONSTRAINT `fk_subcategory_category1`
@@ -201,6 +203,20 @@ CREATE TABLE IF NOT EXISTS `online-marketing`.`subcategory` (
     REFERENCES `online-marketing`.`category` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `online-marketing`.`language`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `online-marketing`.`language` (
+  `id` INT NOT NULL,
+  `key` VARCHAR(100) NOT NULL,
+  `serbian` TEXT NULL,
+  `english` TEXT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
+  UNIQUE INDEX `key_UNIQUE` (`key` ASC) VISIBLE)
 ENGINE = InnoDB;
 
 
