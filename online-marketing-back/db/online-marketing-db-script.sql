@@ -212,12 +212,27 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `online-marketing`.`language` (
   `id` INT NOT NULL,
-  `key` VARCHAR(100) NOT NULL,
-  `serbian` TEXT NULL,
-  `english` TEXT NULL,
+  `short_name` VARCHAR(10) NOT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `online-marketing`.`vocabulary`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `online-marketing`.`vocabulary` (
+  `id` INT NOT NULL,
+  `language_id` INT NOT NULL,
+  `key` TEXT NOT NULL,
+  `meaning` TEXT NOT NULL,
+  PRIMARY KEY (`id`, `language_id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
-  UNIQUE INDEX `key_UNIQUE` (`key` ASC) VISIBLE)
+  CONSTRAINT `fk_table1_language1`
+    FOREIGN KEY (`language_id`)
+    REFERENCES `online-marketing`.`language` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 

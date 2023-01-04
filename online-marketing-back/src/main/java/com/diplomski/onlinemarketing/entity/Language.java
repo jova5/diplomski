@@ -2,7 +2,7 @@ package com.diplomski.onlinemarketing.entity;
 
 import jakarta.persistence.*;
 
-import java.util.Objects;
+import java.util.Collection;
 
 @Entity
 public class Language {
@@ -11,14 +11,10 @@ public class Language {
     @Column(name = "id")
     private Integer id;
     @Basic
-    @Column(name = "key")
-    private String key;
-    @Basic
-    @Column(name = "serbian")
-    private String serbian;
-    @Basic
-    @Column(name = "english")
-    private String english;
+    @Column(name = "short_name")
+    private String shortName;
+    @OneToMany(mappedBy = "language")
+    private Collection<Vocabulary> vocabularies;
 
     public Integer getId() {
         return id;
@@ -28,27 +24,19 @@ public class Language {
         this.id = id;
     }
 
-    public String getKey() {
-        return key;
+    public String getShortName() {
+        return shortName;
     }
 
-    public void setKey(String key) {
-        this.key = key;
+    public void setShortName(String shortName) {
+        this.shortName = shortName;
     }
 
-    public String getSerbian() {
-        return serbian;
+    public Collection<Vocabulary> getVocabularies() {
+        return vocabularies;
     }
 
-    public void setSerbian(String serbian) {
-        this.serbian = serbian;
-    }
-
-    public String getEnglish() {
-        return english;
-    }
-
-    public void setEnglish(String english) {
-        this.english = english;
+    public void setVocabularies(Collection<Vocabulary> vocabularies) {
+        this.vocabularies = vocabularies;
     }
 }
