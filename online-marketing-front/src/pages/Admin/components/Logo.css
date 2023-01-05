@@ -1,0 +1,22 @@
+.left-side {
+    display: flex;
+    padding-left: 10px;
+}
+
+.logo {
+    justify-self: start;
+    font-family: 'Comfortaa', cursive;
+    padding-left: 5px;
+    margin-top: 0.7em;
+    margin-bottom: 0.7em;
+    user-select: none;
+}
+
+.line {
+    width: 3px;
+    height: 2.65em;
+    border-radius: 50px;
+    background-color: #021e34;
+    margin-top: 0.7em;
+    margin-bottom: 0.7em;
+}

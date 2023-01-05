@@ -3,29 +3,6 @@ nav {
     grid-template-columns: 15% 85%;
 }
 
-.left-side {
-    display: flex;
-    padding-left: 10px;
-}
-
-.logo {
-    justify-self: start;
-    font-family: 'Comfortaa', cursive;
-    padding-left: 5px;
-    margin-top: 0.7em;
-    margin-bottom: 0.7em;
-    user-select: none;
-}
-
-.line {
-    width: 3px;
-    height: 2.65em;
-    border-radius: 50px;
-    background-color: #021e34;
-    margin-top: 0.7em;
-    margin-bottom: 0.7em;
-}
-
 nav ul {
     display: flex;
     justify-self: right;
@@ -40,7 +17,9 @@ nav ul li {
     float: right;
 }
 
-a {
+button {
+    background:none;
+    border:none;
     position: relative;
     color: #585858;
     letter-spacing: 0.5px;
@@ -49,11 +28,11 @@ a {
     align-self: center;
     text-decoration: none;
     font-family: Roboto, serif;
-    font-weight: 700;
+    font-weight: 500;
     font-size: larger;
 }
 
-a:after {
+button:after {
     content: "";
     position: absolute;
     background-color: #27b6ff;
@@ -64,10 +43,16 @@ a:after {
     transition: 0.2s;
 }
 
-a:hover {
+button:hover {
     color: #000000;
+    cursor: pointer;
 }
 
-a:hover:after {
+button:hover:after {
     width: 100%;
+}
+
+button.log-out{
+    margin-left: 2em;
+    font-weight: 700;
 }
