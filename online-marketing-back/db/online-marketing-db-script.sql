@@ -57,7 +57,7 @@ ENGINE = InnoDB;
 -- Table `online-marketing`.`contact`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `online-marketing`.`contact` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `store_id` INT NOT NULL,
   `type` VARCHAR(45) NOT NULL,
   `address` VARCHAR(255) NULL,
@@ -77,7 +77,7 @@ ENGINE = InnoDB;
 -- Table `online-marketing`.`email`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `online-marketing`.`email` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `email` VARCHAR(255) NOT NULL,
   `contact_id` INT NOT NULL,
   PRIMARY KEY (`id`, `contact_id`),
@@ -95,7 +95,7 @@ ENGINE = InnoDB;
 -- Table `online-marketing`.`phone`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `online-marketing`.`phone` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `number` VARCHAR(45) NOT NULL,
   `contact_id` INT NOT NULL,
   PRIMARY KEY (`id`, `contact_id`),
@@ -112,7 +112,7 @@ ENGINE = InnoDB;
 -- Table `online-marketing`.`add`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `online-marketing`.`add` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `store_id` INT NOT NULL,
   `image` TEXT NOT NULL,
   `date_from` DATE NOT NULL,
@@ -135,7 +135,7 @@ ENGINE = InnoDB;
 -- Table `online-marketing`.`category`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `online-marketing`.`category` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   `image` TEXT NULL,
   PRIMARY KEY (`id`),
@@ -191,7 +191,7 @@ ENGINE = InnoDB;
 -- Table `online-marketing`.`subcategory`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `online-marketing`.`subcategory` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NULL,
   `category_id` INT NOT NULL,
   PRIMARY KEY (`id`, `category_id`),
@@ -209,7 +209,7 @@ ENGINE = InnoDB;
 -- Table `online-marketing`.`language`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `online-marketing`.`language` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `short_name` VARCHAR(10) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE)
@@ -220,7 +220,7 @@ ENGINE = InnoDB;
 -- Table `online-marketing`.`vocabulary`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `online-marketing`.`vocabulary` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `language_id` INT NOT NULL,
   `key` TEXT NOT NULL,
   `meaning` TEXT NOT NULL,
@@ -238,7 +238,7 @@ ENGINE = InnoDB;
 -- Table `online-marketing`.`visit`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `online-marketing`.`visit` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `store_id` INT NULL,
   `add_id` INT NULL,
   `date` DATE NOT NULL,
