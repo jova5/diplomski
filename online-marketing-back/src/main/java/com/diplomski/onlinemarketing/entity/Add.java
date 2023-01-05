@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 
 import java.sql.Date;
 import java.util.Collection;
-import java.util.Objects;
 
 @Entity
 public class Add {
@@ -28,9 +27,6 @@ public class Add {
     @Column(name = "description")
     private String description;
     @Basic
-    @Column(name = "num_of_visit")
-    private Integer numOfVisit;
-    @Basic
     @Column(name = "premium")
     private Boolean premium;
     @ManyToOne
@@ -38,6 +34,8 @@ public class Add {
     private Store store;
     @ManyToMany(fetch = FetchType.LAZY)
     private Collection<Category> categories;
+    @OneToMany(mappedBy = "add", fetch = FetchType.LAZY)
+    private Collection<Visit> visits;
 
     public Integer getId() {
         return id;
@@ -87,14 +85,6 @@ public class Add {
         this.description = description;
     }
 
-    public Integer getNumOfVisit() {
-        return numOfVisit;
-    }
-
-    public void setNumOfVisit(Integer numOfVisit) {
-        this.numOfVisit = numOfVisit;
-    }
-
     public Boolean getPremium() {
         return premium;
     }
@@ -117,5 +107,13 @@ public class Add {
 
     public void setCategories(Collection<Category> categories) {
         this.categories = categories;
+    }
+
+    public Collection<Visit> getVisits() {
+        return visits;
+    }
+
+    public void setVisits(Collection<Visit> visits) {
+        this.visits = visits;
     }
 }

@@ -26,7 +26,6 @@ CREATE TABLE IF NOT EXISTS `online-marketing`.`store` (
   `sum_of_rating` INT NOT NULL,
   `banner_image` TEXT NULL,
   `store_image` TEXT NULL,
-  `num_of_visit` INT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE)
 ENGINE = InnoDB;
@@ -120,7 +119,6 @@ CREATE TABLE IF NOT EXISTS `online-marketing`.`add` (
   `date_to` DATE NOT NULL,
   `header` VARCHAR(45) NOT NULL,
   `description` VARCHAR(255) NOT NULL,
-  `num_of_visit` INT NOT NULL,
   `premium` BIT NOT NULL,
   PRIMARY KEY (`id`, `store_id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
@@ -231,6 +229,31 @@ CREATE TABLE IF NOT EXISTS `online-marketing`.`vocabulary` (
   CONSTRAINT `fk_table1_language1`
     FOREIGN KEY (`language_id`)
     REFERENCES `online-marketing`.`language` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `online-marketing`.`visit`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `online-marketing`.`visit` (
+  `id` INT NOT NULL,
+  `store_id` INT NULL,
+  `add_id` INT NULL,
+  `date` DATE NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
+  INDEX `fk_visit_store1_idx` (`store_id` ASC) VISIBLE,
+  INDEX `fk_visit_add1_idx` (`add_id` ASC) VISIBLE,
+  CONSTRAINT `fk_visit_store1`
+    FOREIGN KEY (`store_id`)
+    REFERENCES `online-marketing`.`store` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_visit_add1`
+    FOREIGN KEY (`add_id`)
+    REFERENCES `online-marketing`.`add` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

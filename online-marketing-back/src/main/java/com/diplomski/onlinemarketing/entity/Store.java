@@ -3,7 +3,6 @@ package com.diplomski.onlinemarketing.entity;
 import jakarta.persistence.*;
 
 import java.util.Collection;
-import java.util.Objects;
 
 @Entity
 public class Store {
@@ -29,9 +28,6 @@ public class Store {
     @Basic
     @Column(name = "store_image")
     private String storeImage;
-    @Basic
-    @Column(name = "num_of_visit")
-    private Integer numOfVisit;
     @OneToMany(mappedBy = "store", fetch = FetchType.LAZY)
     private Collection<Add> adds;
     @OneToMany(mappedBy = "store", fetch = FetchType.LAZY)
@@ -40,6 +36,8 @@ public class Store {
     private Collection<Category> categories;
     @OneToOne
     private User user;
+    @OneToMany(mappedBy = "store", fetch = FetchType.LAZY)
+    private Collection<Visit> visits;
 
     public Integer getId() {
         return id;
@@ -97,14 +95,6 @@ public class Store {
         this.storeImage = storeImage;
     }
 
-    public Integer getNumOfVisit() {
-        return numOfVisit;
-    }
-
-    public void setNumOfVisit(Integer numOfVisit) {
-        this.numOfVisit = numOfVisit;
-    }
-
     public Collection<Add> getAdds() {
         return adds;
     }
@@ -135,5 +125,13 @@ public class Store {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Collection<Visit> getVisits() {
+        return visits;
+    }
+
+    public void setVisits(Collection<Visit> visits) {
+        this.visits = visits;
     }
 }
