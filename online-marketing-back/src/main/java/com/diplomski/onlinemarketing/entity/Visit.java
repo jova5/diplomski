@@ -13,6 +13,15 @@ public class Visit {
     @Basic
     @Column(name = "date")
     private Date date;
+    @Basic
+    @Column(name = "city")
+    private String city;
+    @Basic
+    @Column(name = "region")
+    private String region;
+    @Basic
+    @Column(name = "country")
+    private String country;
     @ManyToOne
     @JoinColumn(name = "store_id", referencedColumnName = "id")
     private Store store;
