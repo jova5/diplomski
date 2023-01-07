@@ -5,8 +5,30 @@ button.new-language{
     border-radius: 40px;
 }
 
-div.table-top-options{
+div.options{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    padding-bottom: 10px;
+}
+
+div.options-left{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 10px;
+}
+
+div.options-right{
     display: flex;
     justify-content: end;
+    align-items: center;
     gap: 10px;
+}
+
+.edit-table-row-icon{
+    color: var(--custom-aqua-blue);
+}
+
+.delete-table-row-icon{
+    color: var(--custom-delete-red);
 }

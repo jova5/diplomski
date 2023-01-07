@@ -1,3 +1,8 @@
+:root {
+  --custom-aqua-blue: #27b6ff;
+  --custom-delete-red: #d81111;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
