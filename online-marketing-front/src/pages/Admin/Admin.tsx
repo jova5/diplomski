@@ -6,10 +6,12 @@ import {Dynamic} from "solid-js/web";
 
 const Admin: Component = () => {
   return (
-    <>
+    <div>
       <Navbar/>
-      <Dynamic component={NavOptions[nav()]}/>
-    </>
+      <div class="container">
+        <Dynamic component={NavOptions[nav()]}/>
+      </div>
+    </div>
   )
 }
 

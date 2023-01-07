@@ -17,7 +17,7 @@ nav ul li {
     float: right;
 }
 
-button {
+button.nav-button {
     background:none;
     border:none;
     position: relative;
@@ -32,7 +32,7 @@ button {
     font-size: larger;
 }
 
-button:after {
+button.nav-button:after {
     content: "";
     position: absolute;
     background-color: #27b6ff;
@@ -40,16 +40,26 @@ button:after {
     width: 0;
     left: 0;
     bottom: -5px;
+    /*border-bottom: #27b6ff solid;*/
     transition: 0.2s;
 }
 
-button:hover {
+button.nav-button:hover {
     color: #000000;
     cursor: pointer;
 }
 
-button:hover:after {
+button.nav-button:hover:after {
     width: 100%;
+}
+
+button.selected-button {
+    color: #27b6ff;
+}
+
+button.selected-button:hover {
+    color: #27b6ff;
+    cursor: context-menu;
 }
 
 button.log-out{
