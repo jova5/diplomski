@@ -13,6 +13,9 @@ public class Language {
     @Basic
     @Column(name = "short_name")
     private String shortName;
+    @Basic
+    @Column(name = "long_name")
+    private String longName;
     @OneToMany(mappedBy = "language")
     private Collection<Vocabulary> vocabularies;
 
@@ -30,6 +33,14 @@ public class Language {
 
     public void setShortName(String shortName) {
         this.shortName = shortName;
+    }
+
+    public String getLongName() {
+        return longName;
+    }
+
+    public void setLongName(String longName) {
+        this.longName = longName;
     }
 
     public Collection<Vocabulary> getVocabularies() {

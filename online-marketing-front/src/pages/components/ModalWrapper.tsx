@@ -1,5 +1,4 @@
 import {Component} from "solid-js";
-import {openNewLanguageModal} from "../Admin/components/modalStore";
 import {Box, Button, Modal, Typography} from "@suid/material";
 import './ModalWrapper.css';
 
@@ -13,7 +12,7 @@ const ModalWrapper: Component<
   }> = (props) => {
   return (
     <Modal
-      open={openNewLanguageModal()}
+      open={props.open}
       aria-describedby="modal-modal-description"
     >
       <Box class="modal">

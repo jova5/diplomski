@@ -8,5 +8,6 @@ import java.util.Collection;
 public class LanguageResponse {
     private Integer id;
     private String shortName;
+    private String longName;
     private Collection<VocabularyResponse> vocabularies;
 }

@@ -1,0 +1,7 @@
+.input-custom{
+    border: 1px solid var(--custom-gray-outline);
+    padding: 10px 10px 10px 15px;
+    border-radius: 30px;
+    margin: 10px 0;
+    font-size: larger;
+}

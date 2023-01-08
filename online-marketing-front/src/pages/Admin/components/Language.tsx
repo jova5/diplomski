@@ -17,7 +17,8 @@ import SearchBar from "./SearchBar";
 import DeleteIcon from '@suid/icons-material/Delete';
 import EditIcon from '@suid/icons-material/Edit';
 import NewLanguageModal from "./NewLanguageModal";
-import {setOpenNewLanguageModal} from "./modalStore";
+import {setOpenNewLanguageModal, setOpenNewSyntaxModal} from "./modalStore";
+import NewSyntaxModal from "./NewSyntaxModal";
 
 function createData(
   name: string,
@@ -46,11 +47,17 @@ const Language: Component = () => {
           <SearchBar/>
         </div>
         <div class="options-right">
-          <Button class="new-language" variant="outlined" onClick={() => setOpenNewLanguageModal(true)}>
+          <Button
+            class="new-language"
+            variant="outlined"
+            onClick={() => setOpenNewLanguageModal(true)}>
             <AddCircleOutlineIcon/>
             Add new language
           </Button>
-          <Button class="new-language" variant="outlined">
+          <Button
+            class="new-language"
+            variant="outlined"
+            onClick={() => setOpenNewSyntaxModal(true)}>
             <PostAddIcon/>
             Add new syntax
           </Button>
@@ -77,9 +84,6 @@ const Language: Component = () => {
                 <TableRow
                   sx={{"&:last-child td, &:last-child th": {border: 0}}}
                 >
-                  {/*<TableCell component="th" scope="row">*/}
-                  {/*  {row.name}*/}
-                  {/*</TableCell>*/}
                   <TableCell align="left">
                     {row.name}
                   </TableCell>
@@ -99,7 +103,8 @@ const Language: Component = () => {
           </TableBody>
         </Table>
       </TableContainer>
-      <NewLanguageModal name={"New Language Modal"}/>
+      <NewLanguageModal/>
+      <NewSyntaxModal/>
     </>
   )
 }

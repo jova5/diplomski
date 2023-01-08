@@ -211,6 +211,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `online-marketing`.`language` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `short_name` VARCHAR(10) NOT NULL,
+  `long_name` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE)
 ENGINE = InnoDB;
