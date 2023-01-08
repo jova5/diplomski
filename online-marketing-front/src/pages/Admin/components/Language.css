@@ -32,3 +32,9 @@ div.options-right{
 .delete-table-row-icon{
     color: var(--custom-delete-red);
 }
+
+.table-container{
+    display: flex;
+    flex: 1 1 auto;
+    height: 500px;
+}

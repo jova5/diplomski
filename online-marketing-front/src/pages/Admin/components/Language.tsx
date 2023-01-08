@@ -56,6 +56,11 @@ const Language: Component = () => {
       }), {initialValue: []}
   );
 
+  // createEffect(() => {
+  //   console.log("op")
+  //   console.log(renderedLanguageList);
+  // });
+
   return (
     <>
       <div class="options">
@@ -79,7 +84,7 @@ const Language: Component = () => {
           </Button>
         </div>
       </div>
-      <TableContainer component={Paper}>
+      <TableContainer class="table-container" component={Paper}>
         <Table aria-label="simple table">
           <TableHead>
             <TableRow>
@@ -94,26 +99,29 @@ const Language: Component = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            <For each={renderedLanguageList()}>
+            <For each={renderedLanguageList}>
               {
-                (value) =>
-                  <TableRow
-                    sx={{"&:last-child td, &:last-child th": {border: 0}}}
-                  >
-                    <TableCell align="left">
-                      {value.key}
-                    </TableCell>
-                    <TableCell align="left">{value.shortName}</TableCell>
-                    <TableCell align="left">{value.meaning}</TableCell>
-                    <TableCell align="right">
-                      <IconButton class="edit-table-row">
-                        <EditIcon class="edit-table-row-icon"/>
-                      </IconButton>
-                      <IconButton>
-                        <DeleteIcon class="delete-table-row-icon"/>
-                      </IconButton>
-                    </TableCell>
-                  </TableRow>
+                (value) => {
+                  return (
+                    <TableRow
+                      sx={{"&:last-child td, &:last-child th": {border: 0}}}
+                    >
+                      <TableCell align="left">
+                        {value.key}
+                      </TableCell>
+                      <TableCell align="left">{value.shortName}</TableCell>
+                      <TableCell align="left">{value.meaning}</TableCell>
+                      <TableCell align="right">
+                        <IconButton class="edit-table-row">
+                          <EditIcon class="edit-table-row-icon"/>
+                        </IconButton>
+                        <IconButton>
+                          <DeleteIcon class="delete-table-row-icon"/>
+                        </IconButton>
+                      </TableCell>
+                    </TableRow>
+                  )
+                }
               }
             </For>
           </TableBody>

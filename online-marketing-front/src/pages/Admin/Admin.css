@@ -1,3 +1,12 @@
-div.container{
+.container{
     padding-top: 1em;
+    display: flex;
+    flex-flow: column;
+    flex: 1 1 auto;
+}
+
+.admin-container{
+    min-height: 100vh;
+    display: flex;
+    flex-flow: column;
 }

@@ -3,6 +3,7 @@ import {availableLanguages, openNewSyntaxModal, setOpenNewSyntaxModal, setRender
 import ModalWrapper from "../../components/ModalWrapper";
 import './NewSyntaxModal.css';
 import {VocabularyRequest} from "../../dto/VocabularyRequest";
+import {produce} from "solid-js/store";
 
 const NewSyntaxModal: Component = () => {
   const [languageId, setLanguageId] = createSignal<string>("");
@@ -29,14 +30,24 @@ const NewSyntaxModal: Component = () => {
       })
       .then(res => res.json())
       .then(data => {
-        setRenderedLanguageList(prev => [...prev, {
-          id: data.id,
-          key: data.key,
-          meaning: data.meaning,
-          shortName: availableLanguages().find((item) => item.id === languageId()).shortName
-        }])
-      })
+          setRenderedLanguageList(
+            produce((todos) => {
+              todos.push({
+                id: data.id,
+                key: data.key,
+                meaning: data.meaning,
+                shortName: availableLanguages().find((item) => item.id === +languageId()).shortName
+              });
+            }),
+          )
+        }
+      )
   }
+
+  // createEffect(() => {
+  //   console.log("update");
+  //   console.log(renderedLanguageList);
+  // });
 
   return (
     <ModalWrapper
