@@ -16,6 +16,8 @@ import PostAddIcon from '@suid/icons-material/PostAdd';
 import SearchBar from "./SearchBar";
 import DeleteIcon from '@suid/icons-material/Delete';
 import EditIcon from '@suid/icons-material/Edit';
+import NewLanguageModal from "./NewLanguageModal";
+import {setOpenNewLanguageModal} from "./modalStore";
 
 function createData(
   name: string,
@@ -44,7 +46,7 @@ const Language: Component = () => {
           <SearchBar/>
         </div>
         <div class="options-right">
-          <Button class="new-language" variant="outlined">
+          <Button class="new-language" variant="outlined" onClick={() => setOpenNewLanguageModal(true)}>
             <AddCircleOutlineIcon/>
             Add new language
           </Button>
@@ -60,11 +62,11 @@ const Language: Component = () => {
             <TableRow>
               <TableCell>Key</TableCell>
               <TableCell align="left">
-                <div onClick={() => console.log("Calories")}>
-                  Serbian
+                <div onClick={() => console.log("Language")}>
+                  Language
                 </div>
               </TableCell>
-              <TableCell align="left">English</TableCell>
+              <TableCell align="left">Syntax</TableCell>
               <TableCell align="right">Options</TableCell>
             </TableRow>
           </TableHead>
@@ -97,6 +99,7 @@ const Language: Component = () => {
           </TableBody>
         </Table>
       </TableContainer>
+      <NewLanguageModal name={"New Language Modal"}/>
     </>
   )
 }
