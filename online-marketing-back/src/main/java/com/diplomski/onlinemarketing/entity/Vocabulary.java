@@ -3,6 +3,7 @@ package com.diplomski.onlinemarketing.entity;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "vocabulary")
 public class Vocabulary {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

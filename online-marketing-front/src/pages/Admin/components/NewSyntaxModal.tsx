@@ -1,35 +1,72 @@
-import {Component, createSignal} from "solid-js";
-import {openNewSyntaxModal, setOpenNewSyntaxModal} from "./modalStore";
+import {Component, createSignal, For} from "solid-js";
+import {availableLanguages, openNewSyntaxModal, setOpenNewSyntaxModal, setRenderedLanguageList} from "./modalStore";
 import ModalWrapper from "../../components/ModalWrapper";
 import './NewSyntaxModal.css';
+import {VocabularyRequest} from "../../dto/VocabularyRequest";
 
 const NewSyntaxModal: Component = () => {
-  const [languageValue, setLanguageValue] = createSignal<string>("");
+  const [languageId, setLanguageId] = createSignal<string>("");
+  const [syntaxValue, setSyntaxValue] = createSignal<string>("");
+  const [keyValue, setKeyValue] = createSignal<string>("");
   const setOpen = () => {
-    setOpenNewSyntaxModal( prev => !prev);
+    setOpenNewSyntaxModal(prev => !prev);
   }
 
   const handleOK = () => {
+    const vocabulary: VocabularyRequest = {
+      languageId: +languageId(),
+      key: keyValue(),
+      meaning: syntaxValue()
+    }
 
+    fetch('http://127.0.0.1:8080/vocabulary',
+      {
+        method: 'POST',
+        body: JSON.stringify(vocabulary),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(res => res.json())
+      .then(data => {
+        setRenderedLanguageList(prev => [...prev, {
+          id: data.id,
+          key: data.key,
+          meaning: data.meaning,
+          shortName: availableLanguages().find((item) => item.id === languageId()).shortName
+        }])
+      })
   }
 
-  return(
+  return (
     <ModalWrapper
-      name={"New Syntax"}
-      open={openNewSyntaxModal()}
-      setOpen={ () => setOpen()}
-      handleOK={() => handleOK()}
+      name={() => "New Syntax"}
+      open={openNewSyntaxModal}
+      setOpen={setOpen}
+      handleOK={handleOK}
     >
+      <p>Language</p>
+      <select class="language-select" name="languageId" onChange={(e) => setLanguageId(e.currentTarget.value)}>
+        <option value="default" selected disabled>-- Select --</option>
+        <For each={availableLanguages()}>
+          {
+            (item) =>
+              <option value={item.id}>{item.longName}</option>
+          }
+        </For>
+      </select>
+      <p>Key</p>
       <input
         class="input-custom"
         type="text"
-        placeholder="Serbian"
-        onChange={(e) => setLanguageValue(e.currentTarget.value)}/>
+        placeholder={"Key"}
+        onChange={(e) => setKeyValue(e.currentTarget.value)}/>
+      <p>Syntax</p>
       <input
         class="input-custom"
         type="text"
-        placeholder="English"
-        onChange={(e) => setLanguageValue(e.currentTarget.value)}/>
+        placeholder={"Syntax"}
+        onChange={(e) => setSyntaxValue(e.currentTarget.value)}/>
     </ModalWrapper>
   )
 }

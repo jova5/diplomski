@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.Objects;
 
 @Entity
+@Table(name = "category")
 public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

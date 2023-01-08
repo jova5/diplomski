@@ -4,20 +4,20 @@ import './ModalWrapper.css';
 
 const ModalWrapper: Component<
   {
-    name: string,
+    name: () => string,
     children: any,
-    open: boolean,
+    open: () => boolean,
     setOpen: () => void,
     handleOK: () => void,
   }> = (props) => {
   return (
     <Modal
-      open={props.open}
+      open={props.open()}
       aria-describedby="modal-modal-description"
     >
       <Box class="modal">
         <p class={"modal-header"}>
-          {props.name}
+          {props.name()}
         </p>
         <Typography id="modal-modal-description" sx={{mt: 2}}>
           {...props.children}

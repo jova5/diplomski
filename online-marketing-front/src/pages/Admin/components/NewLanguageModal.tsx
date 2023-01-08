@@ -15,10 +15,10 @@ const NewLanguageModal: Component = () => {
 
   return (
     <ModalWrapper
-      name={"New Language Modal"}
-      open={openNewLanguageModal()}
-      setOpen={() => setOpen()}
-      handleOK={() => handleOK()}
+      name={() => "New Language Modal"}
+      open={openNewLanguageModal}
+      setOpen={setOpen}
+      handleOK={handleOK}
     >
       <input
         class="input-language"

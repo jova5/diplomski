@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.Objects;
 
 @Entity
+@Table(name = "contact")
 public class Contact {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import java.util.Collection;
 
 @Entity
+@Table(name = "language")
 public class Language {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

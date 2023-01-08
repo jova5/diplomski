@@ -4,6 +4,7 @@ import com.diplomski.onlinemarketing.exception.RestException;
 import com.diplomski.onlinemarketing.service.generic.GenericService;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,14 +12,14 @@ import java.lang.reflect.ParameterizedType;
 
 public class GenericController<RES,REQ,T,ID> {
     private final GenericService<T, ID> service;
-    private final ModelMapper modelMapper;
+    @Autowired
+    private ModelMapper modelMapper;
     private final Class<RES> responseType;
     private final Class<T> objectType;
 
 
     public GenericController(GenericService<T, ID> service) {
         this.service = service;
-        this.modelMapper = new ModelMapper();
         this.responseType = (Class<RES>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
         this.objectType = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[2];
 //        this.modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);

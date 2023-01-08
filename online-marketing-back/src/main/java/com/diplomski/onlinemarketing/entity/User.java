@@ -3,6 +3,7 @@ package com.diplomski.onlinemarketing.entity;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "user")
 public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
