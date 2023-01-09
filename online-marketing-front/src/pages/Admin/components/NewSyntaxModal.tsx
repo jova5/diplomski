@@ -4,7 +4,7 @@ import ModalWrapper from "../../../components/ModalWrapper";
 import './NewSyntaxModal.css';
 import {VocabularyRequest} from "../../../dto/VocabularyRequest";
 import {availableLanguages} from "../stores/adminStore";
-import {addSyntax} from "../utils/languageAsync";
+import {addSyntax, translate} from "../utils/languageAsync";
 
 const NewSyntaxModal: Component = () => {
   const [languageId, setLanguageId] = createSignal<string>("");
@@ -25,14 +25,14 @@ const NewSyntaxModal: Component = () => {
 
   return (
     <ModalWrapper
-      name={() => "New Syntax"}
+      name={() => translate("addSyntax")}
       open={openNewSyntaxModal}
       setOpen={setOpen}
       handleOK={handleOK}
     >
-      <p>Language</p>
+      <p>{translate("language")}</p>
       <select class="language-select" name="languageId" onChange={(e) => setLanguageId(e.currentTarget.value)}>
-        <option value="default" selected disabled>-- Select --</option>
+        <option value="default" selected disabled>-- {translate("select")} --</option>
         <For each={availableLanguages()}>
           {
             (item) =>
@@ -40,17 +40,17 @@ const NewSyntaxModal: Component = () => {
           }
         </For>
       </select>
-      <p>Key</p>
+      <p>{translate("key")}</p>
       <input
         class="input-custom"
         type="text"
-        placeholder={"Key"}
+        placeholder={translate("key")}
         onChange={(e) => setKeyValue(e.currentTarget.value)}/>
-      <p>Syntax</p>
+      <p>{translate("syntax")}</p>
       <input
         class="input-custom"
         type="text"
-        placeholder={"Syntax"}
+        placeholder={translate("syntax")}
         onChange={(e) => setSyntaxValue(e.currentTarget.value)}/>
     </ModalWrapper>
   )

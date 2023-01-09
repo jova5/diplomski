@@ -10,17 +10,14 @@ import {
   TableHead,
   TableRow
 } from "@suid/material";
-import AddCircleOutlineIcon from '@suid/icons-material/AddCircleOutline';
 import PostAddIcon from '@suid/icons-material/PostAdd';
 import SearchBar from "./components/SearchBar";
 import DeleteIcon from '@suid/icons-material/Delete';
 import EditIcon from '@suid/icons-material/Edit';
-import NewLanguageModal from "./components/NewLanguageModal";
 import {
   openDeleteSyntaxModal,
   setOpenDeleteSyntaxModal,
   setOpenEditSyntaxModal,
-  setOpenNewLanguageModal,
   setOpenNewSyntaxModal,
   setSyntaxId,
   setSyntaxKey,
@@ -30,7 +27,7 @@ import {
   syntaxKey
 } from "./stores/modalStore";
 import NewSyntaxModal from "./components/NewSyntaxModal";
-import {deleteSyntax} from "./utils/languageAsync";
+import {deleteSyntax, translate} from "./utils/languageAsync";
 import ConfirmationModal from "./components/ConfirmationModal";
 import {
   languages,
@@ -42,9 +39,8 @@ import {
 import EditSyntaxModal from "./components/EditSyntaxModal";
 import "./Language.css";
 
-
 const Language: Component = () => {
-  console.log("Language");
+  console.log("Admin/Language");
 
   createEffect(() => {
     const languageList: any[] = languages().filter((syntax: any) => {
@@ -59,7 +55,7 @@ const Language: Component = () => {
       <div class="options">
         <div class="options-left">
           <SearchBar
-            placeholder="Search..."
+            placeholder={`${translate("search")}...`}
             onChange={(str) => setSearchLanguage(str)}
           />
         </div>
@@ -67,16 +63,9 @@ const Language: Component = () => {
           <Button
             class="new-language"
             variant="outlined"
-            onClick={() => setOpenNewLanguageModal(true)}>
-            <AddCircleOutlineIcon/>
-            Add new language
-          </Button>
-          <Button
-            class="new-language"
-            variant="outlined"
             onClick={() => setOpenNewSyntaxModal(true)}>
             <PostAddIcon/>
-            Add new syntax
+            {translate("addSyntax")}
           </Button>
         </div>
       </div>
@@ -84,10 +73,10 @@ const Language: Component = () => {
         <Table aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell>Key</TableCell>
-              <TableCell align="left">Language</TableCell>
-              <TableCell align="left">Syntax</TableCell>
-              <TableCell align="right">Options</TableCell>
+              <TableCell>{translate("key")}</TableCell>
+              <TableCell align="left">{translate("language")}</TableCell>
+              <TableCell align="left">{translate("syntax")}</TableCell>
+              <TableCell align="right">{translate("options")}</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -132,14 +121,13 @@ const Language: Component = () => {
           </TableBody>
         </Table>
       </TableContainer>
-      <NewLanguageModal/>
       <NewSyntaxModal/>
       <ConfirmationModal
-        header={() => "Are you sure you want to delete syntax?"}
+        header={() => translate("deleteSyntax?")}
         open={openDeleteSyntaxModal}
         setOpen={setOpenDeleteSyntaxModal}
         handleOK={() => deleteSyntax(syntaxId())}
-        message={() => `Are you sure you want to delete syntax with key: ### ${syntaxKey()} ###`}
+        message={() => `${translate("deleteSyntaxWithKey?")}: ### ${syntaxKey()} ###`}
       />
       <EditSyntaxModal/>
     </>

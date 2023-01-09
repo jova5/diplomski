@@ -1,6 +1,7 @@
 import {Component} from "solid-js";
 import {Box, Button, Modal, Typography} from "@suid/material";
 import './ModalWrapper.css';
+import {translate} from "../pages/Admin/utils/languageAsync";
 
 const ModalWrapper: Component<
   {
@@ -23,8 +24,8 @@ const ModalWrapper: Component<
           {...props.children}
         </Typography>
         <div class="modal-options">
-          <Button class="cancel" onClick={() => props.setOpen()}>Cancel</Button>
-          <Button class="ok" onClick={() => props.handleOK()}>OK</Button>
+          <Button class="cancel" onClick={() => props.setOpen()}>{translate("cancel")}</Button>
+          <Button class="ok" onClick={() => props.handleOK()}>{translate("ok")}</Button>
         </div>
       </Box>
     </Modal>

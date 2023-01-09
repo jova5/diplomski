@@ -1,11 +1,13 @@
 import {
   availableLanguages,
+  refetch,
   renderedLanguageList,
   setAvailableLanguages,
   setRenderedLanguageList
 } from "../stores/adminStore";
 import {produce} from "solid-js/store";
 import {VocabularyRequest} from "../../../dto/VocabularyRequest";
+import {translation} from "../../../stores/languageStore";
 
 async function getLanguagesForTable(): Promise<any[]> {
   let resultLanguageList: any[] = [];
@@ -38,7 +40,6 @@ async function getLanguagesForTable(): Promise<any[]> {
       }
       resultLanguageList = resultLanguageList.sort((a, b) => a.id - b.id);
       setRenderedLanguageList(resultLanguageList);
-
     })
   return resultLanguageList;
 }
@@ -63,7 +64,8 @@ async function addSyntax(vocabulary: VocabularyRequest, languageId: number): Pro
               shortName: availableLanguages().find((item) => item.id === languageId).shortName
             });
           }),
-        )
+        );
+        refetch();
       }
     )
 }
@@ -74,6 +76,7 @@ async function deleteSyntax(id: number): Promise<any> {
     .then(() => {
       const temporaryList = renderedLanguageList.filter((item) => item.id !== id)
       setRenderedLanguageList(temporaryList);
+      refetch();
     })
 }
 
@@ -99,4 +102,17 @@ async function updateSyntax(vocabulary: VocabularyRequest, vocabularyId: number)
     )
 }
 
-export {getLanguagesForTable, addSyntax, deleteSyntax, updateSyntax};
+async function getTranslation(languageId: number): Promise<any[]> {
+  const {vocabularies} = await fetch(`http://127.0.0.1:8080/language/${languageId}`, {method: 'GET'})
+    .then(res => res.json());
+  return vocabularies;
+}
+
+export const translate = (key: string): string => {
+  const temporaryItem = translation()?.find((item) => item.key === key);
+  if (temporaryItem)
+    return temporaryItem.meaning;
+  return `${key}`;
+}
+
+export {getLanguagesForTable, addSyntax, deleteSyntax, updateSyntax, getTranslation};

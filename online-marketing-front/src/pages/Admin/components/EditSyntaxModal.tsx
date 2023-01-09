@@ -11,7 +11,7 @@ import {
 } from "../stores/modalStore";
 import ModalWrapper from "../../../components/ModalWrapper";
 import {VocabularyRequest} from "../../../dto/VocabularyRequest";
-import {updateSyntax} from "../utils/languageAsync";
+import {translate, updateSyntax} from "../utils/languageAsync";
 
 const EditSyntaxModal: Component = () => {
   const setOpen = () => {
@@ -29,18 +29,18 @@ const EditSyntaxModal: Component = () => {
 
   return (
     <ModalWrapper
-      name={() => "Edit Syntax"}
+      name={() => translate("edit")}
       open={openEditSyntaxModal}
       setOpen={setOpen}
       handleOK={handleOK}
     >
-      <p>Key</p>
+      <p>{translate("key")}</p>
       <input
         class="input-custom"
         type="text"
         value={syntaxKey()}
         onChange={(e) => setSyntaxKey(e.currentTarget.value)}/>
-      <p>Syntax</p>
+      <p>{translate("syntax")}</p>
       <input
         class="input-custom"
         type="text"
