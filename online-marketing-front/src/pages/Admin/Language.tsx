@@ -13,48 +13,24 @@ import {
 import "./Language.css";
 import AddCircleOutlineIcon from '@suid/icons-material/AddCircleOutline';
 import PostAddIcon from '@suid/icons-material/PostAdd';
-import SearchBar from "./SearchBar";
+import SearchBar from "./components/SearchBar";
 import DeleteIcon from '@suid/icons-material/Delete';
 import EditIcon from '@suid/icons-material/Edit';
-import NewLanguageModal from "./NewLanguageModal";
+import NewLanguageModal from "./components/NewLanguageModal";
 import {
-  renderedLanguageList,
-  setAvailableLanguages,
+  openDeleteModal, setOpenDeleteModal,
   setOpenNewLanguageModal,
-  setOpenNewSyntaxModal,
-  setRenderedLanguageList
-} from "./modalStore";
-import NewSyntaxModal from "./NewSyntaxModal";
+  setOpenNewSyntaxModal, setSyntaxId, setSyntaxKey, syntaxId, syntaxKey
+} from "./stores/modalStore";
+import NewSyntaxModal from "./components/NewSyntaxModal";
+import {deleteSyntax, getLanguagesForTable} from "./utils/languageAsync";
+import ConfirmationModal from "./components/ConfirmationModal";
+import {renderedLanguageList} from "./stores/adminStore";
 
 const Language: Component = () => {
   console.log("Language");
 
-  const [languages] = createResource(() =>
-    fetch('http://127.0.0.1:8080/language', {method: 'GET',})
-      .then(res => res.json())
-      .then(data => {
-        const availableLanguages = data.map((item: any) => {
-          return {
-            id: item.id,
-            longName: item.longName,
-            shortName: item.shortName
-          }
-        });
-        setAvailableLanguages(availableLanguages);
-
-        const pom = data.map((item: any) => {
-          return item.vocabularies.map((value: any) => {
-            return {id: value.id, key: value.key, shortName: item.shortName, meaning: value.meaning}
-          })
-        });
-        let resultLanguageList: any[] = [];
-        for (let i = 0; i < pom.length; i++) {
-          resultLanguageList = resultLanguageList.concat(pom[i]);
-        }
-        setRenderedLanguageList(resultLanguageList.sort((a, b) => a.id - b.id));
-        return resultLanguageList.sort((a, b) => a.id - b.id);
-      }), {initialValue: []}
-  );
+  const [languages] = createResource(getLanguagesForTable, {initialValue: []});
 
   // createEffect(() => {
   //   console.log("op")
@@ -115,7 +91,12 @@ const Language: Component = () => {
                         <IconButton class="edit-table-row">
                           <EditIcon class="edit-table-row-icon"/>
                         </IconButton>
-                        <IconButton>
+                        <IconButton
+                          onClick={() => {
+                          setSyntaxId(value.id);
+                          setSyntaxKey(value.key);
+                          setOpenDeleteModal(true);
+                        }}>
                           <DeleteIcon class="delete-table-row-icon"/>
                         </IconButton>
                       </TableCell>
@@ -129,6 +110,12 @@ const Language: Component = () => {
       </TableContainer>
       <NewLanguageModal/>
       <NewSyntaxModal/>
+      <ConfirmationModal
+        header={() => "Are you sure you want to delete syntax?"}
+        open={openDeleteModal}
+        setOpen={setOpenDeleteModal}
+        handleOK={() => deleteSyntax(syntaxId())}
+        message={() => `Are you sure you want to delete syntax with key: ### ${syntaxKey()} ###`}/>
     </>
   )
 }

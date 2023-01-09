@@ -1,9 +1,9 @@
 import {createSignal} from "solid-js";
-import Users from "./components/Users";
-import Stores from "./components/Stores";
-import Categories from "./components/Categories";
-import Language from "./components/Language";
-import Adds from "./components/Adds";
+import Users from "../Users";
+import Stores from "../Stores";
+import Categories from "../Categories";
+import Language from "../Language";
+import Adds from "../Adds";
 
 export const NavValues = ["Users", "Stores", "Categories", "Adds", "Language"] as const;
 

@@ -1,5 +1,5 @@
 import {Component, createSignal} from "solid-js";
-import {openNewLanguageModal, setOpenNewLanguageModal} from "./modalStore";
+import {openNewLanguageModal, setOpenNewLanguageModal} from "../stores/modalStore";
 import "./NewLanguageModal.css";
 import ModalWrapper from "../../components/ModalWrapper";
 

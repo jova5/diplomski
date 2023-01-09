@@ -1,7 +1,7 @@
 import {Component} from "solid-js";
 import "./Admin.css";
 import Navbar from "./components/Navbar";
-import {nav, NavOptions} from "./adminNavigationStore";
+import {nav, NavOptions} from "./stores/adminNavigationStore";
 import {Dynamic} from "solid-js/web";
 
 const Admin: Component = () => {

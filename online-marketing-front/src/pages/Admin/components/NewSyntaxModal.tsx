@@ -1,9 +1,10 @@
 import {Component, createSignal, For} from "solid-js";
-import {availableLanguages, openNewSyntaxModal, setOpenNewSyntaxModal, setRenderedLanguageList} from "./modalStore";
+import {openNewSyntaxModal, setOpenNewSyntaxModal} from "../stores/modalStore";
 import ModalWrapper from "../../components/ModalWrapper";
 import './NewSyntaxModal.css';
 import {VocabularyRequest} from "../../dto/VocabularyRequest";
-import {produce} from "solid-js/store";
+import {availableLanguages} from "../stores/adminStore";
+import {addSyntax} from "../utils/languageAsync";
 
 const NewSyntaxModal: Component = () => {
   const [languageId, setLanguageId] = createSignal<string>("");
@@ -13,35 +14,13 @@ const NewSyntaxModal: Component = () => {
     setOpenNewSyntaxModal(prev => !prev);
   }
 
-  const handleOK = () => {
+  const handleOK = async () => {
     const vocabulary: VocabularyRequest = {
       languageId: +languageId(),
       key: keyValue(),
       meaning: syntaxValue()
     }
-
-    fetch('http://127.0.0.1:8080/vocabulary',
-      {
-        method: 'POST',
-        body: JSON.stringify(vocabulary),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
-      .then(res => res.json())
-      .then(data => {
-          setRenderedLanguageList(
-            produce((todos) => {
-              todos.push({
-                id: data.id,
-                key: data.key,
-                meaning: data.meaning,
-                shortName: availableLanguages().find((item) => item.id === +languageId()).shortName
-              });
-            }),
-          )
-        }
-      )
+    await addSyntax(vocabulary, +languageId());
   }
 
   // createEffect(() => {
