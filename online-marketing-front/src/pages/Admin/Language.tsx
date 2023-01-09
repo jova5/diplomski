@@ -1,4 +1,4 @@
-import {Component, createResource, For} from "solid-js";
+import {Component, createEffect, For} from "solid-js";
 import {
   Button,
   IconButton,
@@ -10,7 +10,6 @@ import {
   TableHead,
   TableRow
 } from "@suid/material";
-import "./Language.css";
 import AddCircleOutlineIcon from '@suid/icons-material/AddCircleOutline';
 import PostAddIcon from '@suid/icons-material/PostAdd';
 import SearchBar from "./components/SearchBar";
@@ -18,30 +17,51 @@ import DeleteIcon from '@suid/icons-material/Delete';
 import EditIcon from '@suid/icons-material/Edit';
 import NewLanguageModal from "./components/NewLanguageModal";
 import {
-  openDeleteModal, setOpenDeleteModal,
+  openDeleteSyntaxModal,
+  setOpenDeleteSyntaxModal,
+  setOpenEditSyntaxModal,
   setOpenNewLanguageModal,
-  setOpenNewSyntaxModal, setSyntaxId, setSyntaxKey, syntaxId, syntaxKey
+  setOpenNewSyntaxModal,
+  setSyntaxId,
+  setSyntaxKey,
+  setSyntaxLanguageId,
+  setSyntaxValue,
+  syntaxId,
+  syntaxKey
 } from "./stores/modalStore";
 import NewSyntaxModal from "./components/NewSyntaxModal";
-import {deleteSyntax, getLanguagesForTable} from "./utils/languageAsync";
+import {deleteSyntax} from "./utils/languageAsync";
 import ConfirmationModal from "./components/ConfirmationModal";
-import {renderedLanguageList} from "./stores/adminStore";
+import {
+  languages,
+  renderedLanguageList,
+  searchLanguage,
+  setRenderedLanguageList,
+  setSearchLanguage
+} from "./stores/adminStore";
+import EditSyntaxModal from "./components/EditSyntaxModal";
+import "./Language.css";
+
 
 const Language: Component = () => {
   console.log("Language");
 
-  const [languages] = createResource(getLanguagesForTable, {initialValue: []});
-
-  // createEffect(() => {
-  //   console.log("op")
-  //   console.log(renderedLanguageList);
-  // });
+  createEffect(() => {
+    const languageList: any[] = languages().filter((syntax: any) => {
+      return syntax.key.toLocaleLowerCase().includes(searchLanguage().toLocaleLowerCase()) ||
+        syntax.meaning.toLocaleLowerCase().includes(searchLanguage().toLocaleLowerCase())
+    })
+    setRenderedLanguageList(languageList);
+  })
 
   return (
     <>
       <div class="options">
         <div class="options-left">
-          <SearchBar/>
+          <SearchBar
+            placeholder="Search..."
+            onChange={(str) => setSearchLanguage(str)}
+          />
         </div>
         <div class="options-right">
           <Button
@@ -79,8 +99,8 @@ const Language: Component = () => {
               {
                 (value) => {
                   return (
-                    <TableRow
-                      sx={{"&:last-child td, &:last-child th": {border: 0}}}
+                    <TableRow class="table-row" hover={true}
+                              sx={{"&:last-child td, &:last-child th": {border: 0}}}
                     >
                       <TableCell align="left">
                         {value.key}
@@ -88,15 +108,23 @@ const Language: Component = () => {
                       <TableCell align="left">{value.shortName}</TableCell>
                       <TableCell align="left">{value.meaning}</TableCell>
                       <TableCell align="right">
-                        <IconButton class="edit-table-row">
+                        <IconButton
+                          class="edit-table-row"
+                          onClick={() => {
+                            setSyntaxId(value.id);
+                            setSyntaxLanguageId(value.languageId);
+                            setSyntaxKey(value.key);
+                            setSyntaxValue(value.meaning);
+                            setOpenEditSyntaxModal(true);
+                          }}>
                           <EditIcon class="edit-table-row-icon"/>
                         </IconButton>
                         <IconButton
                           onClick={() => {
-                          setSyntaxId(value.id);
-                          setSyntaxKey(value.key);
-                          setOpenDeleteModal(true);
-                        }}>
+                            setSyntaxId(value.id);
+                            setSyntaxKey(value.key);
+                            setOpenDeleteSyntaxModal(true);
+                          }}>
                           <DeleteIcon class="delete-table-row-icon"/>
                         </IconButton>
                       </TableCell>
@@ -112,10 +140,12 @@ const Language: Component = () => {
       <NewSyntaxModal/>
       <ConfirmationModal
         header={() => "Are you sure you want to delete syntax?"}
-        open={openDeleteModal}
-        setOpen={setOpenDeleteModal}
+        open={openDeleteSyntaxModal}
+        setOpen={setOpenDeleteSyntaxModal}
         handleOK={() => deleteSyntax(syntaxId())}
-        message={() => `Are you sure you want to delete syntax with key: ### ${syntaxKey()} ###`}/>
+        message={() => `Are you sure you want to delete syntax with key: ### ${syntaxKey()} ###`}
+      />
+      <EditSyntaxModal/>
     </>
   )
 }

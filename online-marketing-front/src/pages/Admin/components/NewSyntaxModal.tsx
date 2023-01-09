@@ -23,11 +23,6 @@ const NewSyntaxModal: Component = () => {
     await addSyntax(vocabulary, +languageId());
   }
 
-  // createEffect(() => {
-  //   console.log("update");
-  //   console.log(renderedLanguageList);
-  // });
-
   return (
     <ModalWrapper
       name={() => "New Syntax"}

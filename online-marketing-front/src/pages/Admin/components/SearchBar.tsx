@@ -1,11 +1,16 @@
 import {Component} from "solid-js";
 import SearchIcon from '@suid/icons-material/Search';
 import './SearchBar.css';
-const SearchBar: Component = () => {
+
+const SearchBar: Component<
+  {
+    onChange: (str: string) => void,
+    placeholder: string
+  }> = (props) => {
   return (
     <div class="input-box">
       <SearchIcon/>
-      <input type="text" placeholder="Search..."/>
+      <input type="text" placeholder={props.placeholder} onKeyUp={(e) => props.onChange(e.currentTarget.value)}/>
     </div>
   )
 }

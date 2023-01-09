@@ -1,4 +1,4 @@
-.modal{
+.modal {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -9,15 +9,17 @@
     padding: 15px;
 }
 
-.modal-header{
+.modal-header {
     font-family: Roboto, serif;
     font-weight: 500;
     font-size: larger;
     color: var(--custom-blue-leather);
     margin: 0;
+    border-bottom: 2px solid var(--custom-gray-outline);
+    padding-bottom: 10px;
 }
 
-.modal-options{
+.modal-options {
     display: flex;
     justify-content: end;
     align-items: center;
@@ -26,18 +28,19 @@
     padding-top: 10px;
 }
 
-button.cancel{
+button.cancel {
     color: var(--custom-delete-red);
     font-size: medium;
 }
 
-button.ok{
+button.ok {
     font-size: medium;
 }
 
-#modal-modal-description{
+#modal-modal-description {
     display: flex;
     flex-direction: column;
     gap: 10px;
     margin-bottom: 10px;
+    margin-top: 0;
 }

@@ -13,7 +13,7 @@ import java.lang.reflect.ParameterizedType;
 public class GenericController<RES,REQ,T,ID> {
     private final GenericService<T, ID> service;
     @Autowired
-    private ModelMapper modelMapper;
+    public ModelMapper modelMapper;
     private final Class<RES> responseType;
     private final Class<T> objectType;
 

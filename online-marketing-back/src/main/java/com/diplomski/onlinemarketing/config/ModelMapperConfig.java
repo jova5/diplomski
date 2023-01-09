@@ -19,13 +19,9 @@ public class ModelMapperConfig {
 
         mapper.createTypeMap(VocabularyRequest.class, Vocabulary.class)
                 .setPostConverter(ctx -> {
-                    VocabularyRequest source = ctx.getSource();
                     Vocabulary dest = ctx.getDestination();
-                    Language language = new Language();
-                    language.setId(source.getLanguageId());
                     try {
                         dest.setId(null);
-                        dest.setLanguage(language);
                     } catch (NullPointerException n) {
                         dest.setLanguage(null);
                     }

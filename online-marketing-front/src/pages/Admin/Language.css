@@ -1,40 +1,42 @@
-button.new-language{
+button.new-language {
     gap: 10px;
     /*color: black;*/
     border-color: black;
     border-radius: 40px;
 }
 
-div.options{
+div.options {
     display: grid;
     grid-template-columns: 50% 50%;
     padding-bottom: 10px;
 }
 
-div.options-left{
+div.options-left {
     display: flex;
     justify-content: start;
     align-items: center;
     gap: 10px;
 }
 
-div.options-right{
+div.options-right {
     display: flex;
     justify-content: end;
     align-items: center;
     gap: 10px;
 }
 
-.edit-table-row-icon{
+.edit-table-row-icon {
     color: var(--custom-aqua-blue);
 }
 
-.delete-table-row-icon{
+.delete-table-row-icon {
     color: var(--custom-delete-red);
 }
 
-.table-container{
-    display: flex;
-    flex: 1 1 auto;
-    height: 500px;
+.table-container {
+    /*display: flex;*/
+    /*flex: 1 1 auto;*/
+    height: 800px;
+    overflow-y: auto;
+    margin-bottom: 20px;
 }
