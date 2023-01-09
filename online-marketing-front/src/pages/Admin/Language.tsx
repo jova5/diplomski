@@ -85,11 +85,7 @@ const Language: Component = () => {
           <TableHead>
             <TableRow>
               <TableCell>Key</TableCell>
-              <TableCell align="left">
-                <div onClick={() => console.log("Language tt")}>
-                  Language
-                </div>
-              </TableCell>
+              <TableCell align="left">Language</TableCell>
               <TableCell align="left">Syntax</TableCell>
               <TableCell align="right">Options</TableCell>
             </TableRow>

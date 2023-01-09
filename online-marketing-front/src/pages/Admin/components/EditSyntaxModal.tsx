@@ -9,8 +9,8 @@ import {
   syntaxLanguageId,
   syntaxValue
 } from "../stores/modalStore";
-import ModalWrapper from "../../components/ModalWrapper";
-import {VocabularyRequest} from "../../dto/VocabularyRequest";
+import ModalWrapper from "../../../components/ModalWrapper";
+import {VocabularyRequest} from "../../../dto/VocabularyRequest";
 import {updateSyntax} from "../utils/languageAsync";
 
 const EditSyntaxModal: Component = () => {

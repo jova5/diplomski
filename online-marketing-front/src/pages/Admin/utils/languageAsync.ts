@@ -5,7 +5,7 @@ import {
   setRenderedLanguageList
 } from "../stores/adminStore";
 import {produce} from "solid-js/store";
-import {VocabularyRequest} from "../../dto/VocabularyRequest";
+import {VocabularyRequest} from "../../../dto/VocabularyRequest";
 
 async function getLanguagesForTable(): Promise<any[]> {
   let resultLanguageList: any[] = [];

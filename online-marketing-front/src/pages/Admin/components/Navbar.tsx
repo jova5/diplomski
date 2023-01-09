@@ -1,7 +1,7 @@
 import {Component, For} from "solid-js";
 import "./Navbar.css";
 import {nav, NavValues, setLogOut, setNav} from "../stores/adminNavigationStore";
-import Logo from "../../components/Logo";
+import Logo from "../../../components/Logo";
 
 const Navbar: Component = () => {
   return (

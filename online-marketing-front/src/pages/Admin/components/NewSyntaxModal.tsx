@@ -1,8 +1,8 @@
 import {Component, createSignal, For} from "solid-js";
 import {openNewSyntaxModal, setOpenNewSyntaxModal} from "../stores/modalStore";
-import ModalWrapper from "../../components/ModalWrapper";
+import ModalWrapper from "../../../components/ModalWrapper";
 import './NewSyntaxModal.css';
-import {VocabularyRequest} from "../../dto/VocabularyRequest";
+import {VocabularyRequest} from "../../../dto/VocabularyRequest";
 import {availableLanguages} from "../stores/adminStore";
 import {addSyntax} from "../utils/languageAsync";
 

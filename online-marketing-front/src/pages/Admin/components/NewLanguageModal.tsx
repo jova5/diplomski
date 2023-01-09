@@ -1,7 +1,7 @@
 import {Component, createSignal} from "solid-js";
 import {openNewLanguageModal, setOpenNewLanguageModal} from "../stores/modalStore";
 import "./NewLanguageModal.css";
-import ModalWrapper from "../../components/ModalWrapper";
+import ModalWrapper from "../../../components/ModalWrapper";
 
 const NewLanguageModal: Component = () => {
   const [languageValue, setLanguageValue] = createSignal<string>("");
