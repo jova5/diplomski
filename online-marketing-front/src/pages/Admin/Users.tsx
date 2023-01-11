@@ -1,9 +1,17 @@
-import {Component} from "solid-js";
+import {Component, onMount} from "solid-js";
 import OptionsAboveTable from "./components/OptionsAboveTable";
-import {setSearchUser} from "./stores/adminStore";
+import {setSearchUser, setUsers} from "./stores/adminStore";
 import {setOpenNewUserModal} from "./stores/modalStore";
+import {getUsers} from "./utils/usersAsync";
+import TableUser from "./components/TableUser";
 
 const Users: Component = () => {
+  console.log("Admin/Users");
+
+  onMount(async () => {
+    setUsers(await getUsers())
+  })
+
   return (
     <>
       <OptionsAboveTable
@@ -11,9 +19,8 @@ const Users: Component = () => {
         search={(str) => setSearchUser(str)}
         openModal={() => setOpenNewUserModal(true)}
       />
-      <div>This is Users</div>
+      <TableUser/>
     </>
-
   )
 }
 

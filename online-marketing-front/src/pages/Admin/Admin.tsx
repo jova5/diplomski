@@ -5,6 +5,7 @@ import {nav, NavOptions} from "./stores/adminNavigationStore";
 import {Dynamic} from "solid-js/web";
 
 const Admin: Component = () => {
+  console.log("Admin");
   return (
     <div class="admin-container">
       <Navbar/>

@@ -1,10 +1,4 @@
-import {
-  availableLanguages,
-  refetch,
-  renderedLanguageList,
-  setAvailableLanguages,
-  setRenderedLanguageList
-} from "../stores/adminStore";
+import {availableLanguages, renderedLanguageList, setLanguages, setRenderedLanguageList} from "../stores/adminStore";
 import {produce} from "solid-js/store";
 import {VocabularyRequest} from "../../../dto/VocabularyRequest";
 import {translation} from "../../../stores/languageStore";
@@ -15,20 +9,25 @@ import {
   setPendingEditSyntax
 } from "../stores/modalStore";
 
-async function getLanguagesForTable(): Promise<any[]> {
-  let resultLanguageList: any[] = [];
-  await fetch('http://127.0.0.1:8080/language', {method: 'GET',})
+async function getLanguages(): Promise<any[]> {
+  return await fetch('http://127.0.0.1:8080/language', {method: 'GET',})
     .then(res => res.json())
     .then(data => {
-      const availableLanguages = data.map((item: any) => {
+      return data.map((item: any) => {
         return {
           id: item.id,
           longName: item.longName,
           shortName: item.shortName
         }
       });
-      setAvailableLanguages(availableLanguages);
+    });
+}
 
+async function getLanguagesForTable(): Promise<any[]> {
+  let resultLanguageList: any[] = [];
+  await fetch('http://127.0.0.1:8080/language', {method: 'GET',})
+    .then(res => res.json())
+    .then(data => {
       const pom = data.map((item: any) => {
         return item.vocabularies.map((value: any) => {
           return {
@@ -45,7 +44,6 @@ async function getLanguagesForTable(): Promise<any[]> {
         resultLanguageList = resultLanguageList.concat(pom[i]);
       }
       resultLanguageList = resultLanguageList.sort((a, b) => a.id - b.id);
-      setRenderedLanguageList(resultLanguageList);
     })
   return resultLanguageList;
 }
@@ -72,7 +70,7 @@ async function addSyntax(vocabulary: VocabularyRequest, languageId: number): Pro
             });
           }),
         );
-        refetch();
+        setLanguages(renderedLanguageList);
         setPendingAddSyntax(false);
       }
     )
@@ -89,7 +87,7 @@ async function deleteSyntax(id: number): Promise<any> {
     .then(() => {
       const temporaryList = renderedLanguageList.filter((item) => item.id !== id)
       setRenderedLanguageList(temporaryList);
-      refetch();
+      setLanguages(renderedLanguageList);
       setPendingDeleteSyntax(false);
       setOpenDeleteSyntaxModal(false);
     })
@@ -140,4 +138,4 @@ export const translate = (key: string): string => {
   return `${key}`;
 }
 
-export {getLanguagesForTable, addSyntax, deleteSyntax, updateSyntax, getTranslation};
+export {getLanguages, getLanguagesForTable, addSyntax, deleteSyntax, updateSyntax, getTranslation};

@@ -1,29 +1,43 @@
-import {Component, createEffect} from "solid-js";
+import {Component, createEffect, onMount} from "solid-js";
 import {
   openDeleteSyntaxModal,
   pendingDeleteSyntax,
-  setOpenDeleteSyntaxModal, setOpenNewSyntaxModal,
+  setOpenDeleteSyntaxModal,
+  setOpenNewSyntaxModal,
   syntaxId,
   syntaxKey
 } from "./stores/modalStore";
 import NewSyntaxModal from "./components/NewSyntaxModal";
-import {deleteSyntax, translate} from "./utils/languageAsync";
+import {deleteSyntax, getLanguagesForTable, translate} from "./utils/languageAsync";
 import ConfirmationModal from "./components/ConfirmationModal";
-import {languages, searchLanguage, setRenderedLanguageList, setSearchLanguage} from "./stores/adminStore";
+import {
+  languages,
+  renderedLanguageList,
+  searchLanguage,
+  setLanguages,
+  setRenderedLanguageList,
+  setSearchLanguage
+} from "./stores/adminStore";
 import EditSyntaxModal from "./components/EditSyntaxModal";
 import TableLanguage from "./components/TableLanguage";
 import OptionsAboveTable from "./components/OptionsAboveTable";
 
+
 const Language: Component = () => {
   console.log("Admin/Language");
 
+  onMount(async () => {
+    setRenderedLanguageList(await getLanguagesForTable());
+    setLanguages(renderedLanguageList);
+  });
+
   createEffect(() => {
-    const languageList: any[] = languages().filter((syntax: any) => {
+    const languageList: any[] = languages.filter((syntax: any) => {
       return syntax.key.toLocaleLowerCase().includes(searchLanguage().toLocaleLowerCase()) ||
         syntax.meaning.toLocaleLowerCase().includes(searchLanguage().toLocaleLowerCase())
     })
     setRenderedLanguageList(languageList);
-  })
+  });
 
   return (
     <>
@@ -46,5 +60,4 @@ const Language: Component = () => {
     </>
   )
 }
-
 export default Language;
