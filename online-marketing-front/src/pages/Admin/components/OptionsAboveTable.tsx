@@ -1,28 +1,30 @@
 import {Component} from "solid-js";
 import SearchBar from "./SearchBar";
 import {translate} from "../utils/languageAsync";
-import {setSearchLanguage} from "../stores/adminStore";
 import {Button} from "@suid/material";
-import {setOpenNewSyntaxModal} from "../stores/modalStore";
 import PostAddIcon from "@suid/icons-material/PostAdd";
 import './OptionsAboveTable.css';
 
-const OptionsAboveTable: Component = () => {
+const OptionsAboveTable: Component<{
+  buttonTitle: string,
+  search: (str: string) => void,
+  openModal: (check: boolean) => void
+}> = (props) => {
   return (
     <div class="options">
       <div class="options-left">
         <SearchBar
           placeholder={`${translate("search")}...`}
-          onChange={(str) => setSearchLanguage(str)}
+          onChange={(str) => props.search(str)}
         />
       </div>
       <div class="options-right">
         <Button
           class="new-something"
           variant="outlined"
-          onClick={() => setOpenNewSyntaxModal(true)}>
+          onClick={() => props.openModal(true)}>
           <PostAddIcon/>
-          {translate("addSyntax")}
+          {translate(props.buttonTitle)}
         </Button>
       </div>
     </div>

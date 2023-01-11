@@ -6,3 +6,7 @@ export const [languages, {refetch}] = createResource(getLanguagesForTable, {init
 export const [availableLanguages, setAvailableLanguages] = createSignal<any[]>([]);
 export const [renderedLanguageList, setRenderedLanguageList] = createStore<any[]>([]);
 export const [searchLanguage, setSearchLanguage] = createSignal<string>("");
+export const [searchUser, setSearchUser] = createSignal<string>("");
+export const [searchStore, setSearchStore] = createSignal<string>("");
+export const [searchCategory, setSearchCategory] = createSignal<string>("");
+export const [searchAdd, setSearchAdd] = createSignal<string>("");

@@ -10,4 +10,4 @@ export const [syntaxId, setSyntaxId] = createSignal<number>(-1);
 export const [syntaxKey, setSyntaxKey] = createSignal<string>("");
 export const [syntaxLanguageId, setSyntaxLanguageId] = createSignal<number>(-1);
 export const [syntaxValue, setSyntaxValue] = createSignal<string>("");
-
+export const [openNewUserModal, setOpenNewUserModal] = createSignal<boolean>(false);
