@@ -8,10 +8,13 @@ import {translate} from "../utils/languageAsync";
 const LanguagePicker: Component = () => {
   const [anchorEl, setAnchorEl] = createSignal<null | HTMLElement>(null);
   const open = () => Boolean(anchorEl());
-  const handleClose = (languageId: number) => {
-    setSelectedLanguageId(languageId);
+  const handleClose = () => {
     setAnchorEl(null);
   };
+  const handleChoseLanguage = (languageId: number) => {
+    setSelectedLanguageId(languageId);
+    setAnchorEl(null);
+  }
   return (
     <>
       <IconButton
@@ -35,7 +38,7 @@ const LanguagePicker: Component = () => {
         <For each={availableLanguages()}>
           {
             (language) =>
-              <MenuItem onClick={() => handleClose(language.id)}>
+              <MenuItem onClick={() => handleChoseLanguage(language.id)}>
                 {translate(language.longName.toLowerCase())}
               </MenuItem>
           }

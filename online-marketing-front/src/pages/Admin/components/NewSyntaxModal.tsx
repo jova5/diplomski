@@ -1,16 +1,20 @@
-import {Component, createSignal, For} from "solid-js";
+import {Component, createEffect, createSignal, For} from "solid-js";
 import {openNewSyntaxModal, pendingAddSyntax, setOpenNewSyntaxModal} from "../stores/modalStore";
 import ModalWrapper from "../../../components/ModalWrapper";
 import './NewSyntaxModal.css';
 import {VocabularyRequest} from "../../../dto/VocabularyRequest";
 import {availableLanguages} from "../stores/adminStore";
 import {addSyntax, translate} from "../utils/languageAsync";
+import {checkNewSyntaxForm} from "../utils/formChecks";
 
 const NewSyntaxModal: Component = () => {
   const [languageId, setLanguageId] = createSignal<string>("");
   const [syntaxValue, setSyntaxValue] = createSignal<string>("");
   const [keyValue, setKeyValue] = createSignal<string>("");
   const setOpen = () => {
+    setLanguageId("");
+    setSyntaxValue("");
+    setKeyValue("");
     setOpenNewSyntaxModal(prev => !prev);
   }
 
@@ -20,8 +24,17 @@ const NewSyntaxModal: Component = () => {
       key: keyValue(),
       meaning: syntaxValue()
     }
-    await addSyntax(vocabulary, +languageId());
+    if (!checkNewSyntaxForm(languageId(), keyValue(), syntaxValue())){
+      alert(translate("fillAllFields"));
+    }else{
+      await addSyntax(vocabulary, +languageId());
+      setLanguageId("");
+    }
   }
+
+  createEffect(() => {
+    console.log(pendingAddSyntax());
+  })
 
   return (
     <ModalWrapper
@@ -38,7 +51,11 @@ const NewSyntaxModal: Component = () => {
         onChange={(e) => setLanguageId(e.currentTarget.value)}
         disabled={pendingAddSyntax()}
       >
-        <option value="default" selected disabled>-- {translate("select")} --</option>
+        <option
+          value="default"
+          selected={languageId()===""}
+          disabled
+        >-- {translate("select")} --</option>
         <For each={availableLanguages()}>
           {
             (item) =>

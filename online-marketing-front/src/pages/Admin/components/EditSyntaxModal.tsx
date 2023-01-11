@@ -12,6 +12,7 @@ import {
 import ModalWrapper from "../../../components/ModalWrapper";
 import {VocabularyRequest} from "../../../dto/VocabularyRequest";
 import {translate, updateSyntax} from "../utils/languageAsync";
+import {checkEditSyntaxForm} from "../utils/formChecks";
 
 const EditSyntaxModal: Component = () => {
   const setOpen = () => {
@@ -24,7 +25,11 @@ const EditSyntaxModal: Component = () => {
       key: syntaxKey(),
       meaning: syntaxValue()
     }
-    await updateSyntax(vocabulary, syntaxId());
+    if(!checkEditSyntaxForm(syntaxKey(), syntaxValue())){
+      alert(translate("fillAllFields"));
+    }else{
+      await updateSyntax(vocabulary, syntaxId());
+    }
   }
 
   return (
