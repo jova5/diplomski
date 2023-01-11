@@ -11,3 +11,8 @@ export const [syntaxKey, setSyntaxKey] = createSignal<string>("");
 export const [syntaxLanguageId, setSyntaxLanguageId] = createSignal<number>(-1);
 export const [syntaxValue, setSyntaxValue] = createSignal<string>("");
 export const [openNewUserModal, setOpenNewUserModal] = createSignal<boolean>(false);
+export const [openDeleteUserModal, setOpenDeleteUserModal] = createSignal<boolean>(false);
+export const [pendingDeleteUser, setPendingDeleteUser] = createSignal<boolean>(false);
+export const [pendingAddUser, setPendingAddUser] = createSignal<boolean>(false);
+export const [pendingEditUser, setPendingEditUser] = createSignal<boolean>(false);
+

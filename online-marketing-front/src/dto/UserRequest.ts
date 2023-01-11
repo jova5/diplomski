@@ -1,8 +1,7 @@
-export interface User {
-  id: number,
+export interface UserRequest{
   name: string,
   password: string,
   email: string,
-  storeId: number,
+  storeId?: number,
   type: string
 }

@@ -7,9 +7,9 @@ import {
   syntaxId,
   syntaxKey
 } from "./stores/modalStore";
-import NewSyntaxModal from "./components/NewSyntaxModal";
+import NewSyntaxModal from "./components/modals/NewSyntaxModal";
 import {deleteSyntax, getLanguagesForTable, translate} from "./utils/languageAsync";
-import ConfirmationModal from "./components/ConfirmationModal";
+import ConfirmationModal from "./components/modals/ConfirmationModal";
 import {
   languages,
   renderedLanguageList,
@@ -18,7 +18,7 @@ import {
   setRenderedLanguageList,
   setSearchLanguage
 } from "./stores/adminStore";
-import EditSyntaxModal from "./components/EditSyntaxModal";
+import EditSyntaxModal from "./components/modals/EditSyntaxModal";
 import TableLanguage from "./components/TableLanguage";
 import OptionsAboveTable from "./components/OptionsAboveTable";
 

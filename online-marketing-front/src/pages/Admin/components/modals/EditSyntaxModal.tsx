@@ -8,11 +8,11 @@ import {
   syntaxKey,
   syntaxLanguageId,
   syntaxValue
-} from "../stores/modalStore";
-import ModalWrapper from "../../../components/ModalWrapper";
-import {VocabularyRequest} from "../../../dto/VocabularyRequest";
-import {translate, updateSyntax} from "../utils/languageAsync";
-import {checkEditSyntaxForm} from "../utils/formChecks";
+} from "../../stores/modalStore";
+import ModalWrapper from "../../../../components/ModalWrapper";
+import {VocabularyRequest} from "../../../../dto/VocabularyRequest";
+import {translate, updateSyntax} from "../../utils/languageAsync";
+import {checkEditSyntaxForm} from "../../utils/formChecks";
 
 const EditSyntaxModal: Component = () => {
   const setOpen = () => {

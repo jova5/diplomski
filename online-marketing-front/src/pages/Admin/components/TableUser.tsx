@@ -4,6 +4,7 @@ import {translate} from "../utils/languageAsync";
 import {users} from "../stores/adminStore";
 import EditIcon from "@suid/icons-material/Edit";
 import DeleteIcon from "@suid/icons-material/Delete";
+import {setOpenDeleteUserModal} from "../stores/modalStore";
 
 const TableUser: Component = () => {
   return (
@@ -32,17 +33,19 @@ const TableUser: Component = () => {
                     </TableCell>
                     <TableCell align="left">{value.password}</TableCell>
                     <TableCell align="left">{value.email}</TableCell>
-                    <TableCell align="left">{value.storeId}</TableCell>
+                    <TableCell align="left">{value.storeId === null ? translate("unknown") : value.storeId}</TableCell>
                     <TableCell align="left">{value.type}</TableCell>
                     <TableCell align="right">
                       <IconButton
                         class="edit-table-row"
                         onClick={() => {
+
                         }}>
                         <EditIcon class="edit-table-row-icon"/>
                       </IconButton>
                       <IconButton
                         onClick={() => {
+                          setOpenDeleteUserModal(true);
                         }}>
                         <DeleteIcon class="delete-table-row-icon"/>
                       </IconButton>
