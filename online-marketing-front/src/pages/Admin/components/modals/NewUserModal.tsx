@@ -4,6 +4,7 @@ import {openAddModal, pendingAdd, setOpenAddModal} from "../../stores/modalStore
 import ModalWrapper from "../../../../components/ModalWrapper";
 import {checkNewUserForm} from "../../utils/formChecks";
 import {UserRequest} from "../../../../dto/UserRequest";
+import {addUser} from "../../utils/usersAsync";
 
 const NewUserModal: Component = () => {
   const [userNameValue, setUserNameValue] = createSignal<string>("");
@@ -24,6 +25,7 @@ const NewUserModal: Component = () => {
     if (!checkNewUserForm(user)) {
       alert(translate("fillAllFields"));
     } else {
+      await addUser(user);
     }
   }
 

@@ -2,7 +2,8 @@ import {createSignal} from "solid-js";
 import {createStore} from "solid-js/store";
 import {User} from "../../../dto/User";
 
-export const [users, setUsers] = createSignal<User[]>();
+export const [users, setUsers] = createStore<User[]>([]);
+export const [renderedUsers, setRenderedUsers] = createStore<User[]>([]);
 export const [availableLanguages, setAvailableLanguages] = createSignal<any[]>([]);
 export const [renderedLanguageList, setRenderedLanguageList] = createStore<any[]>([]);
 export const [languages, setLanguages] = createStore<any[]>([]);

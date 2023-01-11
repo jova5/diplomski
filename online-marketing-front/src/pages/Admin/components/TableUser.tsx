@@ -1,10 +1,18 @@
 import {Component, For} from "solid-js";
 import {IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@suid/material";
 import {translate} from "../utils/languageAsync";
-import {users} from "../stores/adminStore";
+import {renderedUsers} from "../stores/adminStore";
 import EditIcon from "@suid/icons-material/Edit";
 import DeleteIcon from "@suid/icons-material/Delete";
-import {setOpenDelete} from "../stores/modalStore";
+import {
+  setEmailValue,
+  setOpenDelete,
+  setOpenEditModal,
+  setPasswordValue,
+  setStoreId,
+  setTypeValue,
+  setUserNameValue
+} from "../stores/modalStore";
 
 const TableUser: Component = () => {
   return (
@@ -21,7 +29,7 @@ const TableUser: Component = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          <For each={users()}>
+          <For each={renderedUsers}>
             {
               (value) => {
                 return (
@@ -39,7 +47,12 @@ const TableUser: Component = () => {
                       <IconButton
                         class="edit-table-row"
                         onClick={() => {
-
+                          setUserNameValue(value.name);
+                          setPasswordValue(value.password);
+                          setEmailValue(value.email);
+                          setStoreId(value.storeId === null ? translate("unknown") : value.storeId.toString());
+                          setTypeValue(value.type);
+                          setOpenEditModal(true);
                         }}>
                         <EditIcon class="edit-table-row-icon"/>
                       </IconButton>
