@@ -1,7 +1,8 @@
 import {Component} from "solid-js";
 import {
-  openEditSyntaxModal, pendingEditSyntax,
-  setOpenEditSyntaxModal,
+  openEditModal,
+  pendingEdit,
+  setOpenEditModal,
   setSyntaxKey,
   setSyntaxValue,
   syntaxId,
@@ -16,7 +17,7 @@ import {checkEditSyntaxForm} from "../../utils/formChecks";
 
 const EditSyntaxModal: Component = () => {
   const setOpen = () => {
-    setOpenEditSyntaxModal(prev => !prev);
+    setOpenEditModal(prev => !prev);
   }
 
   const handleOK = async () => {
@@ -35,10 +36,10 @@ const EditSyntaxModal: Component = () => {
   return (
     <ModalWrapper
       name={() => translate("edit")}
-      open={openEditSyntaxModal}
+      open={openEditModal}
       setOpen={setOpen}
       handleOK={handleOK}
-      pending={pendingEditSyntax}
+      pending={pendingEdit}
     >
       <p>{translate("key")}</p>
       <input
@@ -46,14 +47,14 @@ const EditSyntaxModal: Component = () => {
         type="text"
         value={syntaxKey()}
         onChange={(e) => setSyntaxKey(e.currentTarget.value)}
-        disabled={pendingEditSyntax()}/>
+        disabled={pendingEdit()}/>
       <p>{translate("syntax")}</p>
       <input
         class="input-custom"
         type="text"
         value={syntaxValue()}
         onChange={(e) => setSyntaxValue(e.currentTarget.value)}
-        disabled={pendingEditSyntax()}/>
+        disabled={pendingEdit()}/>
     </ModalWrapper>
   )
 }

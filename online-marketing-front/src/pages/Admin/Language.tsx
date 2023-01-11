@@ -1,12 +1,5 @@
 import {Component, createEffect, onMount} from "solid-js";
-import {
-  openDelete,
-  pendingDelete,
-  setOpenDelete,
-  setOpenNewSyntaxModal,
-  syntaxId,
-  syntaxKey
-} from "./stores/modalStore";
+import {openDelete, pendingDelete, setOpenAddModal, setOpenDelete, syntaxId, syntaxKey} from "./stores/modalStore";
 import NewSyntaxModal from "./components/modals/NewSyntaxModal";
 import {deleteSyntax, getLanguagesForTable, translate} from "./utils/languageAsync";
 import ConfirmationModal from "./components/modals/ConfirmationModal";
@@ -37,7 +30,7 @@ const Language: Component = () => {
       <OptionsAboveTable
         buttonTitle="addSyntax"
         search={(str) => setSearchLanguage(str)}
-        openModal={() => setOpenNewSyntaxModal(true)}
+        openModal={() => setOpenAddModal(true)}
       />
       <TableLanguage/>
       <NewSyntaxModal/>

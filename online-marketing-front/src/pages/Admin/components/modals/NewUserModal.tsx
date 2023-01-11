@@ -1,6 +1,6 @@
 import {Component, createSignal} from "solid-js";
 import {addSyntax, translate} from "../../utils/languageAsync";
-import {openNewUserModal, pendingAddUser, setOpenNewUserModal} from "../../stores/modalStore";
+import {openAddModal, pendingAdd, setOpenAddModal} from "../../stores/modalStore";
 import ModalWrapper from "../../../../components/ModalWrapper";
 import {checkNewUserForm} from "../../utils/formChecks";
 import {UserRequest} from "../../../../dto/UserRequest";
@@ -11,7 +11,7 @@ const NewUserModal: Component = () => {
   const [emailValue, setEmailValue] = createSignal<string>("");
   const [typeValue, setTypeValue] = createSignal<string>("");
   const setOpen = () => {
-    setOpenNewUserModal(prev => !prev);
+    setOpenAddModal(prev => !prev);
   }
 
   const handleOK = async () => {
@@ -30,17 +30,17 @@ const NewUserModal: Component = () => {
   return (
     <ModalWrapper
       name={() => translate("addSyntax")}
-      open={openNewUserModal}
+      open={openAddModal}
       setOpen={setOpen}
       handleOK={handleOK}
-      pending={pendingAddUser}
+      pending={pendingAdd}
     >
       <p>{translate("userType")}</p>
       <select
         class="language-select"
         name="languageId"
         onChange={(e) => setTypeValue(e.currentTarget.value)}
-        disabled={pendingAddUser()}
+        disabled={pendingAdd()}
       >
         <option
           value="default"
@@ -58,21 +58,21 @@ const NewUserModal: Component = () => {
         type="text"
         placeholder={translate("userName")}
         onChange={(e) => setUserNameValue(e.currentTarget.value)}
-        disabled={pendingAddUser()}/>
+        disabled={pendingAdd()}/>
       <p>{translate("password")}</p>
       <input
         class="input-custom"
         type="text"
         placeholder={translate("password")}
         onChange={(e) => setPasswordValue(e.currentTarget.value)}
-        disabled={pendingAddUser()}/>
+        disabled={pendingAdd()}/>
       <p>{translate("email")}</p>
       <input
         class="input-custom"
         type="text"
         placeholder={translate("email")}
         onChange={(e) => setEmailValue(e.currentTarget.value)}
-        disabled={pendingAddUser()}/>
+        disabled={pendingAdd()}/>
     </ModalWrapper>
   )
 }

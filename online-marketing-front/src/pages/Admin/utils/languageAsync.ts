@@ -8,7 +8,7 @@ import {
 import {produce} from "solid-js/store";
 import {VocabularyRequest} from "../../../dto/VocabularyRequest";
 import {translation} from "../../../stores/languageStore";
-import {setOpenDelete, setPendingAddSyntax, setPendingDelete, setPendingEditSyntax} from "../stores/modalStore";
+import {setOpenDelete, setPendingAdd, setPendingDelete, setPendingEdit} from "../stores/modalStore";
 
 async function getLanguages(): Promise<any[]> {
   return await fetch('http://127.0.0.1:8080/language', {method: 'GET',})
@@ -50,7 +50,7 @@ async function getLanguagesForTable(): Promise<any[]> {
 }
 
 async function addSyntax(vocabulary: VocabularyRequest, languageId: number): Promise<any> {
-  setPendingAddSyntax(true);
+  setPendingAdd(true);
   fetch('http://127.0.0.1:8080/vocabulary',
     {
       method: 'POST',
@@ -80,11 +80,11 @@ async function addSyntax(vocabulary: VocabularyRequest, languageId: number): Pro
               shortName: availableLanguages().find((item) => item.id === languageId).shortName
             });
           }),);
-        setPendingAddSyntax(false);
+        setPendingAdd(false);
       }
     )
     .catch(() => {
-      setPendingAddSyntax(false);
+      setPendingAdd(false);
       alert(translate("errorAdd"));
     })
 }
@@ -106,7 +106,7 @@ async function deleteSyntax(id: number): Promise<any> {
 }
 
 async function updateSyntax(vocabulary: VocabularyRequest, vocabularyId: number): Promise<any> {
-  setPendingEditSyntax(true);
+  setPendingEdit(true);
   fetch(`http://127.0.0.1:8080/vocabulary/update/${vocabularyId}`,
     {
       method: 'PUT',
@@ -124,11 +124,11 @@ async function updateSyntax(vocabulary: VocabularyRequest, vocabularyId: number)
             syntax.meaning = data.meaning;
           }),
         );
-        setPendingEditSyntax(false);
+        setPendingEdit(false);
       }
     )
     .catch(() => {
-      setPendingEditSyntax(false);
+      setPendingEdit(false);
       alert(translate("errorUpdate"));
     })
 }

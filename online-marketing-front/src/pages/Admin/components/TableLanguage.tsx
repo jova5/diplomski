@@ -4,7 +4,7 @@ import {translate} from "../utils/languageAsync";
 import {renderedLanguageList} from "../stores/adminStore";
 import {
   setOpenDelete,
-  setOpenEditSyntaxModal,
+  setOpenEditModal,
   setSyntaxId,
   setSyntaxKey,
   setSyntaxLanguageId,
@@ -47,7 +47,7 @@ const TableLanguage: Component = () => {
                           setSyntaxLanguageId(value.languageId);
                           setSyntaxKey(value.key);
                           setSyntaxValue(value.meaning);
-                          setOpenEditSyntaxModal(true);
+                          setOpenEditModal(true);
                         }}>
                         <EditIcon class="edit-table-row-icon"/>
                       </IconButton>
