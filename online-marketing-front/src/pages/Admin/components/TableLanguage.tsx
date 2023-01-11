@@ -3,7 +3,7 @@ import {IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHea
 import {translate} from "../utils/languageAsync";
 import {renderedLanguageList} from "../stores/adminStore";
 import {
-  setOpenDeleteSyntaxModal,
+  setOpenDelete,
   setOpenEditSyntaxModal,
   setSyntaxId,
   setSyntaxKey,
@@ -55,7 +55,7 @@ const TableLanguage: Component = () => {
                         onClick={() => {
                           setSyntaxId(value.id);
                           setSyntaxKey(value.key);
-                          setOpenDeleteSyntaxModal(true);
+                          setOpenDelete(true);
                         }}>
                         <DeleteIcon class="delete-table-row-icon"/>
                       </IconButton>

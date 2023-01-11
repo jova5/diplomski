@@ -1,8 +1,8 @@
 import {Component, createEffect, onMount} from "solid-js";
 import {
-  openDeleteSyntaxModal,
-  pendingDeleteSyntax,
-  setOpenDeleteSyntaxModal,
+  openDelete,
+  pendingDelete,
+  setOpenDelete,
   setOpenNewSyntaxModal,
   syntaxId,
   syntaxKey
@@ -10,14 +10,7 @@ import {
 import NewSyntaxModal from "./components/modals/NewSyntaxModal";
 import {deleteSyntax, getLanguagesForTable, translate} from "./utils/languageAsync";
 import ConfirmationModal from "./components/modals/ConfirmationModal";
-import {
-  languages,
-  renderedLanguageList,
-  searchLanguage,
-  setLanguages,
-  setRenderedLanguageList,
-  setSearchLanguage
-} from "./stores/adminStore";
+import {languages, searchLanguage, setLanguages, setRenderedLanguageList, setSearchLanguage} from "./stores/adminStore";
 import EditSyntaxModal from "./components/modals/EditSyntaxModal";
 import TableLanguage from "./components/TableLanguage";
 import OptionsAboveTable from "./components/OptionsAboveTable";
@@ -27,8 +20,8 @@ const Language: Component = () => {
   console.log("Admin/Language");
 
   onMount(async () => {
-    setRenderedLanguageList(await getLanguagesForTable());
-    setLanguages(renderedLanguageList);
+    setLanguages(await getLanguagesForTable());
+    setRenderedLanguageList(languages);
   });
 
   createEffect(() => {
@@ -50,11 +43,11 @@ const Language: Component = () => {
       <NewSyntaxModal/>
       <ConfirmationModal
         header={() => translate("deleteSyntax?")}
-        open={openDeleteSyntaxModal}
-        setOpen={setOpenDeleteSyntaxModal}
+        open={openDelete}
+        setOpen={setOpenDelete}
         handleOK={() => deleteSyntax(syntaxId())}
         message={() => `${translate("deleteSyntaxWithKey?")}: ### ${syntaxKey()} ###`}
-        pending={pendingDeleteSyntax}
+        pending={pendingDelete}
       />
       <EditSyntaxModal/>
     </>

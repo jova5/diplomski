@@ -1,13 +1,14 @@
-import {availableLanguages, renderedLanguageList, setLanguages, setRenderedLanguageList} from "../stores/adminStore";
+import {
+  availableLanguages,
+  languages,
+  renderedLanguageList,
+  setLanguages,
+  setRenderedLanguageList
+} from "../stores/adminStore";
 import {produce} from "solid-js/store";
 import {VocabularyRequest} from "../../../dto/VocabularyRequest";
 import {translation} from "../../../stores/languageStore";
-import {
-  setOpenDeleteSyntaxModal,
-  setPendingAddSyntax,
-  setPendingDeleteSyntax,
-  setPendingEditSyntax
-} from "../stores/modalStore";
+import {setOpenDelete, setPendingAddSyntax, setPendingDelete, setPendingEditSyntax} from "../stores/modalStore";
 
 async function getLanguages(): Promise<any[]> {
   return await fetch('http://127.0.0.1:8080/language', {method: 'GET',})
@@ -70,7 +71,15 @@ async function addSyntax(vocabulary: VocabularyRequest, languageId: number): Pro
             });
           }),
         );
-        setLanguages(renderedLanguageList);
+        setLanguages(
+          produce((syntaxList) => {
+            syntaxList.push({
+              id: data.id,
+              key: data.key,
+              meaning: data.meaning,
+              shortName: availableLanguages().find((item) => item.id === languageId).shortName
+            });
+          }),);
         setPendingAddSyntax(false);
       }
     )
@@ -81,18 +90,17 @@ async function addSyntax(vocabulary: VocabularyRequest, languageId: number): Pro
 }
 
 async function deleteSyntax(id: number): Promise<any> {
-  setPendingDeleteSyntax(true);
+  setPendingDelete(true);
   await fetch(`http://127.0.0.1:8080/vocabulary/${id}`, {method: 'DELETE',})
     .then(res => res.json())
     .then(() => {
-      const temporaryList = renderedLanguageList.filter((item) => item.id !== id)
-      setRenderedLanguageList(temporaryList);
-      setLanguages(renderedLanguageList);
-      setPendingDeleteSyntax(false);
-      setOpenDeleteSyntaxModal(false);
+      setRenderedLanguageList(renderedLanguageList.filter((item) => item.id !== id));
+      setLanguages(languages.filter((item) => item.id !== id));
+      setPendingDelete(false);
+      setOpenDelete(false);
     })
     .catch(() => {
-      setPendingDeleteSyntax(false);
+      setPendingDelete(false);
       alert(translate("errorDelete"));
     })
 }

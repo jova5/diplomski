@@ -4,7 +4,7 @@ import {translate} from "../utils/languageAsync";
 import {users} from "../stores/adminStore";
 import EditIcon from "@suid/icons-material/Edit";
 import DeleteIcon from "@suid/icons-material/Delete";
-import {setOpenDeleteUserModal} from "../stores/modalStore";
+import {setOpenDelete} from "../stores/modalStore";
 
 const TableUser: Component = () => {
   return (
@@ -45,7 +45,7 @@ const TableUser: Component = () => {
                       </IconButton>
                       <IconButton
                         onClick={() => {
-                          setOpenDeleteUserModal(true);
+                          setOpenDelete(true);
                         }}>
                         <DeleteIcon class="delete-table-row-icon"/>
                       </IconButton>

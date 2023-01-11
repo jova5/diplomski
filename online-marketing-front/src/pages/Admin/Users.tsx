@@ -1,7 +1,7 @@
 import {Component, onMount} from "solid-js";
 import OptionsAboveTable from "./components/OptionsAboveTable";
 import {setSearchUser, setUsers} from "./stores/adminStore";
-import {openDeleteUserModal, pendingDeleteUser, setOpenDeleteUserModal, setOpenNewUserModal} from "./stores/modalStore";
+import {openDelete, pendingDelete, setOpenDelete, setOpenNewUserModal} from "./stores/modalStore";
 import {getUsers} from "./utils/usersAsync";
 import TableUser from "./components/TableUser";
 import {translate} from "./utils/languageAsync";
@@ -26,12 +26,12 @@ const Users: Component = () => {
       <NewUserModal/>
       <ConfirmationModal
         header={() => translate("deleteUser?")}
-        open={openDeleteUserModal}
-        setOpen={setOpenDeleteUserModal}
+        open={openDelete}
+        setOpen={setOpenDelete}
         handleOK={() => {
         }}
         message={() => `${translate("deleteUserWithUserName?")}: ### test ###`}
-        pending={pendingDeleteUser}
+        pending={pendingDelete}
       />
     </>
   )
