@@ -1,8 +1,8 @@
 -- --------------------------------------------------------
 -- Host:                         127.0.0.1
--- Server version:               8.0.29 - MySQL Community Server - GPL
+-- Server version:               8.0.31 - MySQL Community Server - GPL
 -- Server OS:                    Win64
--- HeidiSQL Version:             12.3.0.6589
+-- HeidiSQL Version:             12.1.0.6537
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -182,9 +182,19 @@ CREATE TABLE IF NOT EXISTS `user` (
   UNIQUE KEY `name_UNIQUE` (`name`),
   KEY `fk_user_store_idx` (`store_id`),
   CONSTRAINT `fk_user_store` FOREIGN KEY (`store_id`) REFERENCES `store` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb3;
 
--- Dumping data for table online-marketing.user: ~0 rows (approximately)
+-- Dumping data for table online-marketing.user: ~9 rows (approximately)
+INSERT INTO `user` (`id`, `name`, `password`, `email`, `store_id`, `type`) VALUES
+	(1, 'admin', 'admin', 'admin@mail.com', NULL, 'ADMIN'),
+	(2, 'test', 'test', 'test', NULL, 'USER'),
+	(3, 'tttt', 'tttt', 'tttt', NULL, 'USER'),
+	(4, 'dddd', 'dddd', 'ddd', NULL, 'USER'),
+	(5, 'rere', 'rere', 'rere', NULL, 'USER'),
+	(6, 'ttyyy', 'yyyy', 'yyy', NULL, 'USER'),
+	(7, 'tre', 'ytr', 'uyt', NULL, 'USER'),
+	(8, 'trete', 'tretretre', 'tretreter', NULL, 'USER'),
+	(9, 'treteerter', 'tretretreertert', 'tretretererterterter', NULL, 'USER');
 
 -- Dumping structure for table online-marketing.visit
 DROP TABLE IF EXISTS `visit`;
@@ -217,9 +227,9 @@ CREATE TABLE IF NOT EXISTS `vocabulary` (
   UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `fk_table1_language1` (`language_id`),
   CONSTRAINT `fk_table1_language1` FOREIGN KEY (`language_id`) REFERENCES `language` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=92 DEFAULT CHARSET=utf8mb3;
 
--- Dumping data for table online-marketing.vocabulary: ~38 rows (approximately)
+-- Dumping data for table online-marketing.vocabulary: ~43 rows (approximately)
 INSERT INTO `vocabulary` (`id`, `language_id`, `key`, `meaning`) VALUES
 	(1, 1, 'users', 'Korisnici'),
 	(2, 2, 'users', 'Users'),
@@ -256,9 +266,19 @@ INSERT INTO `vocabulary` (`id`, `language_id`, `key`, `meaning`) VALUES
 	(53, 1, 'edit', 'Izmjeni'),
 	(54, 2, 'edit', 'Edit'),
 	(55, 2, 'deleteSyntax?', 'Do you want to delete syntax?'),
-	(56, 2, 'deleteSyntax?', 'Da li zelite da izbrisete sintaksu?'),
 	(57, 2, 'deleteSyntaxWithKey?', 'Are you sure you want to delete syntax with key'),
-	(58, 1, 'deleteSyntaxWithKey?', 'Da li ste sigurni da zelite da izbrisete sintaksu sa kljucem');
+	(58, 1, 'deleteSyntaxWithKey?', 'Da li ste sigurni da zelite da izbrisete sintaksu sa kljucem'),
+	(66, 1, 'serbian', 'Srpski'),
+	(67, 2, 'serbian', 'Serbian'),
+	(69, 2, 'english', 'English'),
+	(70, 1, 'english', 'Engleski'),
+	(78, 1, 'fillAllFields', 'Popunite sva polja'),
+	(79, 2, 'fillAllFields', 'Fill all fields'),
+	(80, 1, 'errorAdd', 'Greska prilikom dodavanja novog zapisa'),
+	(81, 2, 'errorAdd', 'Error while adding new record'),
+	(82, 2, 'errorDelete', 'Greska prilikom brisanja zapisa'),
+	(83, 2, 'errorDelete', 'Error while deleting record'),
+	(87, 1, 'deleteSyntax?', 'Da li zelite da izbrisete sintaksu?');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
