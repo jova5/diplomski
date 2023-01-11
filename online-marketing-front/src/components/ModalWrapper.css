@@ -44,3 +44,7 @@ button.ok {
     margin-bottom: 10px;
     margin-top: 0;
 }
+
+.circular-progress{
+    height: 30px;
+}

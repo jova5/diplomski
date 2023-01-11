@@ -5,6 +5,7 @@ import {setSearchLanguage} from "../stores/adminStore";
 import {Button} from "@suid/material";
 import {setOpenNewSyntaxModal} from "../stores/modalStore";
 import PostAddIcon from "@suid/icons-material/PostAdd";
+import './OptionsAboveTable.css';
 
 const OptionsAboveTable: Component = () => {
   return (

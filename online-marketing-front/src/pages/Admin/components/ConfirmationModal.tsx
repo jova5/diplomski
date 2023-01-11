@@ -8,6 +8,7 @@ const ConfirmationModal: Component<
     setOpen: (check: (prev: boolean) => boolean) => void,
     handleOK: () => void,
     message: () => string,
+    pending: () => boolean
   }> = (props) => {
   const setCustomOpen = () => {
     props.setOpen((prev: boolean) => !prev);
@@ -19,6 +20,7 @@ const ConfirmationModal: Component<
       open={props.open}
       setOpen={setCustomOpen}
       handleOK={props.handleOK}
+      pending={props.pending}
     >
       <p>{props.message}</p>
     </ModalWrapper>

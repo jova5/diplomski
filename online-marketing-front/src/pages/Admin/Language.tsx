@@ -1,5 +1,11 @@
 import {Component, createEffect} from "solid-js";
-import {openDeleteSyntaxModal, setOpenDeleteSyntaxModal, syntaxId, syntaxKey} from "./stores/modalStore";
+import {
+  openDeleteSyntaxModal,
+  pendingDeleteSyntax,
+  setOpenDeleteSyntaxModal,
+  syntaxId,
+  syntaxKey
+} from "./stores/modalStore";
 import NewSyntaxModal from "./components/NewSyntaxModal";
 import {deleteSyntax, translate} from "./utils/languageAsync";
 import ConfirmationModal from "./components/ConfirmationModal";
@@ -30,6 +36,7 @@ const Language: Component = () => {
         setOpen={setOpenDeleteSyntaxModal}
         handleOK={() => deleteSyntax(syntaxId())}
         message={() => `${translate("deleteSyntaxWithKey?")}: ### ${syntaxKey()} ###`}
+        pending={pendingDeleteSyntax}
       />
       <EditSyntaxModal/>
     </>

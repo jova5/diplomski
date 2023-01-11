@@ -1,6 +1,6 @@
 import {Component} from "solid-js";
 import {
-  openEditSyntaxModal,
+  openEditSyntaxModal, pendingEditSyntax,
   setOpenEditSyntaxModal,
   setSyntaxKey,
   setSyntaxValue,
@@ -33,19 +33,22 @@ const EditSyntaxModal: Component = () => {
       open={openEditSyntaxModal}
       setOpen={setOpen}
       handleOK={handleOK}
+      pending={pendingEditSyntax}
     >
       <p>{translate("key")}</p>
       <input
         class="input-custom"
         type="text"
         value={syntaxKey()}
-        onChange={(e) => setSyntaxKey(e.currentTarget.value)}/>
+        onChange={(e) => setSyntaxKey(e.currentTarget.value)}
+        disabled={pendingEditSyntax()}/>
       <p>{translate("syntax")}</p>
       <input
         class="input-custom"
         type="text"
         value={syntaxValue()}
-        onChange={(e) => setSyntaxValue(e.currentTarget.value)}/>
+        onChange={(e) => setSyntaxValue(e.currentTarget.value)}
+        disabled={pendingEditSyntax()}/>
     </ModalWrapper>
   )
 }

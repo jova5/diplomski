@@ -1,5 +1,5 @@
-import {Component} from "solid-js";
-import {Box, Button, Modal, Typography} from "@suid/material";
+import {Component, Show} from "solid-js";
+import {Box, Button, CircularProgress, Modal, Typography} from "@suid/material";
 import './ModalWrapper.css';
 import {translate} from "../pages/Admin/utils/languageAsync";
 
@@ -10,7 +10,9 @@ const ModalWrapper: Component<
     open: () => boolean,
     setOpen: () => void,
     handleOK: () => void,
+    pending: () => boolean,
   }> = (props) => {
+  // console.log("pending: " + props.pending());
   return (
     <Modal
       open={props.open()}
@@ -24,8 +26,17 @@ const ModalWrapper: Component<
           {...props.children}
         </Typography>
         <div class="modal-options">
-          <Button class="cancel" onClick={() => props.setOpen()}>{translate("cancel")}</Button>
-          <Button class="ok" onClick={() => props.handleOK()}>{translate("ok")}</Button>
+          <Show when={props.pending()} keyed>
+            <CircularProgress size={30} color="secondary"/>
+          </Show>
+          <Show when={!props.pending()} keyed>
+            <Button class="cancel" onClick={() => props.setOpen()} disabled={props.pending()}>
+              {translate("cancel")}
+            </Button>
+            <Button class="ok" onClick={() => props.handleOK()}>
+              {translate("ok")}
+            </Button>
+          </Show>
         </div>
       </Box>
     </Modal>

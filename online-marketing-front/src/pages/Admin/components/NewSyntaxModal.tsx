@@ -1,5 +1,5 @@
 import {Component, createSignal, For} from "solid-js";
-import {openNewSyntaxModal, setOpenNewSyntaxModal} from "../stores/modalStore";
+import {openNewSyntaxModal, pendingAddSyntax, setOpenNewSyntaxModal} from "../stores/modalStore";
 import ModalWrapper from "../../../components/ModalWrapper";
 import './NewSyntaxModal.css';
 import {VocabularyRequest} from "../../../dto/VocabularyRequest";
@@ -29,9 +29,15 @@ const NewSyntaxModal: Component = () => {
       open={openNewSyntaxModal}
       setOpen={setOpen}
       handleOK={handleOK}
+      pending={pendingAddSyntax}
     >
       <p>{translate("language")}</p>
-      <select class="language-select" name="languageId" onChange={(e) => setLanguageId(e.currentTarget.value)}>
+      <select
+        class="language-select"
+        name="languageId"
+        onChange={(e) => setLanguageId(e.currentTarget.value)}
+        disabled={pendingAddSyntax()}
+      >
         <option value="default" selected disabled>-- {translate("select")} --</option>
         <For each={availableLanguages()}>
           {
@@ -45,13 +51,15 @@ const NewSyntaxModal: Component = () => {
         class="input-custom"
         type="text"
         placeholder={translate("key")}
-        onChange={(e) => setKeyValue(e.currentTarget.value)}/>
+        onChange={(e) => setKeyValue(e.currentTarget.value)}
+        disabled={pendingAddSyntax()}/>
       <p>{translate("syntax")}</p>
       <input
         class="input-custom"
         type="text"
         placeholder={translate("syntax")}
-        onChange={(e) => setSyntaxValue(e.currentTarget.value)}/>
+        onChange={(e) => setSyntaxValue(e.currentTarget.value)}
+        disabled={pendingAddSyntax()}/>
     </ModalWrapper>
   )
 }

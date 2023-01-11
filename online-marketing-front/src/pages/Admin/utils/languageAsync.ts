@@ -8,6 +8,12 @@ import {
 import {produce} from "solid-js/store";
 import {VocabularyRequest} from "../../../dto/VocabularyRequest";
 import {translation} from "../../../stores/languageStore";
+import {
+  setOpenDeleteSyntaxModal,
+  setPendingAddSyntax,
+  setPendingDeleteSyntax,
+  setPendingEditSyntax
+} from "../stores/modalStore";
 
 async function getLanguagesForTable(): Promise<any[]> {
   let resultLanguageList: any[] = [];
@@ -45,6 +51,7 @@ async function getLanguagesForTable(): Promise<any[]> {
 }
 
 async function addSyntax(vocabulary: VocabularyRequest, languageId: number): Promise<any> {
+  setPendingAddSyntax(true);
   fetch('http://127.0.0.1:8080/vocabulary',
     {
       method: 'POST',
@@ -66,21 +73,34 @@ async function addSyntax(vocabulary: VocabularyRequest, languageId: number): Pro
           }),
         );
         refetch();
+        setPendingAddSyntax(false);
       }
     )
+    .catch(() => {
+      setPendingAddSyntax(false);
+      alert(translate("errorAdd"));
+    })
 }
 
 async function deleteSyntax(id: number): Promise<any> {
+  setPendingDeleteSyntax(true);
   await fetch(`http://127.0.0.1:8080/vocabulary/${id}`, {method: 'DELETE',})
     .then(res => res.json())
     .then(() => {
       const temporaryList = renderedLanguageList.filter((item) => item.id !== id)
       setRenderedLanguageList(temporaryList);
       refetch();
+      setPendingDeleteSyntax(false);
+      setOpenDeleteSyntaxModal(false);
+    })
+    .catch(() => {
+      setPendingDeleteSyntax(false);
+      alert(translate("errorDelete"));
     })
 }
 
 async function updateSyntax(vocabulary: VocabularyRequest, vocabularyId: number): Promise<any> {
+  setPendingEditSyntax(true);
   fetch(`http://127.0.0.1:8080/vocabulary/update/${vocabularyId}`,
     {
       method: 'PUT',
@@ -98,8 +118,13 @@ async function updateSyntax(vocabulary: VocabularyRequest, vocabularyId: number)
             syntax.meaning = data.meaning;
           }),
         );
+        setPendingEditSyntax(false);
       }
     )
+    .catch(() => {
+      setPendingEditSyntax(false);
+      alert(translate("errorUpdate"));
+    })
 }
 
 async function getTranslation(languageId: number): Promise<any[]> {
