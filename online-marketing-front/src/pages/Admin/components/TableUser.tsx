@@ -11,6 +11,7 @@ import {
   setPasswordValue,
   setStoreId,
   setTypeValue,
+  setUserId,
   setUserNameValue
 } from "../stores/modalStore";
 
@@ -47,10 +48,11 @@ const TableUser: Component = () => {
                       <IconButton
                         class="edit-table-row"
                         onClick={() => {
+                          setUserId(value.id);
                           setUserNameValue(value.name);
                           setPasswordValue(value.password);
                           setEmailValue(value.email);
-                          setStoreId(value.storeId === null ? translate("unknown") : value.storeId.toString());
+                          setStoreId(value.storeId === null ? "" : value.storeId.toString());
                           setTypeValue(value.type);
                           setOpenEditModal(true);
                         }}>
@@ -58,6 +60,8 @@ const TableUser: Component = () => {
                       </IconButton>
                       <IconButton
                         onClick={() => {
+                          setUserId(value.id);
+                          setUserNameValue(value.name);
                           setOpenDelete(true);
                         }}>
                         <DeleteIcon class="delete-table-row-icon"/>

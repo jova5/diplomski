@@ -1,8 +1,8 @@
-import {Component, onMount} from "solid-js";
+import {Component, createEffect, onMount} from "solid-js";
 import OptionsAboveTable from "./components/OptionsAboveTable";
-import {setRenderedUsers, setSearchUser, setUsers, users} from "./stores/adminStore";
-import {openDelete, pendingDelete, setOpenAddModal, setOpenDelete} from "./stores/modalStore";
-import {getUsers} from "./utils/usersAsync";
+import {searchUser, setRenderedUsers, setSearchUser, setUsers, setUsersStores, users} from "./stores/adminStore";
+import {openDelete, pendingDelete, setOpenAddModal, setOpenDelete, userId, userNameValue} from "./stores/modalStore";
+import {deleteUser, getUsers, getUsersStore} from "./utils/usersAsync";
 import TableUser from "./components/TableUser";
 import {translate} from "./utils/languageAsync";
 import ConfirmationModal from "./components/modals/ConfirmationModal";
@@ -15,7 +15,17 @@ const Users: Component = () => {
   onMount(async () => {
     setUsers(await getUsers());
     setRenderedUsers(users);
-  })
+    setUsersStores(await getUsersStore());
+  });
+
+  createEffect(() => {
+    const userList: any[] = users.filter((user: any) => {
+      return user.name.toLocaleLowerCase().includes(searchUser().toLocaleLowerCase()) ||
+        user.email.toLocaleLowerCase().includes(searchUser().toLocaleLowerCase()) ||
+        user.type.toLocaleLowerCase().includes(searchUser().toLocaleLowerCase())
+    })
+    setRenderedUsers(userList);
+  });
 
   return (
     <>
@@ -30,9 +40,8 @@ const Users: Component = () => {
         header={() => translate("deleteUser?")}
         open={openDelete}
         setOpen={setOpenDelete}
-        handleOK={() => {
-        }}
-        message={() => `${translate("deleteUserWithUserName?")}: ### test ###`}
+        handleOK={() => deleteUser(userId())}
+        message={() => `${translate("deleteUserWithUserName?")}: ### ${userNameValue()} ###`}
         pending={pendingDelete}
       />
       <EditUserModal/>

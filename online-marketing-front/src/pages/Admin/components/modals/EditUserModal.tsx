@@ -1,4 +1,4 @@
-import {Component} from "solid-js";
+import {Component, For} from "solid-js";
 import {translate} from "../../utils/languageAsync";
 import {
   emailValue,
@@ -9,17 +9,19 @@ import {
   setEmailValue,
   setOpenEditModal,
   setPasswordValue,
+  setStoreId,
   setTypeValue,
   setUserNameValue,
-  syntaxKey,
-  syntaxLanguageId,
-  syntaxValue,
+  storeId,
   typeValue,
+  userId,
   userNameValue
 } from "../../stores/modalStore";
 import ModalWrapper from "../../../../components/ModalWrapper";
-import {VocabularyRequest} from "../../../../dto/VocabularyRequest";
-import {checkEditSyntaxForm} from "../../utils/formChecks";
+import {checkUserReqForm} from "../../utils/formChecks";
+import {UserRequest} from "../../../../dto/UserRequest";
+import {usersStores} from "../../stores/adminStore";
+import {updateUser} from "../../utils/usersAsync";
 
 const EditUserModal: Component = () => {
   const setOpen = () => {
@@ -27,15 +29,17 @@ const EditUserModal: Component = () => {
   }
 
   const handleOK = async () => {
-    const vocabulary: VocabularyRequest = {
-      languageId: syntaxLanguageId(),
-      key: syntaxKey(),
-      meaning: syntaxValue()
+    const user: UserRequest = {
+      name: userNameValue(),
+      password: passwordValue(),
+      email: emailValue(),
+      type: typeValue(),
+      storeId: storeId() === "" ? undefined : +storeId()
     }
-    if (!checkEditSyntaxForm(syntaxKey(), syntaxValue())) {
+    if (!checkUserReqForm(user)) {
       alert(translate("fillAllFields"));
     } else {
-
+      await updateUser(user, userId());
     }
   }
 
@@ -54,9 +58,28 @@ const EditUserModal: Component = () => {
         onChange={(e) => setTypeValue(e.currentTarget.value)}
         disabled={pendingAdd()}
       >
-        <option value="default" disabled>-- {translate("select")} --</option>
+        <option selected={typeValue() === ""} value="default" disabled>-- {translate("select")} --</option>
         <option selected={typeValue() === "ADMIN"} value="ADMIN">{translate("admin").toUpperCase()}</option>
         <option selected={typeValue() === "USER"} value="USER">{translate("user").toUpperCase()}</option>
+      </select>
+      <p>{translate("store")}</p>
+      <select
+        class="language-select"
+        name="languageId"
+        onChange={(e) => setStoreId(e.currentTarget.value)}
+        disabled={pendingAdd()}
+      >
+        <option
+          value=""
+          selected={storeId() === ""}
+        >-- {translate("select")} --
+        </option>
+        <For each={usersStores()}>
+          {
+            (value) =>
+              <option selected={storeId() === value.id.toString()} value={`${value.id}`}>{value.name}</option>
+          }
+        </For>
       </select>
       <p>{translate("userName")}</p>
       <input

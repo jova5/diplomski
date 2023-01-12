@@ -10,6 +10,7 @@ export const [syntaxId, setSyntaxId] = createSignal<number>(-1);
 export const [syntaxKey, setSyntaxKey] = createSignal<string>("");
 export const [syntaxLanguageId, setSyntaxLanguageId] = createSignal<number>(-1);
 export const [syntaxValue, setSyntaxValue] = createSignal<string>("");
+export const [userId, setUserId] = createSignal<number>(-1);
 export const [userNameValue, setUserNameValue] = createSignal<string>("");
 export const [passwordValue, setPasswordValue] = createSignal<string>("");
 export const [emailValue, setEmailValue] = createSignal<string>("");

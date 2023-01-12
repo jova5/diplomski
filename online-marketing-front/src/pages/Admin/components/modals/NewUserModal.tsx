@@ -1,28 +1,31 @@
-import {Component, createSignal} from "solid-js";
+import {Component, createSignal, For} from "solid-js";
 import {addSyntax, translate} from "../../utils/languageAsync";
 import {openAddModal, pendingAdd, setOpenAddModal} from "../../stores/modalStore";
 import ModalWrapper from "../../../../components/ModalWrapper";
-import {checkNewUserForm} from "../../utils/formChecks";
+import {checkUserReqForm} from "../../utils/formChecks";
 import {UserRequest} from "../../../../dto/UserRequest";
 import {addUser} from "../../utils/usersAsync";
+import {usersStores} from "../../stores/adminStore";
 
 const NewUserModal: Component = () => {
-  const [userNameValue, setUserNameValue] = createSignal<string>("");
-  const [passwordValue, setPasswordValue] = createSignal<string>("");
-  const [emailValue, setEmailValue] = createSignal<string>("");
-  const [typeValue, setTypeValue] = createSignal<string>("");
+  const [userName, setUserName] = createSignal<string>("");
+  const [password, setPassword] = createSignal<string>("");
+  const [email, setEmail] = createSignal<string>("");
+  const [type, setType] = createSignal<string>("");
+  const [store, setStore] = createSignal<string>("");
   const setOpen = () => {
     setOpenAddModal(prev => !prev);
   }
 
   const handleOK = async () => {
     const user: UserRequest = {
-      name: userNameValue(),
-      password: passwordValue(),
-      email: emailValue(),
-      type: typeValue()
+      name: userName(),
+      password: password(),
+      email: email(),
+      type: type(),
+      storeId: store() === "" ? undefined : +store()
     }
-    if (!checkNewUserForm(user)) {
+    if (!checkUserReqForm(user)) {
       alert(translate("fillAllFields"));
     } else {
       await addUser(user);
@@ -41,39 +44,57 @@ const NewUserModal: Component = () => {
       <select
         class="language-select"
         name="languageId"
-        onChange={(e) => setTypeValue(e.currentTarget.value)}
+        onChange={(e) => setType(e.currentTarget.value)}
         disabled={pendingAdd()}
       >
         <option
           value="default"
-          selected={typeValue() === ""}
+          selected={type() === ""}
           disabled
         >-- {translate("select")} --
         </option>
         <option value="ADMIN">{translate("admin").toUpperCase()}</option>
         <option value="USER">{translate("user").toUpperCase()}</option>
       </select>
-      <p>Dodati opciju za selektovanje prodavnica!!!!!!</p>
+      <p>{translate("store")}</p>
+      <select
+        class="language-select"
+        name="languageId"
+        onChange={(e) => setStore(e.currentTarget.value)}
+        disabled={pendingAdd()}
+      >
+        <option
+          value=""
+          selected
+        >-- {translate("select")} --
+        </option>
+        <For each={usersStores()}>
+          {
+            (value) =>
+              <option value={`${value.id}`}>{value.name}</option>
+          }
+        </For>
+      </select>
       <p>{translate("userName")}</p>
       <input
         class="input-custom"
         type="text"
         placeholder={translate("userName")}
-        onChange={(e) => setUserNameValue(e.currentTarget.value)}
+        onChange={(e) => setUserName(e.currentTarget.value)}
         disabled={pendingAdd()}/>
       <p>{translate("password")}</p>
       <input
         class="input-custom"
         type="text"
         placeholder={translate("password")}
-        onChange={(e) => setPasswordValue(e.currentTarget.value)}
+        onChange={(e) => setPassword(e.currentTarget.value)}
         disabled={pendingAdd()}/>
       <p>{translate("email")}</p>
       <input
         class="input-custom"
         type="text"
         placeholder={translate("email")}
-        onChange={(e) => setEmailValue(e.currentTarget.value)}
+        onChange={(e) => setEmail(e.currentTarget.value)}
         disabled={pendingAdd()}/>
     </ModalWrapper>
   )

@@ -35,7 +35,7 @@ public class Store {
     private Collection<Contact> contacts;
     @ManyToMany(fetch = FetchType.LAZY)
     private Collection<Category> categories;
-    @OneToOne
+    @OneToOne(mappedBy = "store")
     private User user;
     @OneToMany(mappedBy = "store", fetch = FetchType.LAZY)
     private Collection<Visit> visits;

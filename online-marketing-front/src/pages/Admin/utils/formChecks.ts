@@ -8,6 +8,6 @@ export const checkEditSyntaxForm = (key: string, syntax:string): boolean => {
   return key !== "" && syntax !== "";
 }
 
-export const checkNewUserForm = (user: UserRequest): boolean => {
+export const checkUserReqForm = (user: UserRequest): boolean => {
   return user.name !== "" && user.password !== "" && user.email !== "" && user.type !== "";
 }

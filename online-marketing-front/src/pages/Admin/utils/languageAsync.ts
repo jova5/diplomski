@@ -107,7 +107,7 @@ async function deleteSyntax(id: number): Promise<any> {
 
 async function updateSyntax(vocabulary: VocabularyRequest, vocabularyId: number): Promise<any> {
   setPendingEdit(true);
-  fetch(`http://127.0.0.1:8080/vocabulary/update/${vocabularyId}`,
+  fetch(`http://127.0.0.1:8080/vocabulary/${vocabularyId}`,
     {
       method: 'PUT',
       body: JSON.stringify(vocabulary),
