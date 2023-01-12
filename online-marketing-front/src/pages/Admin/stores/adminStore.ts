@@ -5,6 +5,8 @@ import {User} from "../../../dto/User";
 export const [users, setUsers] = createStore<User[]>([]);
 export const [renderedUsers, setRenderedUsers] = createStore<User[]>([]);
 export const [usersStores, setUsersStores] = createSignal<any[]>([]);
+export const [stores, setStores] = createStore<any[]>([]);
+export const [renderedStores, setRenderedStores] = createStore<any[]>([]);
 export const [availableLanguages, setAvailableLanguages] = createSignal<any[]>([]);
 export const [renderedLanguageList, setRenderedLanguageList] = createStore<any[]>([]);
 export const [languages, setLanguages] = createStore<any[]>([]);

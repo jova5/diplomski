@@ -16,4 +16,7 @@ export const [passwordValue, setPasswordValue] = createSignal<string>("");
 export const [emailValue, setEmailValue] = createSignal<string>("");
 export const [storeId, setStoreId] = createSignal<string>("");
 export const [typeValue, setTypeValue] = createSignal<string>("");
-
+export const [storeName, setStoreName] = createSignal<string>("");
+export const [storeDescription, setStoreDescription] = createSignal<string>("");
+export const [storeBannerImage, setStoreBannerImage] = createSignal<string>("");
+export const [storeImage, setStoreImage] = createSignal<string>("");

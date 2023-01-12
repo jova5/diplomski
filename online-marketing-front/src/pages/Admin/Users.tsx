@@ -3,7 +3,7 @@ import OptionsAboveTable from "./components/OptionsAboveTable";
 import {searchUser, setRenderedUsers, setSearchUser, setUsers, setUsersStores, users} from "./stores/adminStore";
 import {openDelete, pendingDelete, setOpenAddModal, setOpenDelete, userId, userNameValue} from "./stores/modalStore";
 import {deleteUser, getUsers, getUsersStore} from "./utils/usersAsync";
-import TableUser from "./components/TableUser";
+import TableUser from "./components/tables/TableUser";
 import {translate} from "./utils/languageAsync";
 import ConfirmationModal from "./components/modals/ConfirmationModal";
 import NewUserModal from "./components/modals/NewUserModal";

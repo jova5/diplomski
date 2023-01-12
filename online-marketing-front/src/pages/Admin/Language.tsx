@@ -5,7 +5,7 @@ import {deleteSyntax, getLanguagesForTable, translate} from "./utils/languageAsy
 import ConfirmationModal from "./components/modals/ConfirmationModal";
 import {languages, searchLanguage, setLanguages, setRenderedLanguageList, setSearchLanguage} from "./stores/adminStore";
 import EditSyntaxModal from "./components/modals/EditSyntaxModal";
-import TableLanguage from "./components/TableLanguage";
+import TableLanguage from "./components/tables/TableLanguage";
 import OptionsAboveTable from "./components/OptionsAboveTable";
 
 

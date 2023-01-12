@@ -1,7 +1,7 @@
 import {Component, For} from "solid-js";
 import {IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@suid/material";
-import {translate} from "../utils/languageAsync";
-import {renderedLanguageList} from "../stores/adminStore";
+import {translate} from "../../utils/languageAsync";
+import {renderedLanguageList} from "../../stores/adminStore";
 import {
   setOpenDelete,
   setOpenEditModal,
@@ -9,7 +9,7 @@ import {
   setSyntaxKey,
   setSyntaxLanguageId,
   setSyntaxValue
-} from "../stores/modalStore";
+} from "../../stores/modalStore";
 import EditIcon from "@suid/icons-material/Edit";
 import DeleteIcon from "@suid/icons-material/Delete";
 import "./TableLanguage.css";

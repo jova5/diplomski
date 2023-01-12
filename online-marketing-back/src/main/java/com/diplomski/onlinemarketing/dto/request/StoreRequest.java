@@ -10,5 +10,4 @@ public class StoreRequest {
     private int sumOfRating;
     private String bannerImage;
     private String storeImage;
-    private Integer numOfVisit;
 }

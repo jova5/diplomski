@@ -1,7 +1,7 @@
 import {Component, For} from "solid-js";
 import {IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@suid/material";
-import {translate} from "../utils/languageAsync";
-import {renderedUsers} from "../stores/adminStore";
+import {translate} from "../../utils/languageAsync";
+import {renderedUsers} from "../../stores/adminStore";
 import EditIcon from "@suid/icons-material/Edit";
 import DeleteIcon from "@suid/icons-material/Delete";
 import {
@@ -13,7 +13,7 @@ import {
   setTypeValue,
   setUserId,
   setUserNameValue
-} from "../stores/modalStore";
+} from "../../stores/modalStore";
 
 const TableUser: Component = () => {
   return (

@@ -17,5 +17,5 @@ export const NavOptions = {
   Translation: Language
 }
 
-export const [nav, setNav] = createSignal<NavValue>(NavValues[0]);
+export const [nav, setNav] = createSignal<NavValue>(NavValues[1]);
 export const [logOut, setLogOut] = createSignal<boolean>(false);
