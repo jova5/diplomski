@@ -2,7 +2,14 @@ import {Component, For} from "solid-js";
 import {IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@suid/material";
 import {translate} from "../../utils/languageAsync";
 import {renderedStores} from "../../stores/adminStore";
-import {setOpenDelete, setOpenEditModal, setStoreDescription, setStoreId, setStoreName} from "../../stores/modalStore";
+import {
+  setOpenDelete,
+  setOpenEditModal, setStoreAddress, setStoreBannerImage, setStoreContactId,
+  setStoreDelete,
+  setStoreDescription, setStoreEmail, setStoreEmailId,
+  setStoreId, setStoreImage,
+  setStoreName, setStorePhone, setStorePhoneId
+} from "../../stores/modalStore";
 import EditIcon from "@suid/icons-material/Edit";
 import DeleteIcon from "@suid/icons-material/Delete";
 
@@ -33,16 +40,24 @@ const TableStore: Component = () => {
                       <IconButton
                         class="edit-table-row"
                         onClick={() => {
+                          setStoreId(value.id.toString());
                           setStoreName(value.name);
                           setStoreDescription(value.description);
+                          setStoreAddress(value.address!);
+                          setStoreEmail(value.email!);
+                          setStorePhone(value.phone!);
+                          setStoreBannerImage(value.bannerImage!);
+                          setStoreImage(value.storeImage!);
+                          setStoreContactId(value.contactId!);
+                          setStoreEmailId(value.emailId!);
+                          setStorePhoneId(value.phoneId!);
                           setOpenEditModal(true);
                         }}>
                         <EditIcon class="edit-table-row-icon"/>
                       </IconButton>
                       <IconButton
                         onClick={() => {
-                          setStoreId(value.id.toString());
-                          setStoreName(value.name);
+                          setStoreDelete(value);
                           setOpenDelete(true);
                         }}>
                         <DeleteIcon class="delete-table-row-icon"/>

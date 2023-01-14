@@ -4,5 +4,6 @@ import lombok.Data;
 
 @Data
 public class EmailResponse {
+    private Integer id;
     private String email;
 }

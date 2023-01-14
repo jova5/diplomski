@@ -4,5 +4,6 @@ import lombok.Data;
 
 @Data
 public class PhoneResponse {
+    private Integer id;
     private String number;
 }

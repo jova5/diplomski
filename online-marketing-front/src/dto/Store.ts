@@ -12,6 +12,8 @@ export interface Store {
   adds?: Adds[] | undefined;
   contactId?: number;
   address?: string;
+  emailId?: number;
   email?: string;
+  phoneId?: number;
   phone?: string;
 }

@@ -1,7 +1,15 @@
 import {Component, createEffect, onMount} from "solid-js";
 import OptionsAboveTable from "./components/OptionsAboveTable";
 import {searchUser, setRenderedUsers, setSearchUser, setUsers, setUsersStores, users} from "./stores/adminStore";
-import {openDelete, pendingDelete, setOpenAddModal, setOpenDelete, userId, userNameValue} from "./stores/modalStore";
+import {
+  openDelete,
+  pendingDelete,
+  setOpenAddModal,
+  setOpenDelete,
+  setStoreId,
+  userId,
+  userNameValue
+} from "./stores/modalStore";
 import {deleteUser, getUsers, getUsersStore} from "./utils/usersAsync";
 import TableUser from "./components/tables/TableUser";
 import {translate} from "./utils/languageAsync";
@@ -13,6 +21,7 @@ const Users: Component = () => {
   console.log("Admin/Users");
 
   onMount(async () => {
+    setStoreId("");
     setUsers(await getUsers());
     setRenderedUsers(users);
     setUsersStores(await getUsersStore());

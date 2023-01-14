@@ -1,4 +1,5 @@
 import {createSignal} from "solid-js";
+import {Store} from "../../../dto/Store";
 
 export const [openAddModal, setOpenAddModal] = createSignal<boolean>(false);
 export const [pendingAdd, setPendingAdd] = createSignal<boolean>(false);
@@ -16,9 +17,18 @@ export const [passwordValue, setPasswordValue] = createSignal<string>("");
 export const [emailValue, setEmailValue] = createSignal<string>("");
 export const [storeId, setStoreId] = createSignal<string>("");
 export const [typeValue, setTypeValue] = createSignal<string>("");
+// export const [storeEdit, setStoreEdit] = createSignal<Store>();
+export const [storeDelete, setStoreDelete] = createSignal<Store>();
 export const [storeName, setStoreName] = createSignal<string>("");
 export const [storeDescription, setStoreDescription] = createSignal<string>("");
+export const [storeEmail, setStoreEmail] = createSignal<string>("");
+export const [storeAddress, setStoreAddress] = createSignal<string>("");
+export const [storePhone, setStorePhone] = createSignal<string>("");
+export const [storeContactId, setStoreContactId] = createSignal<number>(-1);
+export const [storeEmailId, setStoreEmailId] = createSignal<number>(-1);
+export const [storePhoneId, setStorePhoneId] = createSignal<number>(-1);
 export const [storeBannerImage, setStoreBannerImage] = createSignal<string>("");
 export const [storeImage, setStoreImage] = createSignal<string>("");
 export const [addedStoreId, setAddedStoreId] = createSignal<number>(-1);
 export const [addedContactId, setAddedContactId] = createSignal<number>(-1);
+export const [updatedContactId, setUpdatedContactId] = createSignal<number>(-1);
