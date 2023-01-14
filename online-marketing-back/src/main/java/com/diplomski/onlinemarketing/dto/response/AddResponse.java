@@ -13,7 +13,6 @@ public class AddResponse {
     private Date dateTo;
     private String header;
     private String description;
-    private Integer numOfVisit;
     private Boolean premium;
-    private StoreResponse store;
+//    private StoreResponse store;
 }

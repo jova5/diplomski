@@ -1,19 +1,20 @@
 import {Component, createEffect, onMount} from "solid-js";
 import OptionsAboveTable from "./components/OptionsAboveTable";
-import {setSearchStore} from "./stores/adminStore";
+import {setRenderedStores, setSearchStore, setStores, stores} from "./stores/adminStore";
 import {openDelete, pendingDelete, setOpenAddModal, setOpenDelete, setStoreId} from "./stores/modalStore";
 import ConfirmationModal from "./components/modals/ConfirmationModal";
 import {translate} from "./utils/languageAsync";
 import NewStoreModal from "./components/modals/NewStoreModal";
+import TableStore from "./components/tables/TableStore";
+import {getStore} from "./utils/storeAsync";
 
 const Stores: Component = () => {
   console.log("Admin/Stores");
 
   onMount(async () => {
     setStoreId("");
-    // setUsers(await getUsers());
-    // setRenderedUsers(users);
-    // setUsersStores(await getUsersStore());
+    setStores(await getStore());
+    setRenderedStores(stores);
   });
 
   createEffect(() => {
@@ -33,7 +34,7 @@ const Stores: Component = () => {
         openModal={() => setOpenAddModal(true)}
       />
       {/*<TableUser/>*/}
-      {/*<NewUserModal/>*/}
+      <TableStore/>
       <NewStoreModal/>
       <ConfirmationModal
         header={() => translate("deleteStore?")}

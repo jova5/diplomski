@@ -59,8 +59,8 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `online-marketing`.`contact` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `store_id` INT NOT NULL,
-  `type` VARCHAR(45) NOT NULL,
-  `address` VARCHAR(255) NULL,
+  `type` VARCHAR(45) NULL,
+  `address` VARCHAR(45) NOT NULL,
   `latitude` DOUBLE NULL,
   `longitude` DOUBLE NULL,
   PRIMARY KEY (`id`, `store_id`),

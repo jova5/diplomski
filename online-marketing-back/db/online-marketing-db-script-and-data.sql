@@ -1,8 +1,8 @@
 -- --------------------------------------------------------
 -- Host:                         127.0.0.1
--- Server version:               8.0.31 - MySQL Community Server - GPL
+-- Server version:               8.0.29 - MySQL Community Server - GPL
 -- Server OS:                    Win64
--- HeidiSQL Version:             12.1.0.6537
+-- HeidiSQL Version:             12.3.0.6589
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -21,7 +21,6 @@ CREATE DATABASE IF NOT EXISTS `online-marketing` /*!40100 DEFAULT CHARACTER SET 
 USE `online-marketing`;
 
 -- Dumping structure for table online-marketing.add
-DROP TABLE IF EXISTS `add`;
 CREATE TABLE IF NOT EXISTS `add` (
   `id` int NOT NULL AUTO_INCREMENT,
   `store_id` int NOT NULL,
@@ -40,7 +39,6 @@ CREATE TABLE IF NOT EXISTS `add` (
 -- Dumping data for table online-marketing.add: ~0 rows (approximately)
 
 -- Dumping structure for table online-marketing.add_has_category
-DROP TABLE IF EXISTS `add_has_category`;
 CREATE TABLE IF NOT EXISTS `add_has_category` (
   `add_id` int NOT NULL,
   `category_id` int NOT NULL,
@@ -54,7 +52,6 @@ CREATE TABLE IF NOT EXISTS `add_has_category` (
 -- Dumping data for table online-marketing.add_has_category: ~0 rows (approximately)
 
 -- Dumping structure for table online-marketing.category
-DROP TABLE IF EXISTS `category`;
 CREATE TABLE IF NOT EXISTS `category` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
@@ -66,24 +63,28 @@ CREATE TABLE IF NOT EXISTS `category` (
 -- Dumping data for table online-marketing.category: ~0 rows (approximately)
 
 -- Dumping structure for table online-marketing.contact
-DROP TABLE IF EXISTS `contact`;
 CREATE TABLE IF NOT EXISTS `contact` (
   `id` int NOT NULL AUTO_INCREMENT,
   `store_id` int NOT NULL,
-  `type` varchar(45) NOT NULL,
-  `address` varchar(255) DEFAULT NULL,
+  `type` varchar(45) DEFAULT NULL,
+  `address` varchar(45) NOT NULL,
   `latitude` double DEFAULT NULL,
   `longitude` double DEFAULT NULL,
   PRIMARY KEY (`id`,`store_id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `fk_contact_store1` (`store_id`),
   CONSTRAINT `fk_contact_store1` FOREIGN KEY (`store_id`) REFERENCES `store` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3;
 
--- Dumping data for table online-marketing.contact: ~0 rows (approximately)
+-- Dumping data for table online-marketing.contact: ~5 rows (approximately)
+INSERT INTO `contact` (`id`, `store_id`, `type`, `address`, `latitude`, `longitude`) VALUES
+	(1, 2, NULL, 'test', NULL, NULL),
+	(2, 3, NULL, 'pppp', NULL, NULL),
+	(3, 4, NULL, 'eee', NULL, NULL),
+	(4, 5, NULL, 'aaaa', NULL, NULL),
+	(5, 6, NULL, 'bbb', NULL, NULL);
 
 -- Dumping structure for table online-marketing.email
-DROP TABLE IF EXISTS `email`;
 CREATE TABLE IF NOT EXISTS `email` (
   `id` int NOT NULL AUTO_INCREMENT,
   `email` varchar(255) NOT NULL,
@@ -92,12 +93,14 @@ CREATE TABLE IF NOT EXISTS `email` (
   UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `fk_email_contact1_idx` (`contact_id`),
   CONSTRAINT `fk_email_contact1` FOREIGN KEY (`contact_id`) REFERENCES `contact` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
 
--- Dumping data for table online-marketing.email: ~0 rows (approximately)
+-- Dumping data for table online-marketing.email: ~2 rows (approximately)
+INSERT INTO `email` (`id`, `email`, `contact_id`) VALUES
+	(1, 'aaa', 4),
+	(2, 'bbbb', 5);
 
 -- Dumping structure for table online-marketing.language
-DROP TABLE IF EXISTS `language`;
 CREATE TABLE IF NOT EXISTS `language` (
   `id` int NOT NULL AUTO_INCREMENT,
   `short_name` varchar(10) NOT NULL,
@@ -112,7 +115,6 @@ INSERT INTO `language` (`id`, `short_name`, `long_name`) VALUES
 	(2, 'EN', 'English');
 
 -- Dumping structure for table online-marketing.phone
-DROP TABLE IF EXISTS `phone`;
 CREATE TABLE IF NOT EXISTS `phone` (
   `id` int NOT NULL AUTO_INCREMENT,
   `number` varchar(45) NOT NULL,
@@ -120,12 +122,13 @@ CREATE TABLE IF NOT EXISTS `phone` (
   PRIMARY KEY (`id`,`contact_id`),
   KEY `fk_phone_contact1_idx` (`contact_id`),
   CONSTRAINT `fk_phone_contact1` FOREIGN KEY (`contact_id`) REFERENCES `contact` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
 
--- Dumping data for table online-marketing.phone: ~0 rows (approximately)
+-- Dumping data for table online-marketing.phone: ~1 rows (approximately)
+INSERT INTO `phone` (`id`, `number`, `contact_id`) VALUES
+	(1, 'bbbb', 5);
 
 -- Dumping structure for table online-marketing.store
-DROP TABLE IF EXISTS `store`;
 CREATE TABLE IF NOT EXISTS `store` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
@@ -136,12 +139,18 @@ CREATE TABLE IF NOT EXISTS `store` (
   `store_image` text,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3;
 
--- Dumping data for table online-marketing.store: ~0 rows (approximately)
+-- Dumping data for table online-marketing.store: ~6 rows (approximately)
+INSERT INTO `store` (`id`, `name`, `description`, `num_of_rating`, `sum_of_rating`, `banner_image`, `store_image`) VALUES
+	(1, 'test', 'test', 0, 0, '', ''),
+	(2, 'test', 'test', 0, 0, '', ''),
+	(3, 'pppp', 'pppp', 0, 0, '', ''),
+	(4, 'eeee', 'eee', 0, 0, '', ''),
+	(5, 'aaaa', 'aaa', 0, 0, '', ''),
+	(6, 'bbbb', 'bbbb', 0, 0, '', '');
 
 -- Dumping structure for table online-marketing.store_has_category
-DROP TABLE IF EXISTS `store_has_category`;
 CREATE TABLE IF NOT EXISTS `store_has_category` (
   `store_id` int NOT NULL,
   `category_id` int NOT NULL,
@@ -155,7 +164,6 @@ CREATE TABLE IF NOT EXISTS `store_has_category` (
 -- Dumping data for table online-marketing.store_has_category: ~0 rows (approximately)
 
 -- Dumping structure for table online-marketing.subcategory
-DROP TABLE IF EXISTS `subcategory`;
 CREATE TABLE IF NOT EXISTS `subcategory` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(45) DEFAULT NULL,
@@ -169,7 +177,6 @@ CREATE TABLE IF NOT EXISTS `subcategory` (
 -- Dumping data for table online-marketing.subcategory: ~0 rows (approximately)
 
 -- Dumping structure for table online-marketing.user
-DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
@@ -197,7 +204,6 @@ INSERT INTO `user` (`id`, `name`, `password`, `email`, `store_id`, `type`) VALUE
 	(9, 'treteerter', 'tretretreertert', 'tretretererterterter', NULL, 'USER');
 
 -- Dumping structure for table online-marketing.visit
-DROP TABLE IF EXISTS `visit`;
 CREATE TABLE IF NOT EXISTS `visit` (
   `id` int NOT NULL AUTO_INCREMENT,
   `store_id` int DEFAULT NULL,
@@ -217,7 +223,6 @@ CREATE TABLE IF NOT EXISTS `visit` (
 -- Dumping data for table online-marketing.visit: ~0 rows (approximately)
 
 -- Dumping structure for table online-marketing.vocabulary
-DROP TABLE IF EXISTS `vocabulary`;
 CREATE TABLE IF NOT EXISTS `vocabulary` (
   `id` int NOT NULL AUTO_INCREMENT,
   `language_id` int NOT NULL,
@@ -227,9 +232,9 @@ CREATE TABLE IF NOT EXISTS `vocabulary` (
   UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `fk_table1_language1` (`language_id`),
   CONSTRAINT `fk_table1_language1` FOREIGN KEY (`language_id`) REFERENCES `language` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=92 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=88 DEFAULT CHARSET=utf8mb3;
 
--- Dumping data for table online-marketing.vocabulary: ~43 rows (approximately)
+-- Dumping data for table online-marketing.vocabulary: ~48 rows (approximately)
 INSERT INTO `vocabulary` (`id`, `language_id`, `key`, `meaning`) VALUES
 	(1, 1, 'users', 'Korisnici'),
 	(2, 2, 'users', 'Users'),

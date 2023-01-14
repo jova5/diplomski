@@ -1,13 +1,21 @@
-import {Component, createSignal} from "solid-js";
-import {openAddModal, pendingAdd, setOpenAddModal} from "../../stores/modalStore";
+import {Component, createEffect, createSignal} from "solid-js";
+import {addedContactId, addedStoreId, openAddModal, pendingAdd, setOpenAddModal} from "../../stores/modalStore";
 import {checkStoreReqForm} from "../../utils/formChecks";
 import {translate} from "../../utils/languageAsync";
 import ModalWrapper from "../../../../components/ModalWrapper";
 import {StoreRequest} from "../../../../dto/StoreRequest";
+import {convertImageToBase64} from "../../utils/converteImageToBase64";
+import {addContact, addEmail, addPhone, addStore} from "../../utils/storeAsync";
+import {ContactRequest} from "../../../../dto/ContactRequest";
+import {EmailRequest} from "../../../../dto/EmailRequest";
+import {PhoneRequest} from "../../../../dto/PhoneRequest";
 
 const NewStoreModal: Component = () => {
   const [storeName, setStoreName] = createSignal<string>("");
   const [description, setDescription] = createSignal<string>("");
+  const [address, setAddress] = createSignal<string>("");
+  const [email, setEmail] = createSignal<string>("");
+  const [phone, setPhone] = createSignal<string>("");
   const [bannerImage, setBannerImage] = createSignal<File>();
   const [storeImage, setStoreImage] = createSignal<File>();
 
@@ -20,8 +28,8 @@ const NewStoreModal: Component = () => {
   // })
 
   const handleOK = async () => {
-    const bannerImageBase64 = await convertBase64(bannerImage());
-    const storeImageBase64 = await convertBase64(storeImage());
+    const bannerImageBase64 = await convertImageToBase64(bannerImage());
+    const storeImageBase64 = await convertImageToBase64(storeImage());
     const store: StoreRequest = {
       name: storeName(),
       description: description(),
@@ -30,35 +38,34 @@ const NewStoreModal: Component = () => {
       numOfRating: 0,
       sumOfRating: 0
     }
-    if (!checkStoreReqForm(store)) {
+    if (!checkStoreReqForm(store, address(), email(), phone())) {
       alert(translate("fillAllFields"));
     } else {
-      // await addStore(store);
+
+      await addStore(store);
+      const contactReq: ContactRequest = {
+        storeId: addedStoreId(),
+        address: address()
+      }
+      await addContact(contactReq);
+
+      const emailReq: EmailRequest = {
+        contactId: addedContactId(),
+        email: email()
+      }
+      await addEmail(emailReq);
+
+      const phoneReq: PhoneRequest = {
+        contactId: addedContactId(),
+        number: phone()
+      }
+      await addPhone(phoneReq);
     }
   }
 
-  const convertBase64 = (file: File | undefined) => {
-    return new Promise((resolve, reject) => {
-      const fileReader = new FileReader();
-      if (file !== undefined) {
-        fileReader.readAsDataURL(file);
-
-        fileReader.onload = () => {
-          resolve(fileReader.result);
-        };
-
-        fileReader.onerror = (error) => {
-          reject(error);
-        };
-      } else {
-        resolve("");
-      }
-    });
-  };
-
   return (
     <ModalWrapper
-      name={() => translate("addSyntax")}
+      name={() => translate("addStore")}
       open={openAddModal}
       setOpen={setOpen}
       handleOK={handleOK}
@@ -78,6 +85,31 @@ const NewStoreModal: Component = () => {
         placeholder={translate("description")}
         onChange={(e) => setDescription(e.currentTarget.value)}
         disabled={pendingAdd()}/>
+
+      <p>{translate("address")}</p>
+      <input
+        class="input-custom"
+        type="text"
+        placeholder={translate("address")}
+        onChange={(e) => setAddress(e.currentTarget.value)}
+        disabled={pendingAdd()}/>
+
+      <p>{translate("email")}</p>
+      <input
+        class="input-custom"
+        type="text"
+        placeholder={translate("email")}
+        onChange={(e) => setEmail(e.currentTarget.value)}
+        disabled={pendingAdd()}/>
+
+      <p>{translate("phone")}</p>
+      <input
+        class="input-custom"
+        type="text"
+        placeholder={translate("phone")}
+        onChange={(e) => setPhone(e.currentTarget.value)}
+        disabled={pendingAdd()}/>
+
       <p>{translate("bannerImage")}</p>
       <input
         class="input-custom"

@@ -13,7 +13,6 @@ public class StoreResponse {
     private int sumOfRating;
     private String bannerImage;
     private String storeImage;
-    private Integer numOfVisit;
     private Collection<AddResponse> adds;
     private Collection<ContactResponse> contacts;
 }

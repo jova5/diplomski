@@ -20,3 +20,5 @@ export const [storeName, setStoreName] = createSignal<string>("");
 export const [storeDescription, setStoreDescription] = createSignal<string>("");
 export const [storeBannerImage, setStoreBannerImage] = createSignal<string>("");
 export const [storeImage, setStoreImage] = createSignal<string>("");
+export const [addedStoreId, setAddedStoreId] = createSignal<number>(-1);
+export const [addedContactId, setAddedContactId] = createSignal<number>(-1);

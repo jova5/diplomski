@@ -6,6 +6,7 @@ import java.util.Collection;
 
 @Data
 public class ContactResponse {
+    private Integer id;
     private Integer storeId;
     private String type;
     private String address;

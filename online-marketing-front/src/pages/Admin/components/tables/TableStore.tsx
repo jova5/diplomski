@@ -12,8 +12,9 @@ const TableStore: Component = () => {
       <Table aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>{translate("nameName")}</TableCell>
-            <TableCell align="left">{translate("stars")}</TableCell>
+            <TableCell>{translate("storeName")}</TableCell>
+            <TableCell align="left">{translate("storeDescription")}</TableCell>
+            <TableCell align="left">{translate("stars")}&star;</TableCell>
             <TableCell align="right">{translate("options")}</TableCell>
           </TableRow>
         </TableHead>
@@ -26,7 +27,8 @@ const TableStore: Component = () => {
                             sx={{"&:last-child td, &:last-child th": {border: 0}}}
                   >
                     <TableCell align="left">{value.name}</TableCell>
-                    <TableCell align="left">{value.sumOfRating / value.numOfRating}</TableCell>
+                    <TableCell align="left">{value.description}</TableCell>
+                    <TableCell align="left">{value.sumOfRating === 0 ? 0 : value.sumOfRating / value.numOfRating}&star;</TableCell>
                     <TableCell align="right">
                       <IconButton
                         class="edit-table-row"
@@ -39,7 +41,7 @@ const TableStore: Component = () => {
                       </IconButton>
                       <IconButton
                         onClick={() => {
-                          setStoreId(value.id);
+                          setStoreId(value.id.toString());
                           setStoreName(value.name);
                           setOpenDelete(true);
                         }}>
