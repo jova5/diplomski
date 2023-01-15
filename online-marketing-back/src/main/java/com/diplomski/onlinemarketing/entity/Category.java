@@ -20,7 +20,7 @@ public class Category {
     private String image;
     @ManyToMany(fetch = FetchType.LAZY)
     private Collection<Add> adds;
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "categories")
     private Collection<Store> stores;
     @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
     private Collection<Subcategory> subcategories;

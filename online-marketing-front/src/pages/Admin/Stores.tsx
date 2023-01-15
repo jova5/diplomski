@@ -1,12 +1,12 @@
 import {Component, createEffect, onMount} from "solid-js";
 import OptionsAboveTable from "./components/OptionsAboveTable";
 import {searchStore, setRenderedStores, setSearchStore, setStores, stores} from "./stores/adminStore";
-import {openDelete, pendingDelete, setOpenAddModal, setOpenDelete, setStoreId} from "./stores/modalStore";
+import {openDelete, pendingDelete, setOpenAddModal, setOpenDelete, setStoreId, storeDelete} from "./stores/modalStore";
 import ConfirmationModal from "./components/modals/ConfirmationModal";
 import {translate} from "./utils/languageAsync";
 import NewStoreModal from "./components/modals/NewStoreModal";
 import TableStore from "./components/tables/TableStore";
-import {getStore} from "./utils/storeAsync";
+import {deleteStore, getStore} from "./utils/storeAsync";
 import EditStoreModal from "./components/modals/EditStoreModal";
 
 const Stores: Component = () => {
@@ -38,9 +38,8 @@ const Stores: Component = () => {
         header={() => translate("deleteStore?")}
         open={openDelete}
         setOpen={setOpenDelete}
-        handleOK={() => {
-        }}
-        message={() => `${translate("deleteStoreWithName?")}: ### test ###`}
+        handleOK={() => deleteStore(storeDelete().id)}
+        message={() => `${translate("deleteStoreWithName?")}: ### ${storeDelete().name} ###`}
         pending={pendingDelete}
       />
       <EditStoreModal/>

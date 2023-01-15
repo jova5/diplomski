@@ -34,6 +34,10 @@ public class Store {
     @OneToMany(mappedBy = "store", fetch = FetchType.LAZY)
     private Collection<Contact> contacts;
     @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "store_has_category",
+            joinColumns = @JoinColumn(name = "store_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Collection<Category> categories;
     @OneToOne(mappedBy = "store")
     private User user;

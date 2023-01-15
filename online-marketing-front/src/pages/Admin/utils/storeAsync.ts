@@ -1,14 +1,16 @@
 import {Store} from "../../../dto/Store";
-import {UserRequest} from "../../../dto/UserRequest";
 import {
   addedContactId,
   setAddedContactId,
   setAddedStoreId,
+  setOpenDelete,
   setPendingAdd,
+  setPendingDelete,
   setPendingEdit,
-  setUpdatedContactId, updatedContactId
+  setUpdatedContactId,
+  updatedContactId
 } from "../stores/modalStore";
-import {setRenderedStores, setRenderedUsers, setStores, setUsers} from "../stores/adminStore";
+import {renderedStores, setRenderedStores, setStores, stores} from "../stores/adminStore";
 import {produce} from "solid-js/store";
 import {translate} from "./languageAsync";
 import {StoreRequest} from "../../../dto/StoreRequest";
@@ -19,7 +21,7 @@ import {PhoneRequest} from "../../../dto/PhoneRequest";
 async function getStore(): Promise<Store[]> {
   const data = (await fetch('http://127.0.0.1:8080/store', {method: 'GET'})).json().then(d => {
     return d.map((i: any) => {
-      return{
+      return {
         id: i.id,
         name: i.name,
         description: i.description,
@@ -114,6 +116,7 @@ async function addContact(contact: ContactRequest): Promise<any> {
       );
     })
 }
+
 async function addEmail(email: EmailRequest): Promise<any> {
   await fetch('http://127.0.0.1:8080/email',
     {
@@ -143,6 +146,7 @@ async function addEmail(email: EmailRequest): Promise<any> {
       );
     })
 }
+
 async function addPhone(phone: PhoneRequest): Promise<any> {
   await fetch('http://127.0.0.1:8080/phone',
     {
@@ -183,29 +187,29 @@ async function updateStore(store: StoreRequest, storeId: number): Promise<any> {
     })
     .then(res => res.json())
     .then(data => {
-      // setAddedStoreId(data.id);
-      setRenderedStores(
-        store => store.id === data.id,
-        produce((store: Store) => {
-          store.name = data.name;
-          store.description = data.description;
-          store.bannerImage = data.bannerImage;
-          store.storeImage = data.storeImage;
-        }),
+        // setAddedStoreId(data.id);
+        setRenderedStores(
+          store => store.id === data.id,
+          produce((store: Store) => {
+            store.name = data.name;
+            store.description = data.description;
+            store.bannerImage = data.bannerImage;
+            store.storeImage = data.storeImage;
+          }),
         );
-      // setStores(
-      //   produce((userList) => {
-      //     userList.push({
-      //       id: data.id,
-      //       name: data.name,
-      //       description: data.description,
-      //       numOfRating: data.numOfRating,
-      //       sumOfRating: data.sumOfRating,
-      //       bannerImage: data.bannerImage,
-      //       storeImage: data.storeImage,
-      //     });
-      //   })
-      // );
+        // setStores(
+        //   produce((userList) => {
+        //     userList.push({
+        //       id: data.id,
+        //       name: data.name,
+        //       description: data.description,
+        //       numOfRating: data.numOfRating,
+        //       sumOfRating: data.sumOfRating,
+        //       bannerImage: data.bannerImage,
+        //       storeImage: data.storeImage,
+        //     });
+        //   })
+        // );
         setPendingEdit(false);
       }
     )
@@ -243,6 +247,7 @@ async function updateContact(contact: ContactRequest, contactId: number): Promis
       // );
     })
 }
+
 async function updateEmail(email: EmailRequest, emailId: number): Promise<any> {
   await fetch(`http://127.0.0.1:8080/email/${emailId}`,
     {
@@ -271,6 +276,7 @@ async function updateEmail(email: EmailRequest, emailId: number): Promise<any> {
       // );
     })
 }
+
 async function updatePhone(phone: PhoneRequest, phoneId: number): Promise<any> {
   await fetch(`http://127.0.0.1:8080/phone/${phoneId}`,
     {
@@ -299,4 +305,31 @@ async function updatePhone(phone: PhoneRequest, phoneId: number): Promise<any> {
     })
 }
 
-export {getStore, addStore, addContact, addEmail, addPhone, updateStore, updateContact, updateEmail, updatePhone};
+async function deleteStore(id: number): Promise<any> {
+  setPendingDelete(true);
+  await fetch(`http://127.0.0.1:8080/store/deleteCustom/${id}`, {method: 'DELETE',})
+    .then(res => res.json())
+    .then(() => {
+      setRenderedStores(renderedStores.filter((item) => item.id !== id));
+      setStores(stores.filter((item) => item.id !== id));
+      setPendingDelete(false);
+      setOpenDelete(false);
+    })
+    .catch(() => {
+      setPendingDelete(false);
+      alert(translate("errorDelete"));
+    })
+}
+
+export {
+  getStore,
+  addStore,
+  addContact,
+  addEmail,
+  addPhone,
+  updateStore,
+  updateContact,
+  updateEmail,
+  updatePhone,
+  deleteStore
+};
