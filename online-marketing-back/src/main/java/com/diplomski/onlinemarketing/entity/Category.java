@@ -18,7 +18,7 @@ public class Category {
     @Basic
     @Column(name = "image")
     private String image;
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "categories")
     private Collection<Add> adds;
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "categories")
     private Collection<Store> stores;

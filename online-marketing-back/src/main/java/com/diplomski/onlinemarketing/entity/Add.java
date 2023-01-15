@@ -34,6 +34,10 @@ public class Add {
     @JoinColumn(name = "store_id", referencedColumnName = "id", nullable = false)
     private Store store;
     @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "add_has_category",
+            joinColumns = @JoinColumn(name = "add_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Collection<Category> categories;
     @OneToMany(mappedBy = "add", fetch = FetchType.LAZY)
     private Collection<Visit> visits;

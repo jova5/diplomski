@@ -10,18 +10,22 @@ import {
   setStoreName,
   setStorePhone,
   storeAddress,
-  storeBannerImage, storeContactId,
+  storeBannerImage,
+  storeContactId,
   storeDescription,
-  storeEmail, storeEmailId, storeId,
+  storeEmail,
+  storeEmailId,
+  storeId,
   storeImage,
   storeName,
-  storePhone, storePhoneId
+  storePhone,
+  storePhoneId
 } from "../../stores/modalStore";
 import ModalWrapper from "../../../../components/ModalWrapper";
 import {checkStoreReqForm} from "../../utils/formChecks";
 import {convertImageToBase64} from "../../utils/converteImageToBase64";
 import {StoreRequest} from "../../../../dto/StoreRequest";
-import {addStore, updateContact, updateEmail, updatePhone, updateStore} from "../../utils/storeAsync";
+import {updateContact, updateEmail, updatePhone, updateStore} from "../../utils/storeAsync";
 import {ContactRequest} from "../../../../dto/ContactRequest";
 import {EmailRequest} from "../../../../dto/EmailRequest";
 import {PhoneRequest} from "../../../../dto/PhoneRequest";
@@ -80,7 +84,7 @@ const EditStoreModal: Component = () => {
 
   return (
     <ModalWrapper
-      name={() => translate("addStore")}
+      name={() => translate("editStore")}
       open={openEditModal}
       setOpen={setOpen}
       handleOK={handleOK}

@@ -2,12 +2,15 @@ import {createSignal} from "solid-js";
 import {createStore} from "solid-js/store";
 import {User} from "../../../dto/User";
 import {Store} from "../../../dto/Store";
+import {Category} from "../../../dto/Category";
 
 export const [users, setUsers] = createStore<User[]>([]);
 export const [renderedUsers, setRenderedUsers] = createStore<User[]>([]);
 export const [usersStores, setUsersStores] = createSignal<any[]>([]);
 export const [stores, setStores] = createStore<Store[]>([]);
 export const [renderedStores, setRenderedStores] = createStore<Store[]>([]);
+export const [categories, setCategories] = createStore<Category[]>([]);
+export const [renderedCategories, setRenderedCategories] = createStore<Category[]>([]);
 export const [availableLanguages, setAvailableLanguages] = createSignal<any[]>([]);
 export const [renderedLanguageList, setRenderedLanguageList] = createStore<any[]>([]);
 export const [languages, setLanguages] = createStore<any[]>([]);

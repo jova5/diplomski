@@ -24,8 +24,8 @@ CREATE TABLE IF NOT EXISTS `online-marketing`.`store` (
   `description` VARCHAR(255) NULL,
   `num_of_rating` INT NOT NULL,
   `sum_of_rating` INT NOT NULL,
-  `banner_image` TEXT NULL,
-  `store_image` TEXT NULL,
+  `banner_image` LONGTEXT NULL,
+  `store_image` LONGTEXT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE)
 ENGINE = InnoDB;
@@ -114,7 +114,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `online-marketing`.`add` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `store_id` INT NOT NULL,
-  `image` TEXT NOT NULL,
+  `image` LONGTEXT NOT NULL,
   `date_from` DATE NOT NULL,
   `date_to` DATE NOT NULL,
   `header` VARCHAR(45) NOT NULL,

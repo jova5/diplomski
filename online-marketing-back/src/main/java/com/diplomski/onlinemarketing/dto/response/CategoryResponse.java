@@ -8,6 +8,6 @@ import java.util.Collection;
 public class CategoryResponse {
     private Integer id;
     private String name;
-    private String image;
-    private Collection<SubcategoryResponse> subcategories;
+//    private String image;
+//    private Collection<SubcategoryResponse> subcategories;
 }

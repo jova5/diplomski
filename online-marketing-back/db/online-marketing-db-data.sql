@@ -20,36 +20,50 @@
 
 -- Dumping data for table online-marketing.category: ~0 rows (approximately)
 
--- Dumping data for table online-marketing.contact: ~5 rows (approximately)
+-- Dumping data for table online-marketing.contact: ~7 rows (approximately)
 INSERT INTO `contact` (`id`, `store_id`, `type`, `address`, `latitude`, `longitude`) VALUES
-	(1, 2, NULL, 'test', NULL, NULL),
-	(2, 3, NULL, 'pppp', NULL, NULL),
-	(3, 4, NULL, 'eee', NULL, NULL),
-	(4, 5, NULL, 'aaaa', NULL, NULL),
-	(5, 6, NULL, 'bbb', NULL, NULL);
+	(11, 12, NULL, 'test3', NULL, NULL),
+	(12, 13, NULL, 'asd3', NULL, NULL),
+	(13, 14, NULL, 'jkl3', NULL, NULL),
+	(14, 15, NULL, 'bnmm3', NULL, NULL),
+	(15, 16, NULL, 'aaaa3', NULL, NULL),
+	(16, 17, NULL, 'gggg', NULL, NULL),
+	(17, 18, NULL, 'vvvv', NULL, NULL);
 
--- Dumping data for table online-marketing.email: ~0 rows (approximately)
+-- Dumping data for table online-marketing.email: ~7 rows (approximately)
 INSERT INTO `email` (`id`, `email`, `contact_id`) VALUES
-	(1, 'aaa', 4),
-	(2, 'bbbb', 5);
+	(8, 'test4', 11),
+	(9, 'asd4', 12),
+	(10, 'jkl4', 13),
+	(11, 'bnmm4', 14),
+	(12, 'aaaa4', 15),
+	(13, 'gggg', 16),
+	(14, 'vvvv', 17);
 
 -- Dumping data for table online-marketing.language: ~0 rows (approximately)
 INSERT INTO `language` (`id`, `short_name`, `long_name`) VALUES
 	(1, 'SR', 'Serbian'),
 	(2, 'EN', 'English');
 
--- Dumping data for table online-marketing.phone: ~0 rows (approximately)
+-- Dumping data for table online-marketing.phone: ~7 rows (approximately)
 INSERT INTO `phone` (`id`, `number`, `contact_id`) VALUES
-	(1, 'bbbb', 5);
+	(7, 'test6', 11),
+	(8, 'asd5', 12),
+	(9, 'jkl5', 13),
+	(10, 'bnmm5', 14),
+	(11, 'aaaa5', 15),
+	(12, 'gggg', 16),
+	(13, 'vvvv', 17);
 
--- Dumping data for table online-marketing.store: ~2 rows (approximately)
+-- Dumping data for table online-marketing.store: ~7 rows (approximately)
 INSERT INTO `store` (`id`, `name`, `description`, `num_of_rating`, `sum_of_rating`, `banner_image`, `store_image`) VALUES
-	(1, 'test', 'test', 0, 0, '', ''),
-	(2, 'test', 'test', 0, 0, '', ''),
-	(3, 'pppp', 'pppp', 0, 0, '', ''),
-	(4, 'eeee', 'eee', 0, 0, '', ''),
-	(5, 'aaaa', 'aaa', 0, 0, '', ''),
-	(6, 'bbbb', 'bbbb', 0, 0, '', '');
+	(12, 'test1', 'test2', 0, 0, '', ''),
+	(13, 'asd1', 'asd2', 0, 0, '', ''),
+	(14, 'jkl1', 'jkl2', 0, 0, '', ''),
+	(15, 'bnmm1', 'bnmm2', 0, 0, '', ''),
+	(16, 'aaaa1', 'aaaa2', 0, 0, '', ''),
+	(17, 'gggg', 'gggg', 0, 0, '', ''),
+	(18, 'vvvv', 'vvvv', 0, 0, '', '');
 
 -- Dumping data for table online-marketing.store_has_category: ~0 rows (approximately)
 

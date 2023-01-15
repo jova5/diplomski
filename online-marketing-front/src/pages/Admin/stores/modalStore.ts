@@ -31,3 +31,5 @@ export const [storeImage, setStoreImage] = createSignal<string>("");
 export const [addedStoreId, setAddedStoreId] = createSignal<number>(-1);
 export const [addedContactId, setAddedContactId] = createSignal<number>(-1);
 export const [updatedContactId, setUpdatedContactId] = createSignal<number>(-1);
+export const [categoryName, setCategoryName] = createSignal<string>("");
+export const [categoryId, setCategoryId] = createSignal<number>(-1);

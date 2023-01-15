@@ -28,6 +28,9 @@ public class ModelMapperConfig {
         modelMapper.typeMap(Vocabulary.class, Vocabulary.class)
                 .addMappings(mapper -> mapper.skip(Vocabulary::setId));
 
+        modelMapper.typeMap(Category.class, Category.class)
+                .addMappings(mapper -> mapper.skip(Category::setId));
+
         modelMapper.typeMap(StoreRequest.class, Store.class)
                 .addMappings(mapper -> mapper.skip(Store::setId));
 
