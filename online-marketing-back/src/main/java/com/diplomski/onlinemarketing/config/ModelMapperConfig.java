@@ -19,8 +19,8 @@ public class ModelMapperConfig {
         modelMapper.typeMap(UserRequest.class, User.class)
                 .addMappings(mapper -> mapper.skip(User::setId));
 
-        modelMapper.typeMap(User.class, User.class)
-                .addMappings(mapper -> mapper.skip(User::setId));
+//        modelMapper.typeMap(User.class, User.class)
+//                .addMappings(mapper -> mapper.skip(User::setId));
 
         modelMapper.typeMap(VocabularyRequest.class, Vocabulary.class)
                 .addMappings(mapper -> mapper.skip(Vocabulary::setId));
@@ -70,6 +70,27 @@ public class ModelMapperConfig {
 //        modelMapper.typeMap(Phone.class, Phone.class)
 //                .addMappings(mapper -> mapper.skip(Phone::setContact));
 
+        modelMapper.typeMap(AddRequest.class, Add.class)
+                .addMappings(mapper -> mapper.skip(Add::setId));
+
+        modelMapper.createTypeMap(User.class, User.class)
+                .setConverter(ctx -> {
+                    User src = ctx.getSource();
+                    User dest = ctx.getDestination();
+                    try {
+                        dest.setId(dest.getId());
+                        dest.setStore(src.getStore());
+                        dest.setName(src.getName());
+                        dest.setPassword(src.getPassword());
+                        dest.setEmail(src.getEmail());
+                        dest.setType(src.getType());
+                    } catch (NullPointerException n) {
+                        dest.setId(null);
+                        dest.setStore(null);
+                    }
+                    return dest;
+                });
+
         modelMapper.createTypeMap(Contact.class, Contact.class)
                 .setConverter(ctx -> {
                     Contact src = ctx.getSource();
@@ -113,6 +134,23 @@ public class ModelMapperConfig {
                     } catch (NullPointerException n) {
                         dest.setId(null);
                         dest.setContact(null);
+                    }
+                    return dest;
+                });
+
+        modelMapper.createTypeMap(Add.class, Add.class)
+                .setConverter(ctx -> {
+                    Add src = ctx.getSource();
+                    Add dest = ctx.getDestination();
+                    try {
+                        dest.setId(dest.getId());
+                        dest.setImage(src.getImage());
+                        dest.setHeader(src.getHeader());
+                        dest.setDescription(src.getDescription());
+                        dest.setPremium(src.getPremium());
+                        dest.setStore(dest.getStore());
+                    } catch (NullPointerException n) {
+                        dest.setId(null);
                     }
                     return dest;
                 });

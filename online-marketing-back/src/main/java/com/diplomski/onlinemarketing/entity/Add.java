@@ -2,7 +2,6 @@ package com.diplomski.onlinemarketing.entity;
 
 import jakarta.persistence.*;
 
-import java.sql.Date;
 import java.util.Collection;
 
 @Entity
@@ -15,12 +14,6 @@ public class Add {
     @Basic
     @Column(name = "image")
     private String image;
-    @Basic
-    @Column(name = "date_from")
-    private Date dateFrom;
-    @Basic
-    @Column(name = "date_to")
-    private Date dateTo;
     @Basic
     @Column(name = "header")
     private String header;
@@ -56,22 +49,6 @@ public class Add {
 
     public void setImage(String image) {
         this.image = image;
-    }
-
-    public Date getDateFrom() {
-        return dateFrom;
-    }
-
-    public void setDateFrom(Date dateFrom) {
-        this.dateFrom = dateFrom;
-    }
-
-    public Date getDateTo() {
-        return dateTo;
-    }
-
-    public void setDateTo(Date dateTo) {
-        this.dateTo = dateTo;
     }
 
     public String getHeader() {

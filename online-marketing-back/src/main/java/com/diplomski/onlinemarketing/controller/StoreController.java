@@ -10,6 +10,8 @@ import com.diplomski.onlinemarketing.service.StoreService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/store")
 public class StoreController extends GenericController<StoreResponse, StoreRequest, Store, Integer> {
@@ -22,7 +24,8 @@ public class StoreController extends GenericController<StoreResponse, StoreReque
 
     @GetMapping("/forUsers")
     public ResponseEntity<?> getStoresForUsers(){
-        return ResponseEntity.ok(modelMapper.map(service.getAll(), StoresForUsersResponse.class));
+        List<StoresForUsersResponse> list = service.getAll().stream().map(item -> modelMapper.map(item, StoresForUsersResponse.class)).toList();
+        return ResponseEntity.ok(list);
     }
 
     @DeleteMapping("/deleteCustom/{id}")

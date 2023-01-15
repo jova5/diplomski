@@ -115,8 +115,6 @@ CREATE TABLE IF NOT EXISTS `online-marketing`.`add` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `store_id` INT NOT NULL,
   `image` LONGTEXT NOT NULL,
-  `date_from` DATE NOT NULL,
-  `date_to` DATE NOT NULL,
   `header` VARCHAR(45) NOT NULL,
   `description` VARCHAR(255) NOT NULL,
   `premium` BIT NOT NULL,
