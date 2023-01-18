@@ -1,12 +1,16 @@
-input{
+.search-input{
     outline: none;
     font-size: larger;
     border: none;
     font-family: Roboto, serif;
+    background: none;
+    display: flex;
+    flex-grow: 1;
 }
 
 div.input-box{
     display: flex;
+    flex-grow: 1;
     border: 1px solid black;
     border-radius: 30px;
     padding: 6px 6px 6px 10px;

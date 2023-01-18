@@ -8,9 +8,14 @@ const SearchBar: Component<
     placeholder: string
   }> = (props) => {
   return (
-    <div class="input-box">
+    <div class={"input-box"} style={{"max-width": '600px'}}>
       <SearchIcon/>
-      <input type="text" placeholder={props.placeholder} onKeyUp={(e) => props.onChange(e.currentTarget.value)}/>
+      <input
+        class="search-input"
+        type="text"
+        placeholder={props.placeholder}
+        onKeyUp={(e) => props.onChange(e.currentTarget.value)}
+      />
     </div>
   )
 }

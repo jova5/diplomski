@@ -1,5 +1,5 @@
 import {Component} from "solid-js";
-import SearchBar from "./SearchBar";
+import SearchBar from "../../../components/SearchBar";
 import {translate} from "../utils/languageAsync";
 import {Button} from "@suid/material";
 import PostAddIcon from "@suid/icons-material/PostAdd";

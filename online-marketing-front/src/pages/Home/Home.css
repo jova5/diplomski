@@ -1,0 +1,24 @@
+.search-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-options{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-options button{
+    background: none;
+    border: none;
+    font-size: x-large;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.search-options button:hover{
+    font-weight: bold;
+    cursor: pointer;
+}
