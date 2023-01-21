@@ -10,6 +10,15 @@ import {
 import {getAdds} from "../../../utils/addAsync";
 import {setUsersStores} from "../../Admin/stores/adminStore";
 import {getUsersStore} from "../../Admin/utils/usersAsync";
+import HomeAddModal from "./HomeAddModal";
+import {
+  setHomeAddDescription,
+  setHomeAddHeader,
+  setHomeAddImage,
+  setHomeAddStoreId,
+  setHomeAddStoreName,
+  setOpenHomeAddModal
+} from "../../Store/homeModalStore";
 
 const AddContent: Component = () => {
   console.log("Home/AddContent")
@@ -32,34 +41,46 @@ const AddContent: Component = () => {
   })
 
   return (
-    <div class="content-container-grid">
-      <Show when={renderedHomeAdds.length > 0}
-            fallback={<div>Loading...</div>} keyed>
-        <For each={renderedHomeAdds}>
-          {
-            value => (
-              <div class="card">
-                <Show when={value.image}
-                      fallback={<img src={"../../../../../assets/reklama.png"} height={230} alt="Reklama"/>} keyed>
-                  <img src={value.image}
-                       height={230}
-                       alt={value.header}
-                  />
-                </Show>
-                <div style={{padding: '10px'}}>
-                  <div class="header">
-                    <p style={{margin: '0', 'font-weight': 600}}>{value.header}</p>
-                  </div>
-                  <div class="description">
-                    <p>{value.description}</p>
+    <>
+      <div class="content-container-grid">
+        <Show when={renderedHomeAdds.length > 0}
+              fallback={<div>Loading...</div>} keyed>
+          <For each={renderedHomeAdds}>
+            {
+              value => (
+                <div class="card"
+                     onClick={() => {
+                       setHomeAddImage(value.image);
+                       setHomeAddHeader(value.header);
+                       setHomeAddDescription(value.description);
+                       setHomeAddStoreName(value.storeName!);
+                       setHomeAddStoreId(value.storeId);
+                       setOpenHomeAddModal(true);
+                     }}
+                >
+                  <Show when={value.image}
+                        fallback={<img src={"../../../../../assets/reklama.png"} height={230} alt="Reklama"/>} keyed>
+                    <img src={value.image}
+                         height={230}
+                         alt={value.header}
+                    />
+                  </Show>
+                  <div style={{padding: '10px'}}>
+                    <div class="header">
+                      <p style={{margin: '0', 'font-weight': 600}}>{value.header}</p>
+                    </div>
+                    <div class="description">
+                      <p>{value.description}</p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            )
-          }
-        </For>
-      </Show>
-    </div>
+              )
+            }
+          </For>
+        </Show>
+      </div>
+      <HomeAddModal/>
+    </>
   )
 }
 
