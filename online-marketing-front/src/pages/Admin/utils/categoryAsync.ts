@@ -2,7 +2,7 @@ import {Category} from "../../../dto/Category";
 import {setOpenDelete, setPendingAdd, setPendingDelete, setPendingEdit} from "../stores/modalStore";
 import {categories, renderedCategories, setCategories, setRenderedCategories} from "../stores/adminStore";
 import {produce} from "solid-js/store";
-import {translate} from "./languageAsync";
+import {translate} from "../../../utils/languageAsync";
 import {CategoryRequest} from "../../../dto/CategoryRequest";
 
 async function getCategories(): Promise<Category[]> {

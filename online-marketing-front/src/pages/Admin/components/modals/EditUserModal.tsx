@@ -1,5 +1,5 @@
 import {Component, For} from "solid-js";
-import {translate} from "../../utils/languageAsync";
+import {translate} from "../../../../utils/languageAsync";
 import {
   emailValue,
   openEditModal,

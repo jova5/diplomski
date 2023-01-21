@@ -4,7 +4,7 @@ import ModalWrapper from "../../../../components/ModalWrapper";
 import './NewSyntaxModal.css';
 import {VocabularyRequest} from "../../../../dto/VocabularyRequest";
 import {availableLanguages} from "../../stores/adminStore";
-import {addSyntax, translate} from "../../utils/languageAsync";
+import {addSyntax, translate} from "../../../../utils/languageAsync";
 import {checkNewSyntaxForm} from "../../utils/formChecks";
 
 const NewSyntaxModal: Component = () => {

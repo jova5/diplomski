@@ -1,11 +1,11 @@
-import {Component, createEffect, createSignal} from "solid-js";
+import {Component, createSignal} from "solid-js";
 import {addedContactId, addedStoreId, openAddModal, pendingAdd, setOpenAddModal} from "../../stores/modalStore";
 import {checkStoreReqForm} from "../../utils/formChecks";
-import {translate} from "../../utils/languageAsync";
+import {translate} from "../../../../utils/languageAsync";
 import ModalWrapper from "../../../../components/ModalWrapper";
 import {StoreRequest} from "../../../../dto/StoreRequest";
 import {convertImageToBase64} from "../../utils/converteImageToBase64";
-import {addContact, addEmail, addPhone, addStore} from "../../utils/storeAsync";
+import {addContact, addEmail, addPhone, addStore} from "../../../../utils/storeAsync";
 import {ContactRequest} from "../../../../dto/ContactRequest";
 import {EmailRequest} from "../../../../dto/EmailRequest";
 import {PhoneRequest} from "../../../../dto/PhoneRequest";

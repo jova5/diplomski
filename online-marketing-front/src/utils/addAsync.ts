@@ -1,14 +1,13 @@
-import {Adds} from "../../../dto/Adds";
-import {setOpenDelete, setPendingAdd, setPendingDelete, setPendingEdit} from "../stores/modalStore";
-import {adds, renderedAdds, setAdds, setRenderedAdds, usersStores} from "../stores/adminStore";
+import {Adds} from "../dto/Adds";
+import {setOpenDelete, setPendingAdd, setPendingDelete, setPendingEdit} from "../pages/Admin/stores/modalStore";
+import {adds, renderedAdds, setAdds, setRenderedAdds, usersStores} from "../pages/Admin/stores/adminStore";
 import {produce} from "solid-js/store";
 import {translate} from "./languageAsync";
-import {AddRequest} from "../../../dto/AddRequest";
+import {AddRequest} from "../dto/AddRequest";
 
 async function getAdds(): Promise<Adds[]> {
   return (await fetch('http://127.0.0.1:8080/add', {method: 'GET'})).json().then(
     d => {
-      console.log(d);
       return d.map((i: any) => {
         return {
           id: i.id,

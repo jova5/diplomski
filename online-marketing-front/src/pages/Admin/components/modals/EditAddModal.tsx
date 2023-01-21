@@ -1,5 +1,5 @@
 import {Component, createSignal} from "solid-js";
-import {translate} from "../../utils/languageAsync";
+import {translate} from "../../../../utils/languageAsync";
 import {
   addDescription,
   addHeader,
@@ -17,7 +17,7 @@ import ModalWrapper from "../../../../components/ModalWrapper";
 import {convertImageToBase64} from "../../utils/converteImageToBase64";
 import {AddRequest} from "../../../../dto/AddRequest";
 import {checkEditReqForm} from "../../utils/formChecks";
-import {updateAdd} from "../../utils/addAsync";
+import {updateAdd} from "../../../../utils/addAsync";
 
 const EditAddModal: Component = () => {
   const [localImage, setLocalImage] = createSignal<File>();

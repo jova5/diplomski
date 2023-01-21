@@ -3,7 +3,7 @@ import {UserRequest} from "../../../dto/UserRequest";
 import {renderedUsers, setRenderedUsers, setUsers, users} from "../stores/adminStore";
 import {produce} from "solid-js/store";
 import {setOpenDelete, setPendingAdd, setPendingDelete, setPendingEdit} from "../stores/modalStore";
-import {translate} from "./languageAsync";
+import {translate} from "../../../utils/languageAsync";
 
 async function getUsers(): Promise<User[]> {
   return (await fetch('http://127.0.0.1:8080/user', {method: 'GET'})).json();

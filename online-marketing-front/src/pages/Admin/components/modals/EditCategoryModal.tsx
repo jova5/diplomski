@@ -1,5 +1,5 @@
 import {Component} from "solid-js";
-import {translate} from "../../utils/languageAsync";
+import {translate} from "../../../../utils/languageAsync";
 import {
   categoryId,
   categoryName,

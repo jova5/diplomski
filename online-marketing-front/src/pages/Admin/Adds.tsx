@@ -3,8 +3,8 @@ import {addHeader, addId, openDelete, pendingDelete, setOpenAddModal, setOpenDel
 import {adds, searchAdd, setAdds, setRenderedAdds, setSearchAdd, setUsersStores} from "./stores/adminStore";
 import OptionsAboveTable from "./components/OptionsAboveTable";
 import ConfirmationModal from "./components/modals/ConfirmationModal";
-import {translate} from "./utils/languageAsync";
-import {deleteAdd, getAdds} from "./utils/addAsync";
+import {translate} from "../../utils/languageAsync";
+import {deleteAdd, getAdds} from "../../utils/addAsync";
 import TableAdd from "./components/tables/TableAdd";
 import {getUsersStore} from "./utils/usersAsync";
 import NewAddModal from "./components/modals/NewAddModal";

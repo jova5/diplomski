@@ -1,6 +1,6 @@
 import {Component, For} from "solid-js";
 import {IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@suid/material";
-import {translate} from "../../utils/languageAsync";
+import {translate} from "../../../../utils/languageAsync";
 import {renderedCategories} from "../../stores/adminStore";
 import {setCategoryId, setCategoryName, setOpenDelete, setOpenEditModal} from "../../stores/modalStore";
 import EditIcon from "@suid/icons-material/Edit";

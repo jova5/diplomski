@@ -1,4 +1,4 @@
-import {Store} from "../../../dto/Store";
+import {Store} from "../dto/Store";
 import {
   addedContactId,
   setAddedContactId,
@@ -9,17 +9,17 @@ import {
   setPendingEdit,
   setUpdatedContactId,
   updatedContactId
-} from "../stores/modalStore";
-import {renderedStores, setRenderedStores, setStores, stores} from "../stores/adminStore";
+} from "../pages/Admin/stores/modalStore";
+import {renderedStores, setRenderedStores, setStores, stores} from "../pages/Admin/stores/adminStore";
 import {produce} from "solid-js/store";
 import {translate} from "./languageAsync";
-import {StoreRequest} from "../../../dto/StoreRequest";
-import {ContactRequest} from "../../../dto/ContactRequest";
-import {EmailRequest} from "../../../dto/EmailRequest";
-import {PhoneRequest} from "../../../dto/PhoneRequest";
+import {StoreRequest} from "../dto/StoreRequest";
+import {ContactRequest} from "../dto/ContactRequest";
+import {EmailRequest} from "../dto/EmailRequest";
+import {PhoneRequest} from "../dto/PhoneRequest";
 
 async function getStore(): Promise<Store[]> {
-  const data = (await fetch('http://127.0.0.1:8080/store', {method: 'GET'})).json().then(d => {
+  return (await fetch('http://127.0.0.1:8080/store', {method: 'GET'})).json().then(d => {
     return d.map((i: any) => {
       return {
         id: i.id,
@@ -37,8 +37,7 @@ async function getStore(): Promise<Store[]> {
         phoneId: i.contacts[0].phones[0].id,
       }
     })
-  });
-  return data
+  })
 }
 
 async function addStore(store: StoreRequest): Promise<any> {

@@ -3,7 +3,7 @@ import {IconButton, Menu, MenuItem} from "@suid/material";
 import TranslateIcon from '@suid/icons-material/Translate';
 import {availableLanguages} from "../stores/adminStore";
 import {setSelectedLanguageId} from "../../../stores/languageStore";
-import {translate} from "../utils/languageAsync";
+import {translate} from "../../../utils/languageAsync";
 
 const LanguagePicker: Component = () => {
   const [anchorEl, setAnchorEl] = createSignal<null | HTMLElement>(null);

@@ -1,5 +1,5 @@
 import {Component, createSignal} from "solid-js";
-import {translate} from "../../utils/languageAsync";
+import {translate} from "../../../../utils/languageAsync";
 import {openAddModal, pendingAdd, setOpenAddModal} from "../../stores/modalStore";
 import ModalWrapper from "../../../../components/ModalWrapper";
 import {CategoryRequest} from "../../../../dto/CategoryRequest";

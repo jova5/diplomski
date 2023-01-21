@@ -4,11 +4,11 @@ import {
   renderedLanguageList,
   setLanguages,
   setRenderedLanguageList
-} from "../stores/adminStore";
+} from "../pages/Admin/stores/adminStore";
 import {produce} from "solid-js/store";
-import {VocabularyRequest} from "../../../dto/VocabularyRequest";
-import {translation} from "../../../stores/languageStore";
-import {setOpenDelete, setPendingAdd, setPendingDelete, setPendingEdit} from "../stores/modalStore";
+import {VocabularyRequest} from "../dto/VocabularyRequest";
+import {translation} from "../stores/languageStore";
+import {setOpenDelete, setPendingAdd, setPendingDelete, setPendingEdit} from "../pages/Admin/stores/modalStore";
 
 async function getLanguages(): Promise<any[]> {
   return await fetch('http://127.0.0.1:8080/language', {method: 'GET',})

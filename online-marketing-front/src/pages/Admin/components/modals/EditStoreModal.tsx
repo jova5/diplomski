@@ -1,5 +1,5 @@
 import {Component, createSignal} from "solid-js";
-import {translate} from "../../utils/languageAsync";
+import {translate} from "../../../../utils/languageAsync";
 import {
   openEditModal,
   pendingEdit,
@@ -25,7 +25,7 @@ import ModalWrapper from "../../../../components/ModalWrapper";
 import {checkStoreReqForm} from "../../utils/formChecks";
 import {convertImageToBase64} from "../../utils/converteImageToBase64";
 import {StoreRequest} from "../../../../dto/StoreRequest";
-import {updateContact, updateEmail, updatePhone, updateStore} from "../../utils/storeAsync";
+import {updateContact, updateEmail, updatePhone, updateStore} from "../../../../utils/storeAsync";
 import {ContactRequest} from "../../../../dto/ContactRequest";
 import {EmailRequest} from "../../../../dto/EmailRequest";
 import {PhoneRequest} from "../../../../dto/PhoneRequest";

@@ -1,6 +1,6 @@
 import {Component, For} from "solid-js";
 import {IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@suid/material";
-import {translate} from "../../utils/languageAsync";
+import {translate} from "../../../../utils/languageAsync";
 import {renderedAdds} from "../../stores/adminStore";
 import {
   setAddDescription,

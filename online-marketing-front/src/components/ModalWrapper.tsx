@@ -1,7 +1,7 @@
 import {Component, Show} from "solid-js";
 import {Box, Button, CircularProgress, Modal, Typography} from "@suid/material";
 import './ModalWrapper.css';
-import {translate} from "../pages/Admin/utils/languageAsync";
+import {translate} from "../utils/languageAsync";
 
 const ModalWrapper: Component<
   {

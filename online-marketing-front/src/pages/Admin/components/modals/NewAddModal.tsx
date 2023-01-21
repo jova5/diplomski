@@ -2,11 +2,11 @@ import {Component, createEffect, createSignal, For} from "solid-js";
 import {openAddModal, pendingAdd, setOpenAddModal} from "../../stores/modalStore";
 import {convertImageToBase64} from "../../utils/converteImageToBase64";
 import {checkAddReqForm} from "../../utils/formChecks";
-import {translate} from "../../utils/languageAsync";
+import {translate} from "../../../../utils/languageAsync";
 import ModalWrapper from "../../../../components/ModalWrapper";
 import {usersStores} from "../../stores/adminStore";
 import {AddRequest} from "../../../../dto/AddRequest";
-import {addAdd} from "../../utils/addAsync";
+import {addAdd} from "../../../../utils/addAsync";
 
 const NewAddModal: Component = () => {
   const [header, setHeader] = createSignal<string>("");

@@ -1,5 +1,5 @@
 import {Component, createSignal, For} from "solid-js";
-import {addSyntax, translate} from "../../utils/languageAsync";
+import {addSyntax, translate} from "../../../../utils/languageAsync";
 import {openAddModal, pendingAdd, setOpenAddModal} from "../../stores/modalStore";
 import ModalWrapper from "../../../../components/ModalWrapper";
 import {checkUserReqForm} from "../../utils/formChecks";

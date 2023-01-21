@@ -10,7 +10,7 @@ import {
 } from "./stores/adminStore";
 import {categoryId, openDelete, pendingDelete, setOpenAddModal, setOpenDelete} from "./stores/modalStore";
 import ConfirmationModal from "./components/modals/ConfirmationModal";
-import {translate} from "./utils/languageAsync";
+import {translate} from "../../utils/languageAsync";
 import NewCategoryModal from "./components/modals/NewCategoryModal";
 import {deleteCategory, getCategories} from "./utils/categoryAsync";
 import TableCategory from "./components/tables/TableCategory";

@@ -3,7 +3,7 @@ import "./Navbar.css";
 import {nav, NavValues, setLogOut, setNav} from "../stores/adminNavigationStore";
 import Logo from "../../../components/Logo";
 import LanguagePicker from "./LanguagePicker";
-import {translate} from "../utils/languageAsync";
+import {translate} from "../../../utils/languageAsync";
 
 const Navbar: Component = () => {
   return (
