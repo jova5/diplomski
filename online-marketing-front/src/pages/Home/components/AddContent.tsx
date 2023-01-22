@@ -6,7 +6,7 @@ import {
   setHomeAdds,
   setHomeSearch,
   setRenderedHomeAdds
-} from "../../Store/homeStore";
+} from "../store/homeStore";
 import {getAdds} from "../../../utils/addAsync";
 import {setUsersStores} from "../../Admin/stores/adminStore";
 import {getUsersStore} from "../../Admin/utils/usersAsync";
@@ -18,7 +18,7 @@ import {
   setHomeAddStoreId,
   setHomeAddStoreName,
   setOpenHomeAddModal
-} from "../../Store/homeModalStore";
+} from "../store/homeModalStore";
 
 const AddContent: Component = () => {
   console.log("Home/AddContent")

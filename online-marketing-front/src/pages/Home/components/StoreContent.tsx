@@ -6,8 +6,8 @@ import {
   setHomeSearch,
   setHomeStores,
   setRenderedHomeStores
-} from "../../Store/homeStore";
-import {getStore} from "../../../utils/storeAsync";
+} from "../store/homeStore";
+import {getStores} from "../../../utils/storeAsync";
 
 const StoreContent: Component = () => {
   console.log("Home/StoreContent")
@@ -15,7 +15,7 @@ const StoreContent: Component = () => {
   onMount(async () => {
     setHomeSearch("");
     if (homeStores.length === 0) {
-      setHomeStores(await getStore());
+      setHomeStores(await getStores());
       setRenderedHomeStores(homeStores);
     }
   })

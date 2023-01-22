@@ -3,7 +3,7 @@ import {onMount} from "solid-js";
 import styles from './App.module.css';
 import {setAvailableLanguages} from "./pages/Admin/stores/adminStore";
 import {getLanguages} from "./utils/languageAsync";
-import Home from "./pages/Home/Home";
+import Store from "./pages/Store/Store";
 
 const App: Component = () => {
   onMount(async () => {
@@ -12,7 +12,8 @@ const App: Component = () => {
 
   return (
     <div class={styles.container}>
-      <Home/>
+      {/*<Home/>*/}
+      <Store/>
     </div>
   );
 };

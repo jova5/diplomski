@@ -1,7 +1,7 @@
 import {Component} from "solid-js";
 import "./ContentContainer.css";
 import {Dynamic} from "solid-js/web";
-import {homeNav, HomeNavOptions} from "../../Store/homeNavigationStore";
+import {homeNav, HomeNavOptions} from "../store/homeNavigationStore";
 
 const ContentContainer: Component = () => {
   return (

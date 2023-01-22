@@ -6,7 +6,7 @@ import ConfirmationModal from "./components/modals/ConfirmationModal";
 import {translate} from "../../utils/languageAsync";
 import NewStoreModal from "./components/modals/NewStoreModal";
 import TableStore from "./components/tables/TableStore";
-import {deleteStore, getStore} from "../../utils/storeAsync";
+import {deleteStore, getStores} from "../../utils/storeAsync";
 import EditStoreModal from "./components/modals/EditStoreModal";
 
 const Stores: Component = () => {
@@ -14,7 +14,7 @@ const Stores: Component = () => {
 
   onMount(async () => {
     setStoreId("");
-    setStores(await getStore());
+    setStores(await getStores());
     setRenderedStores(stores);
   });
 

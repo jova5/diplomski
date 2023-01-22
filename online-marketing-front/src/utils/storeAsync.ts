@@ -18,7 +18,7 @@ import {ContactRequest} from "../dto/ContactRequest";
 import {EmailRequest} from "../dto/EmailRequest";
 import {PhoneRequest} from "../dto/PhoneRequest";
 
-async function getStore(): Promise<Store[]> {
+async function getStores(): Promise<Store[]> {
   return (await fetch('http://127.0.0.1:8080/store', {method: 'GET'})).json().then(d => {
     return d.map((i: any) => {
       return {
@@ -37,6 +37,27 @@ async function getStore(): Promise<Store[]> {
         phoneId: i.contacts[0].phones[0].id,
       }
     })
+  })
+}
+
+async function getStoreById(id: number): Promise<Store> {
+  return (await fetch(`http://127.0.0.1:8080/store/${id}`, {method: 'GET'})).json().then(d => {
+    return {
+      id: d.id,
+      name: d.name,
+      description: d.description,
+      numOfRating: d.numOfRating,
+      sumOfRating: d.sumOfRating,
+      bannerImage: d.bannerImage,
+      adds: d.adds,
+      storeImage: d.storeImage,
+      address: d.contacts[0].address,
+      contactId: d.contacts[0].id,
+      email: d.contacts[0].emails[0].email,
+      emailId: d.contacts[0].emails[0].id,
+      phone: d.contacts[0].phones[0].number,
+      phoneId: d.contacts[0].phones[0].id,
+    }
   })
 }
 
@@ -321,7 +342,8 @@ async function deleteStore(id: number): Promise<any> {
 }
 
 export {
-  getStore,
+  getStores,
+  getStoreById,
   addStore,
   addContact,
   addEmail,

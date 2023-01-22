@@ -1,6 +1,6 @@
 import {createSignal} from "solid-js";
-import StoreContent from "../Home/components/StoreContent";
-import AddContent from "../Home/components/AddContent";
+import StoreContent from "../components/StoreContent";
+import AddContent from "../components/AddContent";
 
 export const HomeNavValues = ["StoreContent", "AddContent",] as const;
 

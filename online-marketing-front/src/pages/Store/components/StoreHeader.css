@@ -1,0 +1,19 @@
+header {
+    background-color: #1158a8;
+}
+
+.store-image {
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+
+.edit-banner-image{
+    position: absolute;
+    bottom: 80px;
+    right: 0;
+}

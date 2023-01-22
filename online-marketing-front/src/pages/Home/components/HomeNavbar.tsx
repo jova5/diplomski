@@ -5,7 +5,7 @@ import LanguagePicker from "../../Admin/components/LanguagePicker";
 import {nav, setLogOut} from "../../Admin/stores/adminNavigationStore";
 import {translate} from "../../../utils/languageAsync";
 import './Navbar.css';
-import {setHomeSearch} from "../../Store/homeStore";
+import {setHomeSearch} from "../store/homeStore";
 
 const HomeNavbar: Component = () => {
   return (

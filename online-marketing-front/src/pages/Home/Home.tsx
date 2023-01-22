@@ -2,7 +2,7 @@ import {Component, For} from "solid-js";
 import './Home.css';
 import HomeNavbar from "./components/HomeNavbar";
 import ContentContainer from "./components/ContentContainer";
-import {homeNav, HomeNavValues, setHomeNav} from "../Store/homeNavigationStore";
+import {homeNav, HomeNavValues, setHomeNav} from "./store/homeNavigationStore";
 
 const Home: Component = () => {
   console.log("Home");
