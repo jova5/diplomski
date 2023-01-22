@@ -2,7 +2,7 @@ import {Component, createEffect, onMount} from "solid-js";
 import OptionsAboveTable from "./components/OptionsAboveTable";
 import {searchStore, setRenderedStores, setSearchStore, setStores, stores} from "./stores/adminStore";
 import {openDelete, pendingDelete, setOpenAddModal, setOpenDelete, setStoreId, storeDelete} from "./stores/modalStore";
-import ConfirmationModal from "./components/modals/ConfirmationModal";
+import ConfirmationModal from "../../components/ConfirmationModal";
 import {translate} from "../../utils/languageAsync";
 import NewStoreModal from "./components/modals/NewStoreModal";
 import TableStore from "./components/tables/TableStore";

@@ -13,7 +13,7 @@ import {
 import {deleteUser, getUsers, getUsersStore} from "./utils/usersAsync";
 import TableUser from "./components/tables/TableUser";
 import {translate} from "../../utils/languageAsync";
-import ConfirmationModal from "./components/modals/ConfirmationModal";
+import ConfirmationModal from "../../components/ConfirmationModal";
 import NewUserModal from "./components/modals/NewUserModal";
 import EditUserModal from "./components/modals/EditUserModal";
 

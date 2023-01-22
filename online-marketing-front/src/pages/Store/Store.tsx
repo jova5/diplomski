@@ -7,6 +7,15 @@ import {getStoreById} from "../../utils/storeAsync";
 import {translate} from "../../utils/languageAsync";
 import EditIcon from '@suid/icons-material/Edit';
 import {IconButton} from "@suid/material";
+import StoreFooter from "./components/StoreFooter";
+import StoreAddressEditModal from "./components/modals/StoreAddressEditModal";
+import StorePhoneEditModal from "./components/modals/StorePhoneEditModal";
+import StoreEmailEditModal from "./components/modals/StoreEmailEditModal";
+import StoreHeaderImageEditModal from "./components/modals/StoreHeaderImageEditModal";
+import StoreImageEditModal from "./components/modals/StoreImageEditModal";
+import ConfirmationModal from "../../components/ConfirmationModal";
+import {setStoreDeleteAddModal, storeDeleteAddModal, storeDeleteAddPending} from "./store/storeModalStore";
+import StoreAddEditModal from "./components/modals/StoreAddEditModal";
 
 const Store: Component = () => {
   console.log("Store");
@@ -20,36 +29,22 @@ const Store: Component = () => {
       <StoreHeader/>
       <div style={{"display": "flex", "flex-flow": "column"}}>
         <StoreAdds/>
-        <footer>
-          <p style={{"margin-bottom": "0"}}>
-            {translate("address") + ": " + storeStore()?.address}
-            <IconButton
-              onClick={() => {
-              }}
-            >
-              <EditIcon/>
-            </IconButton>
-          </p>
-          <p style={{"margin-bottom": "0"}}>
-            {translate("phone") + ": " + storeStore()?.phone}
-            <IconButton
-              onClick={() => {
-              }}
-            >
-              <EditIcon/>
-            </IconButton>
-          </p>
-          <p style={{"margin-bottom": "0"}}>
-            {translate("email") + ": " + storeStore()?.email}
-            <IconButton
-              onClick={() => {
-              }}
-            >
-              <EditIcon/>
-            </IconButton>
-          </p>
-        </footer>
+        <StoreFooter/>
       </div>
+      <StoreAddressEditModal/>
+      <StorePhoneEditModal/>
+      <StoreEmailEditModal/>
+      <StoreHeaderImageEditModal/>
+      <StoreImageEditModal/>
+      <StoreAddEditModal/>
+      <ConfirmationModal
+        header={() => translate("deleteStoreAdd")}
+        open={storeDeleteAddModal}
+        setOpen={setStoreDeleteAddModal}
+        handleOK={() => {}}
+        message={() => `${translate("deleteStoreAdd?")} test???`}
+        pending={storeDeleteAddPending}
+      />
     </>
   )
 }

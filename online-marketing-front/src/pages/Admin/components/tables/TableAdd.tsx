@@ -43,7 +43,6 @@ const TableAdd: Component = () => {
                           setAddHeader(value.header);
                           setAddDescription(value.description);
                           setAddImage(value.image);
-                          console.log(value.premium);
                           setAddPremium(value.premium);
                           setOpenEditModal(true);
                         }}>

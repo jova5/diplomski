@@ -148,8 +148,6 @@ async function addEmail(email: EmailRequest): Promise<any> {
     })
     .then(res => res.json())
     .then(data => {
-      console.log("email");
-      console.log(data);
       setRenderedStores(
         store => store.contactId === addedContactId(),
         produce((store: Store) => {
@@ -279,7 +277,6 @@ async function updateEmail(email: EmailRequest, emailId: number): Promise<any> {
     })
     .then(res => res.json())
     .then(data => {
-      console.log(data);
       setRenderedStores(
         store => store.contactId === updatedContactId(),
         produce((store: Store) => {

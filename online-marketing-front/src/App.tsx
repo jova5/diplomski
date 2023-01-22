@@ -12,6 +12,7 @@ const App: Component = () => {
 
   return (
     <div class={styles.container}>
+      {/*<Admin/>*/}
       {/*<Home/>*/}
       <Store/>
     </div>

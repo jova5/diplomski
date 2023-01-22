@@ -2,6 +2,7 @@ import {Component} from "solid-js";
 import "./StoreHeader.css";
 import EditIcon from "@suid/icons-material/Edit";
 import {IconButton} from "@suid/material";
+import {setStoreOpenHeaderImageEdit, setStoreOpenImageEdit} from "../store/storeModalStore";
 
 const StoreHeader: Component = () => {
   return (
@@ -14,6 +15,7 @@ const StoreHeader: Component = () => {
             "bottom": "80px",
             "right": "0px"}}
           onClick={() => {
+            setStoreOpenHeaderImageEdit(true);
           }}
         >
           <EditIcon/>
@@ -29,6 +31,7 @@ const StoreHeader: Component = () => {
             "bottom": "0px",
             "right": "0px"}}
           onClick={() => {
+            setStoreOpenImageEdit(true);
           }}
         >
           <EditIcon/>

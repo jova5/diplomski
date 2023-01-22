@@ -2,7 +2,7 @@ import {Component, createEffect, onMount} from "solid-js";
 import {openDelete, pendingDelete, setOpenAddModal, setOpenDelete, syntaxId, syntaxKey} from "./stores/modalStore";
 import NewSyntaxModal from "./components/modals/NewSyntaxModal";
 import {deleteSyntax, getLanguagesForTable, translate} from "../../utils/languageAsync";
-import ConfirmationModal from "./components/modals/ConfirmationModal";
+import ConfirmationModal from "../../components/ConfirmationModal";
 import {languages, searchLanguage, setLanguages, setRenderedLanguageList, setSearchLanguage} from "./stores/adminStore";
 import EditSyntaxModal from "./components/modals/EditSyntaxModal";
 import TableLanguage from "./components/tables/TableLanguage";

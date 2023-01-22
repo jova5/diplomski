@@ -1,5 +1,5 @@
 import {Component} from "solid-js";
-import ModalWrapper from "../../../../components/ModalWrapper";
+import ModalWrapper from "./ModalWrapper";
 
 const ConfirmationModal: Component<
   {
