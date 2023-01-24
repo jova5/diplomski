@@ -35,6 +35,7 @@ const StoreAddOptions: Component<{
   }
 
   const handleDeleteAdd = () => {
+    setStoreAddId(props.addId);
     setAnchorEl(null);
     setStoreDeleteAddModal(true);
   }
@@ -45,7 +46,8 @@ const StoreAddOptions: Component<{
         style={{
           "position": "absolute",
           "bottom": "90px",
-          "right": "0px"
+          "right": "0px",
+          "background-color": "white"
         }}
         aria-controls={open() ? "basic-menu" : undefined}
         aria-haspopup="true"

@@ -17,6 +17,8 @@ import {StoreRequest} from "../dto/StoreRequest";
 import {ContactRequest} from "../dto/ContactRequest";
 import {EmailRequest} from "../dto/EmailRequest";
 import {PhoneRequest} from "../dto/PhoneRequest";
+import {setStoreStore} from "../pages/Store/store/storeStore";
+import {setStorePendingEdit} from "../pages/Store/store/storeModalStore";
 
 async function getStores(): Promise<Store[]> {
   return (await fetch('http://127.0.0.1:8080/store', {method: 'GET'})).json().then(d => {
@@ -237,6 +239,43 @@ async function updateStore(store: StoreRequest, storeId: number): Promise<any> {
     })
 }
 
+async function updateStoreByOwner(store: StoreRequest, storeId: number): Promise<any> {
+  setStorePendingEdit(true);
+  fetch(`http://127.0.0.1:8080/store/${storeId}`,
+    {
+      method: 'PUT',
+      body: JSON.stringify(store),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(res => res.json())
+    .then(data => {
+        setStoreStore({
+          id: data.id,
+          name: data.name,
+          description: data.description,
+          numOfRating: data.numOfRating,
+          sumOfRating: data.sumOfRating,
+          bannerImage: data.bannerImage,
+          adds: data.adds,
+          storeImage: data.storeImage,
+          address: data.contacts[0].address,
+          contactId: data.contacts[0].id,
+          email: data.contacts[0].emails[0].email,
+          emailId: data.contacts[0].emails[0].id,
+          phone: data.contacts[0].phones[0].number,
+          phoneId: data.contacts[0].phones[0].id,
+        });
+        setStorePendingEdit(false);
+      }
+    )
+    .catch(() => {
+      setStorePendingEdit(false);
+      alert(translate("errorUpdate"));
+    })
+}
+
 async function updateContact(contact: ContactRequest, contactId: number): Promise<any> {
   await fetch(`http://127.0.0.1:8080/contact/${contactId}`,
     {
@@ -263,6 +302,44 @@ async function updateContact(contact: ContactRequest, contactId: number): Promis
       //     store.contactId = data.id;
       //   }),
       // );
+    })
+}
+
+async function updateContactByOwner(contact: ContactRequest, contactId: number): Promise<any> {
+  setStorePendingEdit(true);
+  await fetch(`http://127.0.0.1:8080/contact/${contactId}`,
+    {
+      method: 'PUT',
+      body: JSON.stringify(contact),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(res => res.json())
+    .then(data => {
+      setStoreStore((store) => {
+        return {
+          id: store!.id,
+          name: store!.name,
+          description: store!.description,
+          numOfRating: store!.numOfRating,
+          sumOfRating: store!.sumOfRating,
+          bannerImage: store!.bannerImage,
+          adds: store!.adds,
+          storeImage: store!.storeImage,
+          address: data.address,
+          contactId: store!.contactId,
+          email: store!.email,
+          emailId: store!.emailId,
+          phone: store!.phone,
+          phoneId: store!.phoneId,
+        }
+      });
+      setStorePendingEdit(false);
+    })
+    .catch(err => {
+      setStorePendingEdit(false);
+      alert(translate("errorUpdate"));
     })
 }
 
@@ -294,6 +371,44 @@ async function updateEmail(email: EmailRequest, emailId: number): Promise<any> {
     })
 }
 
+async function updateEmailByOwner(email: EmailRequest, emailId: number): Promise<any> {
+  setStorePendingEdit(true);
+  await fetch(`http://127.0.0.1:8080/email/${emailId}`,
+    {
+      method: 'PUT',
+      body: JSON.stringify(email),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(res => res.json())
+    .then(data => {
+      setStoreStore((store) => {
+        return {
+          id: store!.id,
+          name: store!.name,
+          description: store!.description,
+          numOfRating: store!.numOfRating,
+          sumOfRating: store!.sumOfRating,
+          bannerImage: store!.bannerImage,
+          adds: store!.adds,
+          storeImage: store!.storeImage,
+          address: store!.address,
+          contactId: store!.contactId,
+          email: data.email,
+          emailId: store!.emailId,
+          phone: store!.phone,
+          phoneId: store!.phoneId,
+        }
+      });
+      setStorePendingEdit(false);
+    })
+    .catch(err => {
+      setStorePendingEdit(false);
+      alert(translate("errorUpdate"));
+    })
+}
+
 async function updatePhone(phone: PhoneRequest, phoneId: number): Promise<any> {
   await fetch(`http://127.0.0.1:8080/phone/${phoneId}`,
     {
@@ -319,6 +434,44 @@ async function updatePhone(phone: PhoneRequest, phoneId: number): Promise<any> {
       //     store.phoneId = data.id;
       //   }),
       // );
+    })
+}
+
+async function updatePhoneByOwner(phone: PhoneRequest, phoneId: number): Promise<any> {
+  setStorePendingEdit(true);
+  await fetch(`http://127.0.0.1:8080/phone/${phoneId}`,
+    {
+      method: 'PUT',
+      body: JSON.stringify(phone),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(res => res.json())
+    .then(data => {
+      setStoreStore((store) => {
+        return {
+          id: store!.id,
+          name: store!.name,
+          description: store!.description,
+          numOfRating: store!.numOfRating,
+          sumOfRating: store!.sumOfRating,
+          bannerImage: store!.bannerImage,
+          adds: store!.adds,
+          storeImage: store!.storeImage,
+          address: store!.address,
+          contactId: store!.contactId,
+          email: store!.email,
+          emailId: store!.emailId,
+          phone: data.number,
+          phoneId: store!.phoneId,
+        }
+      });
+      setStorePendingEdit(false);
+    })
+    .catch(err => {
+      setStorePendingEdit(false);
+      alert(translate("errorUpdate"));
     })
 }
 
@@ -349,5 +502,9 @@ export {
   updateContact,
   updateEmail,
   updatePhone,
-  deleteStore
+  deleteStore,
+  updateStoreByOwner,
+  updateContactByOwner,
+  updateEmailByOwner,
+  updatePhoneByOwner
 };

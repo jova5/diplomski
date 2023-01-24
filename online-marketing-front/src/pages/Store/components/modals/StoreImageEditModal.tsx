@@ -1,9 +1,11 @@
 import {Component, createSignal} from "solid-js";
 import {setStoreOpenImageEdit, storeOpenImageEdit, storePendingEdit} from "../../store/storeModalStore";
 import {convertImageToBase64} from "../../../Admin/utils/converteImageToBase64";
-import {addImage} from "../../../Admin/stores/modalStore";
 import ModalWrapper from "../../../../components/ModalWrapper";
 import {translate} from "../../../../utils/languageAsync";
+import {StoreRequest} from "../../../../dto/StoreRequest";
+import {storeStore} from "../../store/storeStore";
+import {updateStoreByOwner} from "../../../../utils/storeAsync";
 
 const StoreImageEditModal: Component = () => {
   const [localImage, setLocalImage] = createSignal<File>();
@@ -12,11 +14,19 @@ const StoreImageEditModal: Component = () => {
   }
 
   const handleOK = async () => {
-    let addIm;
+    let storeImage;
     if (localImage() !== undefined) {
-      addIm = await convertImageToBase64(localImage());
-    } else {
-      addIm = addImage();
+      storeImage = await convertImageToBase64(localImage());
+      const store: StoreRequest = {
+        name: storeStore()!.name,
+        description: storeStore()!.description,
+        bannerImage: storeStore()!.bannerImage,
+        storeImage: storeImage,
+        numOfRating: storeStore()!.numOfRating,
+        sumOfRating: storeStore()!.sumOfRating
+      }
+      await updateStoreByOwner(store, storeStore()!.id);
+      setLocalImage(undefined);
     }
   }
   return (

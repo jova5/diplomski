@@ -8,10 +8,17 @@ import {
   storeOpenEmailEdit,
   storePendingEdit
 } from "../../store/storeModalStore";
+import {EmailRequest} from "../../../../dto/EmailRequest";
+import {updateEmailByOwner} from "../../../../utils/storeAsync";
+import {storeStore} from "../../store/storeStore";
 
 const StoreEmailEditModal: Component = () => {
-  const handleOk = () => {
-
+  const handleOk = async () => {
+    const emailReq: EmailRequest = {
+      contactId: storeStore()?.contactId!,
+      email: storeEditSingleProperty(),
+    }
+    await updateEmailByOwner(emailReq, storeStore()?.emailId!);
   }
   const setOpen = () => {
     setStoreOpenEmailEdit(prev => !prev);

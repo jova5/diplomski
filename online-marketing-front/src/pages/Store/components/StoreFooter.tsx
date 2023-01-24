@@ -16,6 +16,7 @@ const StoreFooter: Component = () => {
       <p style={{"margin-bottom": "0"}}>
         {translate("address") + ": " + storeStore()?.address}
         <IconButton
+          style={{"margin-left": "10px", "background-color": "white"}}
           onClick={() => {
             setStoreEditSingleProperty(storeStore()?.address!)
             setStoreOpenAddressEdit(true);
@@ -27,6 +28,7 @@ const StoreFooter: Component = () => {
       <p style={{"margin-bottom": "0"}}>
         {translate("phone") + ": " + storeStore()?.phone}
         <IconButton
+          style={{"margin-left": "10px", "background-color": "white"}}
           onClick={() => {
             setStoreEditSingleProperty(storeStore()?.phone!)
             setStoreOpenPhoneEdit(true);
@@ -38,6 +40,7 @@ const StoreFooter: Component = () => {
       <p style={{"margin-bottom": "0"}}>
         {translate("email") + ": " + storeStore()?.email}
         <IconButton
+          style={{"margin-left": "10px", "background-color": "white"}}
           onClick={() => {
             setStoreEditSingleProperty(storeStore()?.email!)
             setStoreOpenEmailEdit(true);

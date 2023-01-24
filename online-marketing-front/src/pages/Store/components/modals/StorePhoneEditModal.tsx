@@ -8,10 +8,17 @@ import {
   storePendingEdit
 } from "../../store/storeModalStore";
 import ModalWrapper from "../../../../components/ModalWrapper";
+import {updatePhoneByOwner} from "../../../../utils/storeAsync";
+import {storeStore} from "../../store/storeStore";
+import {PhoneRequest} from "../../../../dto/PhoneRequest";
 
 const StorePhoneEditModal: Component = () => {
-  const handleOk = () => {
-
+  const handleOk = async () => {
+    const phoneReq: PhoneRequest = {
+      contactId: storeStore()!.contactId!,
+      number: storeEditSingleProperty(),
+    }
+    await updatePhoneByOwner(phoneReq, storeStore()!.phoneId!);
   }
   const setOpen = () => {
     setStoreOpenPhoneEdit(prev => !prev);

@@ -10,10 +10,14 @@ import {
   setStoreOpenAddEdit,
   storeAddDescription,
   storeAddHeader,
+  storeAddId,
+  storeAddImage,
   storeAddPremium,
   storeOpenAddEdit,
   storePendingEdit
 } from "../../store/storeModalStore";
+import {AddRequest} from "../../../../dto/AddRequest";
+import {updateAddByOwner} from "../../../../utils/addAsync";
 
 const StoreAddEditModal: Component = () => {
   const [localImage, setLocalImage] = createSignal<File>();
@@ -26,20 +30,17 @@ const StoreAddEditModal: Component = () => {
     if (localImage() !== undefined) {
       addIm = await convertImageToBase64(localImage());
     } else {
-      addIm = addImage();
+      addIm = storeAddImage();
     }
 
-    // const add: AddRequest = {
-    //   header: addHeader(),
-    //   description: addDescription(),
-    //   image: addIm,
-    //   premium: addPremium(),
-    // }
-    // if (!checkEditReqForm(add)) {
-    //   alert(translate("fillAllFields"));
-    // } else {
-    //   await updateAdd(add, addId());
-    // }
+    const add: AddRequest = {
+      header: storeAddHeader(),
+      description: storeAddDescription(),
+      image: addIm,
+      premium: storeAddPremium(),
+    }
+    await updateAddByOwner(add, storeAddId());
+    setLocalImage(undefined);
   }
   return (
     <ModalWrapper

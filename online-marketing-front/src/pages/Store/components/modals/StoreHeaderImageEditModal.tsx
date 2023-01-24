@@ -1,9 +1,11 @@
 import {Component, createSignal} from "solid-js";
-import {addImage} from "../../../Admin/stores/modalStore";
 import {convertImageToBase64} from "../../../Admin/utils/converteImageToBase64";
 import {translate} from "../../../../utils/languageAsync";
 import {setStoreOpenHeaderImageEdit, storeOpenHeaderImageEdit, storePendingEdit} from "../../store/storeModalStore";
 import ModalWrapper from "../../../../components/ModalWrapper";
+import {StoreRequest} from "../../../../dto/StoreRequest";
+import {updateStoreByOwner} from "../../../../utils/storeAsync";
+import {storeStore} from "../../store/storeStore";
 
 const StoreHeaderImageEditModal: Component = () => {
   const [localImage, setLocalImage] = createSignal<File>();
@@ -12,13 +14,22 @@ const StoreHeaderImageEditModal: Component = () => {
   }
 
   const handleOK = async () => {
-    let addIm;
+    let bannerImage;
     if (localImage() !== undefined) {
-      addIm = await convertImageToBase64(localImage());
-    } else {
-      addIm = addImage();
+      bannerImage = await convertImageToBase64(localImage());
+      const store: StoreRequest = {
+        name: storeStore()!.name,
+        description: storeStore()!.description,
+        bannerImage: bannerImage,
+        storeImage: storeStore()!.storeImage,
+        numOfRating: storeStore()!.numOfRating,
+        sumOfRating: storeStore()!.sumOfRating
+      }
+      await updateStoreByOwner(store, storeStore()!.id);
+      setLocalImage(undefined);
     }
   }
+
   return (
     <ModalWrapper
       name={() => translate("editStoreHeaderImage")}
