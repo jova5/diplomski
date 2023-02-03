@@ -10,7 +10,7 @@ import {
 import {getAdds} from "../../../utils/addAsync";
 import {setUsersStores} from "../../Admin/stores/adminStore";
 import {getUsersStore} from "../../Admin/utils/usersAsync";
-import HomeAddModal from "./HomeAddModal";
+import HomeAddModal from "./modals/HomeAddModal";
 import {
   setHomeAddDescription,
   setHomeAddHeader,

@@ -4,6 +4,7 @@ import styles from './App.module.css';
 import {setAvailableLanguages} from "./pages/Admin/stores/adminStore";
 import {getLanguages} from "./utils/languageAsync";
 import Store from "./pages/Store/Store";
+import Home from "./pages/Home/Home";
 
 const App: Component = () => {
   onMount(async () => {
@@ -13,8 +14,8 @@ const App: Component = () => {
   return (
     <div class={styles.container}>
       {/*<Admin/>*/}
-      {/*<Home/>*/}
-      <Store/>
+      <Home/>
+      {/*<Store/>*/}
     </div>
   );
 };

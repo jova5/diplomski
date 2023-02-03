@@ -18,4 +18,3 @@ export const NavOptions = {
 }
 
 export const [nav, setNav] = createSignal<NavValue>(NavValues[0]);
-export const [logOut, setLogOut] = createSignal<boolean>(false);

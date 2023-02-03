@@ -3,6 +3,7 @@ import './Home.css';
 import HomeNavbar from "./components/HomeNavbar";
 import ContentContainer from "./components/ContentContainer";
 import {homeNav, HomeNavValues, setHomeNav} from "./store/homeNavigationStore";
+import LoginRegisterModal from "./components/modals/LoginRegisterModal";
 
 const Home: Component = () => {
   console.log("Home");
@@ -25,6 +26,7 @@ const Home: Component = () => {
         </For>
       </div>
       <ContentContainer/>
+      <LoginRegisterModal/>
     </div>
 
   )

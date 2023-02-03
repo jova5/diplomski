@@ -1,9 +1,10 @@
 import {Component, For} from "solid-js";
 import "./Navbar.css";
-import {nav, NavValues, setLogOut, setNav} from "../stores/adminNavigationStore";
+import {nav, NavValues, setNav} from "../stores/adminNavigationStore";
 import Logo from "../../../components/Logo";
 import LanguagePicker from "./LanguagePicker";
 import {translate} from "../../../utils/languageAsync";
+import {setLogIn} from "../../../stores/authStore";
 
 const Navbar: Component = () => {
   return (
@@ -25,7 +26,7 @@ const Navbar: Component = () => {
           }
         </For>
         <li>
-          <button class="log-out nav-button" onClick={() => setLogOut(true)}>
+          <button class="log-out nav-button" onClick={() => setLogIn(false)}>
             <span>{translate("logout")}</span>
           </button>
         </li>

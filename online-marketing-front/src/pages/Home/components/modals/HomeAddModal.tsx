@@ -8,7 +8,7 @@ import {
   homeAddStoreName,
   openHomeAddModal,
   setOpenHomeAddModal
-} from "../store/homeModalStore";
+} from "../../store/homeModalStore";
 import OpenInNewIcon from '@suid/icons-material/OpenInNew';
 
 const HomeAddModal: Component = () => {

@@ -12,4 +12,3 @@ export const HomeNavOptions = {
 }
 
 export const [homeNav, setHomeNav] = createSignal<HomeNavValue>(HomeNavValues[0]);
-export const [login, setLogin] = createSignal<boolean>(false);
