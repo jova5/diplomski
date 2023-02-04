@@ -14,7 +14,7 @@ const StoreHeader: Component = () => {
     <header style={{"height": "300px", "padding-bottom": "75px", "position": "relative"}}>
       <div style={{"height": "300px"}}>
         <Show when={storeStore()?.bannerImage}
-              fallback={<img src={"../../../../../assets/prodavnica.png"} height={230} alt="Reklama"/>} keyed>
+              fallback={<img style={{"width": "100%", "height": "100%"}} src={"../../../../../assets/prodavnica.png"} height={230} alt="Reklama"/>} keyed>
           <img style={{"width": "100%", "height": "100%"}}
                src={storeStore()?.bannerImage} alt="Prodavnica"/>
         </Show>
@@ -53,7 +53,7 @@ const StoreHeader: Component = () => {
       </div>
       <div class="store-image">
         <Show when={storeStore()?.bannerImage}
-              fallback={<img src={"../../../../../assets/prodavnica.png"} height={230} alt="Reklama"/>} keyed>
+              fallback={<img style={{"width": "100%", "height": "100%"}} src={"../../../../../assets/prodavnica.png"} height={230} alt="Reklama"/>} keyed>
           <img style={{"width": "100%", "height": "100%"}}
                src={storeStore()?.storeImage} alt="Prodavnica"/>
         </Show>

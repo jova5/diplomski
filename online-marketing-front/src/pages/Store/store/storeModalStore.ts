@@ -1,6 +1,7 @@
 import {createSignal} from "solid-js";
 
 export const [storeOpenAddressEdit, setStoreOpenAddressEdit] = createSignal<boolean>(false);
+export const [storeOpenNameEdit, setStoreOpenNameEdit] = createSignal<boolean>(false);
 export const [storeOpenPhoneEdit, setStoreOpenPhoneEdit] = createSignal<boolean>(false);
 export const [storeOpenEmailEdit, setStoreOpenEmailEdit] = createSignal<boolean>(false);
 export const [storeOpenHeaderImageEdit, setStoreOpenHeaderImageEdit] = createSignal<boolean>(false);

@@ -1,8 +1,8 @@
-import {Component, onMount} from "solid-js";
+import {Component, onMount, Show} from "solid-js";
 import "./Store.css";
 import StoreHeader from "./components/StoreHeader";
 import StoreAdds from "./components/StoreAdds";
-import {setStoreStore} from "./store/storeStore";
+import {setStoreStore, storeStore} from "./store/storeStore";
 import {getStoreById} from "../../utils/storeAsync";
 import {translate} from "../../utils/languageAsync";
 import StoreFooter from "./components/StoreFooter";
@@ -12,11 +12,21 @@ import StoreEmailEditModal from "./components/modals/StoreEmailEditModal";
 import StoreHeaderImageEditModal from "./components/modals/StoreHeaderImageEditModal";
 import StoreImageEditModal from "./components/modals/StoreImageEditModal";
 import ConfirmationModal from "../../components/ConfirmationModal";
-import {setStoreDeleteAddModal, storeAddId, storeDeleteAddModal, storeDeleteAddPending} from "./store/storeModalStore";
+import {
+  setStoreDeleteAddModal,
+  setStoreEditSingleProperty,
+  setStoreOpenNameEdit,
+  storeAddId,
+  storeDeleteAddModal,
+  storeDeleteAddPending
+} from "./store/storeModalStore";
 import StoreAddEditModal from "./components/modals/StoreAddEditModal";
 import {deleteAddByOwner} from "../../utils/addAsync";
 import {useParams} from "@solidjs/router";
-import {setLogIn} from "../../stores/authStore";
+import {logIn, setLogIn} from "../../stores/authStore";
+import {IconButton} from "@suid/material";
+import EditIcon from "@suid/icons-material/Edit";
+import StoreNameEditModal from "./components/modals/StoreNameEditModal";
 
 const Store: Component = () => {
   console.log("Store");
@@ -31,6 +41,24 @@ const Store: Component = () => {
     <>
       <StoreHeader/>
       <div style={{"display": "flex", "flex-flow": "column"}}>
+        <h2 style={{
+          "display": "flex",
+          "justify-content": "center",
+          "align-items": "center"
+        }}>
+          {storeStore()?.name}
+          <Show when={logIn()} keyed>
+            <IconButton
+              style={{"margin-left": "10px", "background-color": "white"}}
+              onClick={() => {
+                setStoreEditSingleProperty(storeStore()?.name!)
+                setStoreOpenNameEdit(true);
+              }}
+            >
+              <EditIcon/>
+            </IconButton>
+          </Show>
+        </h2>
         <StoreAdds/>
         <StoreFooter/>
       </div>
@@ -40,6 +68,7 @@ const Store: Component = () => {
       <StoreHeaderImageEditModal/>
       <StoreImageEditModal/>
       <StoreAddEditModal/>
+      <StoreNameEditModal/>
       <ConfirmationModal
         header={() => translate("deleteStoreAdd")}
         open={storeDeleteAddModal}
