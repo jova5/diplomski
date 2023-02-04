@@ -8,9 +8,11 @@ import {
   setRenderedHomeStores
 } from "../store/homeStore";
 import {getStores} from "../../../utils/storeAsync";
+import {useNavigate} from "@solidjs/router";
 
 const StoreContent: Component = () => {
-  console.log("Home/StoreContent")
+  console.log("Home/StoreContent");
+  const navigate = useNavigate();
 
   onMount(async () => {
     setHomeSearch("");
@@ -35,7 +37,12 @@ const StoreContent: Component = () => {
         <For each={renderedHomeStores}>
           {
             value => (
-              <div class="card">
+              <div
+                class="card"
+                onClick={() => {
+                  navigate(`/store/${value.id}`, {resolve: true});
+                }
+                }>
                 <Show when={value.storeImage}
                       fallback={<img src={"../../../../../assets/prodavnica.png"} height={230} alt="Prodavnica"/>}
                       keyed>

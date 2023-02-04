@@ -15,12 +15,16 @@ import ConfirmationModal from "../../components/ConfirmationModal";
 import {setStoreDeleteAddModal, storeAddId, storeDeleteAddModal, storeDeleteAddPending} from "./store/storeModalStore";
 import StoreAddEditModal from "./components/modals/StoreAddEditModal";
 import {deleteAddByOwner} from "../../utils/addAsync";
+import {useParams} from "@solidjs/router";
+import {setLogIn} from "../../stores/authStore";
 
 const Store: Component = () => {
   console.log("Store");
+  const params = useParams();
 
   onMount(async () => {
-    setStoreStore(await getStoreById(12));
+    setStoreStore(await getStoreById(+params.id));
+    setLogIn(localStorage.getItem("user") !== null)
   })
 
   return (

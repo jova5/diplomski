@@ -1,4 +1,4 @@
-import {Component, createSignal} from "solid-js";
+import {Component, createSignal, Show} from "solid-js";
 import {IconButton, Menu, MenuItem} from "@suid/material";
 import {translate} from "../../../utils/languageAsync";
 import MoreVertIcon from '@suid/icons-material/MoreVert';
@@ -11,6 +11,7 @@ import {
   setStoreDeleteAddModal,
   setStoreOpenAddEdit
 } from "../store/storeModalStore";
+import {logIn} from "../../../stores/authStore";
 
 const StoreAddOptions: Component<{
   header: string,
@@ -41,23 +42,25 @@ const StoreAddOptions: Component<{
   }
   return (
     <>
-      <IconButton
-        id="basic-button"
-        style={{
-          "position": "absolute",
-          "bottom": "90px",
-          "right": "0px",
-          "background-color": "white"
-        }}
-        aria-controls={open() ? "basic-menu" : undefined}
-        aria-haspopup="true"
-        aria-expanded={open() ? "true" : undefined}
-        onClick={(event) => {
-          setAnchorEl(event.currentTarget);
-        }}
-      >
-        <MoreVertIcon/>
-      </IconButton>
+      <Show when={logIn()} keyed>
+        <IconButton
+          id="basic-button"
+          style={{
+            "position": "absolute",
+            "bottom": "90px",
+            "right": "0px",
+            "background-color": "white"
+          }}
+          aria-controls={open() ? "basic-menu" : undefined}
+          aria-haspopup="true"
+          aria-expanded={open() ? "true" : undefined}
+          onClick={(event) => {
+            setAnchorEl(event.currentTarget);
+          }}
+        >
+          <MoreVertIcon/>
+        </IconButton>
+      </Show>
       <Menu
         id="basic-menu"
         anchorEl={anchorEl()}

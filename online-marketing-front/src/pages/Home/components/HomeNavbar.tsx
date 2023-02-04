@@ -1,10 +1,10 @@
 import {Component} from "solid-js";
+import './HomeNavbar.css';
 import Logo from "../../../components/Logo";
 import SearchBar from "../../../components/SearchBar";
 import LanguagePicker from "../../Admin/components/LanguagePicker";
 import {nav} from "../../Admin/stores/adminNavigationStore";
 import {translate} from "../../../utils/languageAsync";
-import './Navbar.css';
 import {setHomeSearch} from "../store/homeStore";
 import {setIsHomeLogin, setOpenHomeLoginRegisterModal} from "../store/homeModalStore";
 

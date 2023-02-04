@@ -15,12 +15,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     @Override
-    public Boolean login(String username, String password) {
-        try {
-            User user = userService.findByUserNameAndPassword(username, password);
-            return user != null;
-        } catch (RestException e) {
-            return false;
-        }
+    public User login(String username, String password) throws RestException {
+        return userService.findByUserNameAndPassword(username, password);
     }
 }

@@ -5,8 +5,10 @@ import Logo from "../../../components/Logo";
 import LanguagePicker from "./LanguagePicker";
 import {translate} from "../../../utils/languageAsync";
 import {setLogIn} from "../../../stores/authStore";
+import {useNavigate} from "@solidjs/router";
 
 const Navbar: Component = () => {
+  const navigate = useNavigate();
   return (
     <nav>
       <Logo/>
@@ -26,7 +28,11 @@ const Navbar: Component = () => {
           }
         </For>
         <li>
-          <button class="log-out nav-button" onClick={() => setLogIn(false)}>
+          <button class="log-out nav-button" onClick={() => {
+            localStorage.removeItem("user");
+            setLogIn(false);
+            navigate("/");
+          }}>
             <span>{translate("logout")}</span>
           </button>
         </li>

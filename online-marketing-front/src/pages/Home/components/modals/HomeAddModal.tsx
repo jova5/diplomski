@@ -5,13 +5,16 @@ import {
   homeAddDescription,
   homeAddHeader,
   homeAddImage,
+  homeAddStoreId,
   homeAddStoreName,
   openHomeAddModal,
   setOpenHomeAddModal
 } from "../../store/homeModalStore";
 import OpenInNewIcon from '@suid/icons-material/OpenInNew';
+import {useNavigate} from "@solidjs/router";
 
 const HomeAddModal: Component = () => {
+  const navigate = useNavigate();
   const handleClose = () => {
     setOpenHomeAddModal(false);
   }
@@ -45,6 +48,7 @@ const HomeAddModal: Component = () => {
             {homeAddStoreName()}
             <IconButton
               onClick={() => {
+                navigate(`/store/${homeAddStoreId()}`);
               }}
             >
               <OpenInNewIcon/>
