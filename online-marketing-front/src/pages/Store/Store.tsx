@@ -16,6 +16,7 @@ import {
   setStoreDeleteAddModal,
   setStoreEditSingleProperty,
   setStoreOpenNameEdit,
+  setStoreOpenNewAdd,
   storeAddId,
   storeDeleteAddModal,
   storeDeleteAddPending
@@ -24,9 +25,11 @@ import StoreAddEditModal from "./components/modals/StoreAddEditModal";
 import {deleteAddByOwner} from "../../utils/addAsync";
 import {useParams} from "@solidjs/router";
 import {logIn, setLogIn} from "../../stores/authStore";
-import {IconButton} from "@suid/material";
+import {Button, IconButton} from "@suid/material";
 import EditIcon from "@suid/icons-material/Edit";
 import StoreNameEditModal from "./components/modals/StoreNameEditModal";
+import AddBoxIcon from '@suid/icons-material/AddBox';
+import StoreNewAddModal from "./components/modals/StoreNewAddModal";
 
 const Store: Component = () => {
   console.log("Store");
@@ -59,6 +62,23 @@ const Store: Component = () => {
             </IconButton>
           </Show>
         </h2>
+        <div style={{
+          "display": "flex",
+          "justify-content": "center",
+          "align-items": "center"
+        }}>
+          <Show when={logIn()} keyed>
+            <Button
+              variant="contained" color="success"
+              startIcon={<AddBoxIcon/>}
+              onClick={() => {
+                setStoreOpenNewAdd(true);
+              }
+              }>
+              {translate("addAdd")}
+            </Button>
+          </Show>
+        </div>
         <StoreAdds/>
         <StoreFooter/>
       </div>
@@ -69,6 +89,7 @@ const Store: Component = () => {
       <StoreImageEditModal/>
       <StoreAddEditModal/>
       <StoreNameEditModal/>
+      <StoreNewAddModal/>
       <ConfirmationModal
         header={() => translate("deleteStoreAdd")}
         open={storeDeleteAddModal}
