@@ -8,3 +8,6 @@ export const [homeStores, setHomeStores] = createStore<Store[]>([]);
 export const [renderedHomeStores, setRenderedHomeStores] = createStore<Store[]>([]);
 export const [homeAdds, setHomeAdds] = createStore<Adds[]>([]);
 export const [renderedHomeAdds, setRenderedHomeAdds] = createStore<Adds[]>([]);
+export const [registerPending, setRegisterPending] = createSignal<boolean>(false);
+export const [registerAddedStoreId, setRegisterAddedStoreId] = createSignal<number>(-1);
+export const [registerAddedContactId, setRegisterAddedContactId] = createSignal<number>(-1);

@@ -10,7 +10,10 @@ import {setIsHomeLogin, setOpenHomeLoginRegisterModal} from "../store/homeModalS
 
 const HomeNavbar: Component = () => {
   return (
-    <nav>
+    <nav style={{
+      "display": "grid",
+      "grid-template-columns": "15% 70% 15%"
+    }}>
       <Logo/>
       <div class="search-container">
         <SearchBar onChange={(str) => setHomeSearch(str)} placeholder={translate("search") + "..."}/>

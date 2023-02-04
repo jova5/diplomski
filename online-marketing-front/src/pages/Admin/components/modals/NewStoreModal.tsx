@@ -23,10 +23,6 @@ const NewStoreModal: Component = () => {
     setOpenAddModal(prev => !prev);
   }
 
-  // createEffect(async () => {
-  //   console.log(await convertBase64(bannerImage()));
-  // })
-
   const handleOK = async () => {
     const bannerImageBase64 = await convertImageToBase64(bannerImage());
     const storeImageBase64 = await convertImageToBase64(storeImage());
