@@ -26,7 +26,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
         // Registers the endpoint where the connection will take place
         registry.addEndpoint(DELIMITER + WEBSOCKET)
                 // Allow the origin for everyone to send messages to us. (Base URL of the client)
-                .setAllowedOrigins(ALLOWED_ORIGINS)
+                .setAllowedOriginPatterns(ALLOWED_ORIGINS)
                 // Enable SockJS fallback options
                 .withSockJS();
     }
