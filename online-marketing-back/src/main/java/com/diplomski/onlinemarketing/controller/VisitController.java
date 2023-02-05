@@ -3,10 +3,8 @@ package com.diplomski.onlinemarketing.controller;
 import com.diplomski.onlinemarketing.exception.RestException;
 import com.diplomski.onlinemarketing.service.VisitService;
 import com.diplomski.onlinemarketing.service.WebSocketService;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/visit")
@@ -29,8 +27,13 @@ public class VisitController {
         service.newStoreVisit(id);
     }
 
-    @PutMapping("/test")
-    public void test(){
-        webSocketService.sendNewAddStatisticMessage(1, "testtest");
+    @GetMapping("/store/{storeId}")
+    public ResponseEntity<?> storeVisits(@PathVariable(name = "storeId") Integer id) {
+        return ResponseEntity.ok(service.findAllByStoreId(id));
+    }
+
+    @GetMapping("/addsForStore/{storeId}")
+    public ResponseEntity<?> addsForStore(@PathVariable(name = "storeId") Integer id) throws RestException {
+        return ResponseEntity.ok(service.findAllAddsVisitsByStoreId(id));
     }
 }

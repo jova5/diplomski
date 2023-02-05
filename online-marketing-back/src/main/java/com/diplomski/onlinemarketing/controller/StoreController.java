@@ -32,4 +32,10 @@ public class StoreController extends GenericController<StoreResponse, StoreReque
     public ResponseEntity<?> deleteCustom(@PathVariable(name = "id") Integer id) throws RestException {
         return ResponseEntity.ok(service.deleteCustom(id));
     }
+
+    @PutMapping("/{id}/grade/{gradeValue}")
+    public void addNewRating(@PathVariable(name = "id") Integer id,
+                             @PathVariable(name = "gradeValue") Integer grade) throws RestException {
+        service.addNewRating(id, grade);
+    }
 }

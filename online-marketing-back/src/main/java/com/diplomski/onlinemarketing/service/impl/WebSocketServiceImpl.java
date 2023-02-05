@@ -29,4 +29,9 @@ public class WebSocketServiceImpl implements WebSocketService {
     public void sendNewStoreStatisticMessage(Integer userId, Object message) {
         sendMessageTo(userId, "storeStatistics", message);
     }
+
+    @Override
+    public void sendNewStoreRatingMessage(Integer userId, Object message) {
+        sendMessageTo(userId, "storeRating", message);
+    }
 }

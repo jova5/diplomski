@@ -6,9 +6,9 @@ import com.diplomski.onlinemarketing.exception.RestException;
 import com.diplomski.onlinemarketing.repository.VocabularyRepository;
 import com.diplomski.onlinemarketing.service.VocabularyService;
 import com.diplomski.onlinemarketing.service.generic.GenericServiceImpl;
-import jakarta.transaction.Transactional;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class VocabularyServiceImpl extends GenericServiceImpl<Vocabulary, Integer> implements VocabularyService {
