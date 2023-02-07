@@ -30,6 +30,7 @@ import EditIcon from "@suid/icons-material/Edit";
 import StoreNameEditModal from "./components/modals/StoreNameEditModal";
 import AddBoxIcon from '@suid/icons-material/AddBox';
 import StoreNewAddModal from "./components/modals/StoreNewAddModal";
+import StarRating from "./components/StarRating";
 
 const Store: Component = () => {
   console.log("Store");
@@ -71,6 +72,9 @@ const Store: Component = () => {
             </IconButton>
           </Show>
         </h2>
+        <Show when={!logIn()} keyed>
+          <StarRating/>
+        </Show>
         <div style={{
           "display": "flex",
           "justify-content": "center",

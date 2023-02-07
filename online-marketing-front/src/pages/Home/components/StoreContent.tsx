@@ -9,6 +9,8 @@ import {
 } from "../store/homeStore";
 import {getStores} from "../../../utils/storeAsync";
 import {useNavigate} from "@solidjs/router";
+import { CircularProgress } from "@suid/material";
+import {visitStoreAsync} from "../utils/visitAsync";
 
 const StoreContent: Component = () => {
   console.log("Home/StoreContent");
@@ -33,13 +35,14 @@ const StoreContent: Component = () => {
   return (
     <div class="content-container-grid">
       <Show when={renderedHomeStores.length > 0}
-            fallback={<div>Loading...</div>} keyed>
+            fallback={<CircularProgress color="secondary" />} keyed>
         <For each={renderedHomeStores}>
           {
             value => (
               <div
                 class="card"
-                onClick={() => {
+                onClick={async () => {
+                  await visitStoreAsync(value.id);
                   navigate(`/store/${value.id}`, {resolve: true});
                 }
                 }>

@@ -19,6 +19,8 @@ import {
   setHomeAddStoreName,
   setOpenHomeAddModal
 } from "../store/homeModalStore";
+import { CircularProgress } from "@suid/material";
+import {visitAddAsync} from "../utils/visitAsync";
 
 const AddContent: Component = () => {
   console.log("Home/AddContent")
@@ -44,18 +46,19 @@ const AddContent: Component = () => {
     <>
       <div class="content-container-grid">
         <Show when={renderedHomeAdds.length > 0}
-              fallback={<div>Loading...</div>} keyed>
+              fallback={<CircularProgress color="secondary" />} keyed>
           <For each={renderedHomeAdds}>
             {
               value => (
                 <div class="card"
-                     onClick={() => {
+                     onClick={async () => {
                        setHomeAddImage(value.image);
                        setHomeAddHeader(value.header);
                        setHomeAddDescription(value.description);
                        setHomeAddStoreName(value.storeName!);
                        setHomeAddStoreId(value.storeId);
                        setOpenHomeAddModal(true);
+                       await visitAddAsync(value.id);
                      }}
                 >
                   <Show when={value.image}
