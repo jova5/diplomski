@@ -39,15 +39,6 @@ const Store: Component = () => {
   onMount(async () => {
     setStoreStore(await getStoreById(+params.id));
     setLogIn(localStorage.getItem("user") !== null);
-    // if (webSocketConnected()) {
-    //   initiateWebSocketSubscription(
-    //     "/user/1/addStatistics",
-    //     (msg) => {
-    //       console.log("WebSocket message");
-    //       console.log(msg);
-    //     }
-    //   )
-    // }
   })
 
   return (

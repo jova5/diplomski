@@ -12,6 +12,7 @@ import {
 } from "../../store/homeModalStore";
 import OpenInNewIcon from '@suid/icons-material/OpenInNew';
 import {useNavigate} from "@solidjs/router";
+import {visitStoreAsync} from "../../utils/visitAsync";
 
 const HomeAddModal: Component = () => {
   const navigate = useNavigate();
@@ -47,7 +48,8 @@ const HomeAddModal: Component = () => {
           <div class="add-store-name">
             {homeAddStoreName()}
             <IconButton
-              onClick={() => {
+              onClick={async () => {
+                await visitStoreAsync(homeAddStoreId());
                 navigate(`/store/${homeAddStoreId()}`);
               }}
             >

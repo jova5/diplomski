@@ -1,6 +1,6 @@
 package com.diplomski.onlinemarketing.service.impl;
 
-import com.diplomski.onlinemarketing.dto.response.StoreResponse;
+import com.diplomski.onlinemarketing.dto.response.StoreWSResponse;
 import com.diplomski.onlinemarketing.entity.Contact;
 import com.diplomski.onlinemarketing.entity.Email;
 import com.diplomski.onlinemarketing.entity.Phone;
@@ -63,6 +63,6 @@ public class StoreServiceImpl extends GenericServiceImpl<Store, Integer> impleme
         store.setNumOfRating(store.getNumOfRating() + 1);
         store.setSumOfRating(store.getSumOfRating() + grade);
         store = repository.saveAndFlush(store);
-        webSocketService.sendNewStoreRatingMessage(id, modelMapper.map(store, StoreResponse.class));
+        webSocketService.sendNewStoreRatingMessage(id, modelMapper.map(store, StoreWSResponse.class));
     }
 }

@@ -3,13 +3,16 @@ import {Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow}
 import {translate} from "../../utils/languageAsync";
 import {useNavigate, useParams} from "@solidjs/router";
 import {setStoreStore, storeStore} from "../Store/store/storeStore";
-import {createStore} from "solid-js/store";
+import {createStore, produce} from "solid-js/store";
 import {getStoreAddVisits, getStoreVisits} from "./utils/statisticsAsync";
 import {Visit} from "../../dto/Visit";
 import {Store} from "../../dto/Store";
 import {getStoreById} from "../../utils/storeAsync";
+import {webSocketConnected} from "../../stores/webSocketStore";
+import {initiateWebSocketSubscription} from "../../utils/initiateWebSocketConnection";
 
 const Statistics: Component = () => {
+  console.log("Statistics");
   const params = useParams();
   const navigate = useNavigate();
   const [addStore, setAddStore] = createStore<any[]>([]);
@@ -37,8 +40,72 @@ const Statistics: Component = () => {
         })
       })
       setAddStore(ppp);
+
+      if (webSocketConnected()) {
+        initiateWebSocketSubscription(
+          `/user/${storeStore()?.id}/addStatistics`,
+          (msg) => {
+            processWSAdd(JSON.parse(msg));
+          }
+        );
+        initiateWebSocketSubscription(
+          `/user/${storeStore()?.id}/storeStatistics`,
+          (msg) => {
+            processWSStore(JSON.parse(msg));
+          }
+        );
+        initiateWebSocketSubscription(
+          `/user/${storeStore()?.id}/storeRating`,
+          (msg) => {
+            processWSStoreRating(JSON.parse(msg))
+          }
+        );
+      }
     }
   })
+
+  const processWSAdd = (data: any) => {
+    const add = storeStore()?.adds?.find(i => i.id === data.addId);
+    if (add !== null && add !== undefined) {
+      const date = new Date(data.date);
+      setAddStore(
+        produce((adds) => {
+          adds.push({
+            addHeader: add!.header,
+            date: date.toLocaleDateString('sr')
+          })
+        })
+      )
+    }
+  }
+
+  const processWSStore = (data: any) => {
+    if (storeStore()?.id === data.storeId) {
+      setStoreVisits(prev => prev + 1);
+    }
+  }
+
+  const processWSStoreRating = (data: any) => {
+    if (storeStore()?.id === data.id) {
+      let p: Store = {
+        id: storeStore()!.id,
+        name: storeStore()!.name,
+        description: storeStore()!.description,
+        numOfRating: data.numOfRating,
+        sumOfRating: data.sumOfRating,
+        bannerImage: storeStore()?.bannerImage,
+        storeImage: storeStore()?.storeImage,
+        adds: storeStore()?.adds,
+        contactId: storeStore()?.contactId,
+        address: storeStore()?.address,
+        emailId: storeStore()?.emailId,
+        email: storeStore()?.email,
+        phoneId: storeStore()?.phoneId,
+        phone: storeStore()?.phone
+      }
+      setStoreStore(p);
+    }
+  }
 
   return (
     <>
@@ -60,7 +127,7 @@ const Statistics: Component = () => {
               >
                 <TableCell align="center">{storeStore()?.name}</TableCell>
                 <TableCell align="center">
-                  {storeStore()!.sumOfRating === 0 ? 0 : storeStore()!.sumOfRating / storeStore()!.numOfRating}
+                  {storeStore()!.sumOfRating === 0 ? 0 : (storeStore()!.sumOfRating / storeStore()!.numOfRating).toFixed(2)}
                 </TableCell>
                 <TableCell align="center">{storeStore()?.numOfRating}</TableCell>
                 <TableCell align="center">{storeVisits()}</TableCell>
