@@ -1,34 +1,111 @@
-import {Component, createSignal, onCleanup, onMount} from "solid-js";
-import {setStoreStore} from "../Store/store/storeStore";
+import {Component, createSignal, For, onCleanup, onMount} from "solid-js";
+import {setStoreStore, storeStore} from "../Store/store/storeStore";
 import {getStoreById} from "../../utils/storeAsync";
+import {rateStoreAsync} from "../Store/utils/rateStoreAsync";
+import {visitAddAsync, visitStoreAsync} from "../Home/utils/visitAsync";
+import {Adds} from "../../dto/Adds";
+import {createStore, produce} from "solid-js/store";
+import {Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@suid/material";
+import {translate} from "../../utils/languageAsync";
 
 const list = ["VISIT_STORE", "VISIT_ADD", "RATE_STORE"];
+const STORE_ID = 12;
+
+interface Action {
+  id: number,
+  name: string,
+  grade: number
+}
 
 const UserSimulation: Component = () => {
-  const [count, setCount] = createSignal(0);
+  const [adds, setAdds] = createSignal<Adds[]>([]);
+  const [actions, setActions] = createStore<Action[]>([]);
 
-  const timer = setInterval(() => setCount(count() + 1), 1000);
+  const userSimulation = setInterval(() => randomVisit(), 1000);
 
-  const randomVisit = () => {
+  const randomVisit = async () => {
     const random = Math.floor(Math.random() * 3);
 
-    switch (list[random]){
-      case "VISIT_STORE": break;
-      case "VISIT_ADD": break;
-      case "RATE_STORE": break;
-      default: break;
+    switch (list[random]) {
+      case "VISIT_STORE": {
+        await visitStoreAsync(STORE_ID);
+        setActions(produce(actions => {
+          actions.unshift({
+            id: STORE_ID,
+            name: "VISIT_STORE",
+            grade: -1
+          })
+        }));
+      }
+        break;
+      case "VISIT_ADD": {
+        const addsLength = adds().length;
+        const randomAdd = adds()[Math.floor(Math.random() * addsLength)];
+        await visitAddAsync(randomAdd.id);
+        setActions(produce(actions => {
+          actions.unshift({
+            id: randomAdd.id,
+            name: "VISIT_ADD",
+            grade: -1
+          })
+        }));
+      }
+        break;
+      case "RATE_STORE": {
+        const grade = Math.floor(Math.random() * 5) + 1;
+        await rateStoreAsync(STORE_ID, grade);
+        setActions(produce(actions => {
+          actions.unshift({
+            id: STORE_ID,
+            name: "VISIT_ADD",
+            grade: grade
+          })
+        }));
+      }
+        break;
+      default:
+        break;
     }
   }
 
   onMount(async () => {
-    setStoreStore(await getStoreById(12));
+    setStoreStore(await getStoreById(STORE_ID));
+    setAdds(storeStore()!.adds!);
   })
 
-  onCleanup(() => clearInterval(timer));
+  onCleanup(() => clearInterval(userSimulation));
 
-  return(
+  return (
     <>
-      <div>Hello World</div>
+      <TableContainer class="table-container" component={Paper}>
+        <Table aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell align="center">{translate("action")}</TableCell>
+              <TableCell align="center">{translate("id")}</TableCell>
+              <TableCell align="center">{translate("grade")}</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+
+              <For each={actions}>
+                {
+                  value => {
+                    return (
+                      <TableRow class="table-row" hover={true}
+                                sx={{"&:last-child td, &:last-child th": {border: 0}}}
+                      >
+                        <TableCell align="center">{value.name}</TableCell>
+                        <TableCell align="center">{value.id}</TableCell>
+                        <TableCell align="center">{value.grade}</TableCell>
+                      </TableRow>
+                    )
+                  }
+                }
+              </For>
+          </TableBody>
+        </Table>
+      </TableContainer>
     </>
   )
 }

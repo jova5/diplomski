@@ -11,6 +11,7 @@ const Home = lazy(() => import("./pages/Home/Home"));
 const Admin = lazy(() => import("./pages/Admin/Admin"));
 const Store = lazy(() => import("./pages/Store/Store"));
 const Statistics = lazy(() => import("./pages/Statistics/Statistics"));
+const UserSimulation = lazy(() => import("./pages/UserSimulation/UserSimulation"));
 
 
 const App: Component = () => {
@@ -28,6 +29,7 @@ const App: Component = () => {
         <Route path="/" component={Home}/>
         <Route path="/admin" component={Admin}/>
         <Route path="/statistics/:id" component={Statistics}/>
+        <Route path="/userSimulation" component={UserSimulation}/>
       </Routes>
     </div>
   );
