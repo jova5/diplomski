@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface VisitRepository extends JpaRepository<Visit, Integer> {
-    List<Visit> findAllByStore_Id(Integer storeId);
-    List<Visit> findAllByAdd_Id(Integer addId);
+    List<Visit> findAllByStoreId(Integer storeId);
+    List<Visit> findAllByAddId(Integer addId);
 }

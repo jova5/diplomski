@@ -41,8 +41,6 @@ public class Store {
     private Collection<Category> categories;
     @OneToOne(mappedBy = "store")
     private User user;
-    @OneToMany(mappedBy = "store", fetch = FetchType.LAZY)
-    private Collection<Visit> visits;
 
     public Integer getId() {
         return id;
@@ -132,11 +130,4 @@ public class Store {
         this.user = user;
     }
 
-    public Collection<Visit> getVisits() {
-        return visits;
-    }
-
-    public void setVisits(Collection<Visit> visits) {
-        this.visits = visits;
-    }
 }

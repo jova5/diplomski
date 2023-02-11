@@ -1,10 +1,7 @@
 package com.diplomski.onlinemarketing.service.impl;
 
 import com.diplomski.onlinemarketing.dto.response.StoreWSResponse;
-import com.diplomski.onlinemarketing.entity.Contact;
-import com.diplomski.onlinemarketing.entity.Email;
-import com.diplomski.onlinemarketing.entity.Phone;
-import com.diplomski.onlinemarketing.entity.Store;
+import com.diplomski.onlinemarketing.entity.*;
 import com.diplomski.onlinemarketing.exception.RestException;
 import com.diplomski.onlinemarketing.repository.StoreRepository;
 import com.diplomski.onlinemarketing.service.*;
@@ -23,15 +20,19 @@ public class StoreServiceImpl extends GenericServiceImpl<Store, Integer> impleme
     private final PhoneService phoneService;
     private final ContactService contactService;
     private final WebSocketService webSocketService;
+    private final AddService addService;
+    private final UserService userService;
     private final ModelMapper modelMapper;
 
-    public StoreServiceImpl(StoreRepository repository, EmailService emailService, PhoneService phoneService, ContactService contactService, WebSocketService webSocketService, ModelMapper modelMapper) {
+    public StoreServiceImpl(StoreRepository repository, EmailService emailService, PhoneService phoneService, ContactService contactService, WebSocketService webSocketService, AddService addService, UserService userService, ModelMapper modelMapper) {
         super(repository);
         this.repository = repository;
         this.emailService = emailService;
         this.phoneService = phoneService;
         this.contactService = contactService;
         this.webSocketService = webSocketService;
+        this.addService = addService;
+        this.userService = userService;
         this.modelMapper = modelMapper;
     }
 
@@ -51,6 +52,18 @@ public class StoreServiceImpl extends GenericServiceImpl<Store, Integer> impleme
             }
             contactService.delete(contact.getId());
         }
+        Collection<Add> adds = store.getAdds();
+        for (Add add : adds) {
+            addService.delete(add.getId());
+        }
+
+        try {
+            User user = userService.findUserByStoreId(id);
+            user.setStore(null);
+            userService.update(user.getId(), user);
+        } catch (Exception ignored) {
+        }
+
         repository.deleteById(store.getId());
         return true;
     }

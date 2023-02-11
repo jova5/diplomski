@@ -10,6 +10,7 @@ import com.diplomski.onlinemarketing.service.StoreService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 @RestController
@@ -29,7 +30,7 @@ public class StoreController extends GenericController<StoreResponse, StoreReque
     }
 
     @DeleteMapping("/deleteCustom/{id}")
-    public ResponseEntity<?> deleteCustom(@PathVariable(name = "id") Integer id) throws RestException {
+    public ResponseEntity<?> deleteCustom(@PathVariable(name = "id") Integer id) throws RestException, InvocationTargetException, IllegalAccessException {
         return ResponseEntity.ok(service.deleteCustom(id));
     }
 

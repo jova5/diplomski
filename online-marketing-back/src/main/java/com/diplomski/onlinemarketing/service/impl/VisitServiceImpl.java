@@ -40,24 +40,23 @@ public class VisitServiceImpl implements VisitService {
         Add add = addService.getById(addId);
         Visit visit = new Visit();
         visit.setDate(Date.valueOf(LocalDate.now()));
-        visit.setAdd(add);
+        visit.setAddId(addId);
         visit = repository.saveAndFlush(visit);
         webSocketService.sendNewAddStatisticMessage(add.getStore().getId(), modelMapper.map(visit, VisitDTO.class));
     }
 
     @Override
-    public void newStoreVisit(Integer storeId) throws RestException {
-        Store store = storeService.getById(storeId);
+    public void newStoreVisit(Integer storeId) {
         Visit visit = new Visit();
         visit.setDate(Date.valueOf(LocalDate.now()));
-        visit.setStore(store);
+        visit.setStoreId(storeId);
         visit = repository.saveAndFlush(visit);
         webSocketService.sendNewStoreStatisticMessage(storeId, modelMapper.map(visit, VisitDTO.class));
     }
 
     @Override
     public List<VisitDTO> findAllByStoreId(Integer id) {
-        List<Visit> list = repository.findAllByStore_Id(id);
+        List<Visit> list = repository.findAllByStoreId(id);
         return list.stream().map(item -> modelMapper.map(item, VisitDTO.class)).toList();
     }
 
@@ -67,7 +66,7 @@ public class VisitServiceImpl implements VisitService {
         List<Add> adds = store.getAdds().stream().toList();
         List<Visit> list = new ArrayList<>();
         for (Add add: adds){
-            list.addAll(repository.findAllByAdd_Id(add.getId()));
+            list.addAll(repository.findAllByAddId(add.getId()));
         }
         list.sort(Comparator.comparing(Visit::getDate));
         return list.stream().map(item -> modelMapper.map(item, VisitDTO.class)).toList();

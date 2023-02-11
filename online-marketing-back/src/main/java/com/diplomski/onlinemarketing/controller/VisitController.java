@@ -2,7 +2,6 @@ package com.diplomski.onlinemarketing.controller;
 
 import com.diplomski.onlinemarketing.exception.RestException;
 import com.diplomski.onlinemarketing.service.VisitService;
-import com.diplomski.onlinemarketing.service.WebSocketService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,11 +9,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/visit")
 public class VisitController {
     private final VisitService service;
-    private final WebSocketService webSocketService;
 
-    public VisitController(VisitService service, WebSocketService webSocketService) {
+    public VisitController(VisitService service) {
         this.service = service;
-        this.webSocketService = webSocketService;
     }
 
     @PutMapping("/add/{id}")

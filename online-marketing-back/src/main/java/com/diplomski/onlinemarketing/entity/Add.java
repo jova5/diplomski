@@ -32,8 +32,6 @@ public class Add {
             joinColumns = @JoinColumn(name = "add_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Collection<Category> categories;
-    @OneToMany(mappedBy = "add", fetch = FetchType.LAZY)
-    private Collection<Visit> visits;
 
     public Integer getId() {
         return id;
@@ -89,13 +87,5 @@ public class Add {
 
     public void setCategories(Collection<Category> categories) {
         this.categories = categories;
-    }
-
-    public Collection<Visit> getVisits() {
-        return visits;
-    }
-
-    public void setVisits(Collection<Visit> visits) {
-        this.visits = visits;
     }
 }

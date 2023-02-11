@@ -40,8 +40,7 @@ public class ModelMapperConfig {
                 .addMappings(mapper -> mapper.skip(Store::setSumOfRating))
                 .addMappings(mapper -> mapper.skip(Store::setAdds))
                 .addMappings(mapper -> mapper.skip(Store::setContacts))
-                .addMappings(mapper -> mapper.skip(Store::setCategories))
-                .addMappings(mapper -> mapper.skip(Store::setVisits));
+                .addMappings(mapper -> mapper.skip(Store::setCategories));
 
         modelMapper.typeMap(ContactRequest.class, Contact.class)
                 .addMappings(mapper -> mapper.skip(Contact::setId));

@@ -25,4 +25,12 @@ public class UserServiceImpl extends GenericServiceImpl<User, Integer> implement
                         HttpStatus.NOT_FOUND)
         );
     }
+
+    @Override
+    public User findUserByStoreId(Integer storeId) throws RestException {
+        return repository.findByStore_Id(storeId).orElseThrow(
+                () -> new RestException(
+                        "Could not find user with storeId: " + storeId, HttpStatus.NOT_FOUND)
+        );
+    }
 }

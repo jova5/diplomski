@@ -23,12 +23,13 @@ public class Visit {
     @Basic
     @Column(name = "country")
     private String country;
-    @ManyToOne
-    @JoinColumn(name = "store_id", referencedColumnName = "id")
-    private Store store;
-    @ManyToOne
-    @JoinColumn(name = "add_id", referencedColumnName = "id")
-    private Add add;
+
+    @Basic
+    @Column(name = "store_id")
+    private Integer storeId;
+    @Basic
+    @Column(name = "add_id")
+    private Integer addId;
 
     public Integer getId() {
         return id;
@@ -46,19 +47,19 @@ public class Visit {
         this.date = date;
     }
 
-    public Store getStore() {
-        return store;
+    public Integer getStoreId() {
+        return storeId;
     }
 
-    public void setStore(Store store) {
-        this.store = store;
+    public void setStoreId(Integer storeId) {
+        this.storeId = storeId;
     }
 
-    public Add getAdd() {
-        return add;
+    public Integer getAddId() {
+        return addId;
     }
 
-    public void setAdd(Add add) {
-        this.add = add;
+    public void setAddId(Integer addId) {
+        this.addId = addId;
     }
 }
