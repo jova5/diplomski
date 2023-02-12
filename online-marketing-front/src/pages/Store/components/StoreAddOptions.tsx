@@ -37,6 +37,7 @@ const StoreAddOptions: Component<{
 
   const handleDeleteAdd = () => {
     setStoreAddId(props.addId);
+    setStoreAddHeader(props.header);
     setAnchorEl(null);
     setStoreDeleteAddModal(true);
   }

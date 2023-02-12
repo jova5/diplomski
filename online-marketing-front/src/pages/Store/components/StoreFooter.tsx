@@ -14,6 +14,11 @@ import {logIn} from "../../../stores/authStore";
 const StoreFooter: Component = () => {
   return (
     <footer>
+      <p style={{"margin-bottom": "0"}}>{translate("details")}</p>
+      <p style={{"margin": "0", "padding" : "20px"}}>
+        {storeStore()?.description}
+      </p>
+      <p style={{"margin-bottom": "0"}}>{translate("contacts")}</p>
       <p style={{"margin-bottom": "0"}}>
         {translate("address") + ": " + storeStore()?.address}
         <Show when={logIn()} keyed>
@@ -42,7 +47,7 @@ const StoreFooter: Component = () => {
           </IconButton>
         </Show>
       </p>
-      <p style={{"margin-bottom": "0"}}>
+      <p style={{"margin-bottom" : "10px"}}>
         {translate("email") + ": " + storeStore()?.email}
         <Show when={logIn()} keyed>
           <IconButton

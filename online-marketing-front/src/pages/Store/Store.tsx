@@ -17,6 +17,7 @@ import {
   setStoreEditSingleProperty,
   setStoreOpenNameEdit,
   setStoreOpenNewAdd,
+  storeAddHeader,
   storeAddId,
   storeDeleteAddModal,
   storeDeleteAddPending
@@ -99,7 +100,7 @@ const Store: Component = () => {
         open={storeDeleteAddModal}
         setOpen={setStoreDeleteAddModal}
         handleOK={() => deleteAddByOwner(storeAddId())}
-        message={() => `${translate("deleteStoreAdd?")} test???`}
+        message={() => `${translate("deleteStoreAdd?")}: ### ${storeAddHeader()} ###`}
         pending={storeDeleteAddPending}
       />
     </>

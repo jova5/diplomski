@@ -26,7 +26,8 @@ public class ModelMapperConfig {
                 .addMappings(mapper -> mapper.skip(Vocabulary::setId));
 
         modelMapper.typeMap(Vocabulary.class, Vocabulary.class)
-                .addMappings(mapper -> mapper.skip(Vocabulary::setId));
+                .addMappings(mapper -> mapper.skip(Vocabulary::setId))
+                .addMappings(mapper -> mapper.skip(Vocabulary::setLanguage));
 
         modelMapper.typeMap(Category.class, Category.class)
                 .addMappings(mapper -> mapper.skip(Category::setId));

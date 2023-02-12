@@ -9,7 +9,7 @@ import {Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow}
 import {translate} from "../../utils/languageAsync";
 
 const list = ["VISIT_STORE", "VISIT_ADD", "RATE_STORE"];
-const STORE_ID = 12;
+const STORE_ID = 28;
 
 interface Action {
   id: number,
