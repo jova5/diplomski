@@ -100,7 +100,7 @@ const LoginRegisterModal: Component = () => {
 
   return (
     <ModalWrapper
-      name={() => translate(isHomeLogin() ? "login" : "register")}
+      name={() => translate(isHomeLogin() ? "logIn" : "register")}
       open={openHomeLoginRegisterModal}
       setOpen={setOpen}
       handleOK={handleOK}

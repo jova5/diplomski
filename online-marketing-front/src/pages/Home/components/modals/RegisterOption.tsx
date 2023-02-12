@@ -49,7 +49,7 @@ const RegisterOption: Component = () => {
         setHomePassword("");
         setHomeUserName("");
       }}>
-        {translate("login")}
+        {translate("logIn")}
       </button>
     </>
   )

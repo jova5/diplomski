@@ -4,6 +4,7 @@ import HomeNavbar from "./components/HomeNavbar";
 import ContentContainer from "./components/ContentContainer";
 import {homeNav, HomeNavValues, setHomeNav} from "./store/homeNavigationStore";
 import LoginRegisterModal from "./components/modals/LoginRegisterModal";
+import {translate} from "../../utils/languageAsync";
 
 const Home: Component = () => {
   console.log("Home");
@@ -20,7 +21,7 @@ const Home: Component = () => {
             (value) =>
               <button class={homeNav() === value ? "nav-button selected-button" : "nav-button"}
                       onClick={() => setHomeNav(value)}>
-                <span>{value}</span>
+                <span>{translate(value)}</span>
               </button>
           }
         </For>
