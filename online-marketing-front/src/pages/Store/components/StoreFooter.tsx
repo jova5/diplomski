@@ -5,7 +5,7 @@ import {IconButton} from "@suid/material";
 import EditIcon from "@suid/icons-material/Edit";
 import {
   setStoreEditSingleProperty,
-  setStoreOpenAddressEdit,
+  setStoreOpenAddressEdit, setStoreOpenDescriptionEdit,
   setStoreOpenEmailEdit,
   setStoreOpenPhoneEdit
 } from "../store/storeModalStore";
@@ -17,6 +17,17 @@ const StoreFooter: Component = () => {
       <p style={{"margin-bottom": "0"}}>{translate("details")}</p>
       <p style={{"margin": "0", "padding" : "20px"}}>
         {storeStore()?.description}
+        <Show when={logIn()} keyed>
+          <IconButton
+            style={{"margin-left": "10px", "background-color": "white"}}
+            onClick={() => {
+              setStoreEditSingleProperty(storeStore()?.description!)
+              setStoreOpenDescriptionEdit(true);
+            }}
+          >
+            <EditIcon/>
+          </IconButton>
+        </Show>
       </p>
       <p style={{"margin-bottom": "0"}}>{translate("contacts")}</p>
       <p style={{"margin-bottom": "0"}}>

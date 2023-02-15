@@ -24,7 +24,7 @@ import {
 } from "./store/storeModalStore";
 import StoreAddEditModal from "./components/modals/StoreAddEditModal";
 import {deleteAddByOwner} from "../../utils/addAsync";
-import {useParams} from "@solidjs/router";
+import {useNavigate, useParams} from "@solidjs/router";
 import {logIn, setLogIn} from "../../stores/authStore";
 import {Button, IconButton} from "@suid/material";
 import EditIcon from "@suid/icons-material/Edit";
@@ -32,12 +32,18 @@ import StoreNameEditModal from "./components/modals/StoreNameEditModal";
 import AddBoxIcon from '@suid/icons-material/AddBox';
 import StoreNewAddModal from "./components/modals/StoreNewAddModal";
 import StarRating from "./components/StarRating";
+import StoreDescriptionEditModal from "./components/modals/StoreDescriptionEditModal";
 
 const Store: Component = () => {
   console.log("Store");
   const params = useParams();
+  const navigate = useNavigate();
 
   onMount(async () => {
+    const store = localStorage.getItem("user");
+    if (store === null || JSON.parse(store).type !== "USER" || JSON.parse(store).storeId !== +params.id) {
+      navigate("/");
+    }
     setStoreStore(await getStoreById(+params.id));
     setLogIn(localStorage.getItem("user") !== null);
   })
@@ -95,6 +101,7 @@ const Store: Component = () => {
       <StoreAddEditModal/>
       <StoreNameEditModal/>
       <StoreNewAddModal/>
+      <StoreDescriptionEditModal/>
       <ConfirmationModal
         header={() => translate("deleteStoreAdd")}
         open={storeDeleteAddModal}

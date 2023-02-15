@@ -9,7 +9,7 @@
     padding: 15px;
 }
 
-.add-store-name{
+.addStoreName{
     display: flex;
     justify-content: space-between;
 }

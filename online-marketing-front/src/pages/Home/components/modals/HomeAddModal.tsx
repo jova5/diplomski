@@ -1,6 +1,6 @@
 import {Component, Show} from "solid-js";
 import {Box, IconButton, Modal} from "@suid/material";
-import "./HomeAddModal.css";
+import styles from "./HomeAddModal.module.css";
 import {
   homeAddDescription,
   homeAddHeader,
@@ -27,7 +27,7 @@ const HomeAddModal: Component = () => {
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
-      <Box class="modal">
+      <Box class={styles.modal}>
         <Show when={homeAddImage()}
               fallback={<img src={"../../../../../assets/reklama.png"} height={230} alt="Reklama"/>} keyed>
           <img src={homeAddImage()}
@@ -45,7 +45,7 @@ const HomeAddModal: Component = () => {
           <div class="header">
             <p style={{margin: '0', 'font-weight': 600}}>{homeAddHeader()}</p>
           </div>
-          <div class="add-store-name">
+          <div class={styles.addStoreName}>
             {homeAddStoreName()}
             <IconButton
               onClick={async () => {
