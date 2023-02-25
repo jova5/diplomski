@@ -7,9 +7,9 @@ import {Adds} from "../../dto/Adds";
 import {createStore, produce} from "solid-js/store";
 import {Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@suid/material";
 import {translate} from "../../utils/languageAsync";
+import {useParams} from "@solidjs/router";
 
 const list = ["VISIT_STORE", "VISIT_ADD", "RATE_STORE"];
-const STORE_ID = 28;
 
 interface Action {
   id: number,
@@ -20,6 +20,7 @@ interface Action {
 const UserSimulation: Component = () => {
   const [adds, setAdds] = createSignal<Adds[]>([]);
   const [actions, setActions] = createStore<Action[]>([]);
+  const params = useParams();
 
   const userSimulation = setInterval(() => randomVisit(), 1000);
 
@@ -28,10 +29,10 @@ const UserSimulation: Component = () => {
 
     switch (list[random]) {
       case "VISIT_STORE": {
-        await visitStoreAsync(STORE_ID);
+        await visitStoreAsync(+params.soreId);
         setActions(produce(actions => {
           actions.unshift({
-            id: STORE_ID,
+            id: +params.soreId,
             name: "VISIT_STORE",
             grade: -1
           })
@@ -53,10 +54,10 @@ const UserSimulation: Component = () => {
         break;
       case "RATE_STORE": {
         const grade = Math.floor(Math.random() * 5) + 1;
-        await rateStoreAsync(STORE_ID, grade);
+        await rateStoreAsync(+params.soreId, grade);
         setActions(produce(actions => {
           actions.unshift({
-            id: STORE_ID,
+            id: +params.soreId,
             name: "VISIT_ADD",
             grade: grade
           })
@@ -69,7 +70,7 @@ const UserSimulation: Component = () => {
   }
 
   onMount(async () => {
-    setStoreStore(await getStoreById(STORE_ID));
+    setStoreStore(await getStoreById(+params.soreId));
     setAdds(storeStore()!.adds!);
   })
 

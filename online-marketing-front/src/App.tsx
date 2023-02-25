@@ -29,7 +29,7 @@ const App: Component = () => {
         <Route path="/" component={Home}/>
         <Route path="/admin" component={Admin}/>
         <Route path="/statistics/:id" component={Statistics}/>
-        <Route path="/userSimulation" component={UserSimulation}/>
+        <Route path="/userSimulation/:storeId" component={UserSimulation}/>
       </Routes>
     </div>
   );
