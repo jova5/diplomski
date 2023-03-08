@@ -1,0 +1,26 @@
+button.new-something {
+    gap: 10px;
+    /*color: black;*/
+    border-color: black;
+    border-radius: 40px;
+}
+
+div.options {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    padding-bottom: 10px;
+}
+
+div.options-left {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 10px;
+}
+
+div.options-right {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 10px;
+}

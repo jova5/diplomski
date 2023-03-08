@@ -1,0 +1,50 @@
+.modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    background-color: white;
+    border: 2px solid #000;
+    padding: 15px;
+}
+
+.modal-header {
+    font-family: Roboto, serif;
+    font-weight: 500;
+    font-size: larger;
+    color: var(--custom-blue-leather);
+    margin: 0;
+    border-bottom: 2px solid var(--custom-gray-outline);
+    padding-bottom: 10px;
+}
+
+.modal-options {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 20px;
+    border-top: 2px solid var(--custom-gray-outline);
+    padding-top: 10px;
+}
+
+button.cancel {
+    color: var(--custom-delete-red);
+    font-size: medium;
+}
+
+button.ok {
+    font-size: medium;
+}
+
+#modal-modal-description {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 10px;
+    margin-top: 0;
+}
+
+.circular-progress{
+    height: 30px;
+}

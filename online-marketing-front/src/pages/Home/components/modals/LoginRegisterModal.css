@@ -1,0 +1,17 @@
+.input-custom{
+    border: 1px solid var(--custom-gray-outline);
+    padding: 10px 10px 10px 15px;
+    border-radius: 30px;
+    margin: 0;
+    font-size: larger;
+}
+
+.button-change-option{
+    background: none;
+    border: none;
+}
+
+.button-change-option:hover{
+    cursor: pointer;
+    color: #021e34;
+}

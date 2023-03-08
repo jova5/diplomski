@@ -1,0 +1,59 @@
+.content-container{
+    display: flex;
+    flex-flow: column;
+    flex: 1 1 auto;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.content-container-grid{
+    margin: 0 auto;
+    display: grid;
+    gap: 1rem;
+}
+
+.card {
+    display: flex;
+    flex-flow: column;
+    background-color: #ebebeb;
+    color: black;
+    height: 20rem;
+    width: 20rem;
+    border: solid darkgrey 1px;
+}
+
+.card:hover {
+    cursor: pointer;
+}
+
+.header{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+
+.description{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+@media (max-width: 760px) {
+    .content-container-grid { grid-template-columns: repeat(1, 1fr); }
+}
+
+@media (min-width: 760px) {
+    .content-container-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 1130px) {
+    .content-container-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (min-width: 1500px) {
+    .content-container-grid { grid-template-columns: repeat(4, 1fr); }
+}

@@ -1,0 +1,16 @@
+footer{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    background-color: #27b6ff;
+    justify-content: center;
+    align-items: center;
+}
+
+.input-custom{
+    border: 1px solid var(--custom-gray-outline);
+    padding: 10px 10px 10px 15px;
+    border-radius: 30px;
+    margin: 0;
+    font-size: larger;
+}

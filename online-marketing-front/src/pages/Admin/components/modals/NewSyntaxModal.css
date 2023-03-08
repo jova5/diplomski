@@ -1,0 +1,19 @@
+.input-custom{
+    border: 1px solid var(--custom-gray-outline);
+    padding: 10px 10px 10px 15px;
+    border-radius: 30px;
+    margin: 0;
+    font-size: larger;
+}
+
+.language-select{
+    border: 1px solid var(--custom-gray-outline);
+    padding: 10px 10px 10px 15px;
+    border-radius: 30px;
+    margin: 0;
+    font-size: larger;
+}
+
+p{
+    margin-bottom: 0;
+}
