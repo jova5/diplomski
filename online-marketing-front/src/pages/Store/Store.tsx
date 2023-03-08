@@ -41,7 +41,7 @@ const Store: Component = () => {
 
   onMount(async () => {
     const store = localStorage.getItem("user");
-    if (store === null || JSON.parse(store).type !== "USER" || JSON.parse(store).storeId !== +params.id) {
+    if (store !== null && (JSON.parse(store).type !== "USER" || JSON.parse(store).storeId !== +params.id)){
       navigate("/");
     }
     setStoreStore(await getStoreById(+params.id));

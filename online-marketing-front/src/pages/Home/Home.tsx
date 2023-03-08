@@ -11,7 +11,7 @@ const Home: Component = () => {
   return (
     <div style={{
       "max-height": "100vh",
-      display: "flex",
+      "display": "flex",
       "flex-flow": "column"
     }}>
       <HomeNavbar/>
