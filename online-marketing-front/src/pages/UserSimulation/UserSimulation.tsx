@@ -29,10 +29,10 @@ const UserSimulation: Component = () => {
 
     switch (list[random]) {
       case "VISIT_STORE": {
-        await visitStoreAsync(+params.soreId);
+        await visitStoreAsync(+params.storeId);
         setActions(produce(actions => {
           actions.unshift({
-            id: +params.soreId,
+            id: +params.storeId,
             name: "VISIT_STORE",
             grade: -1
           })
@@ -54,10 +54,10 @@ const UserSimulation: Component = () => {
         break;
       case "RATE_STORE": {
         const grade = Math.floor(Math.random() * 5) + 1;
-        await rateStoreAsync(+params.soreId, grade);
+        await rateStoreAsync(+params.storeId, grade);
         setActions(produce(actions => {
           actions.unshift({
-            id: +params.soreId,
+            id: +params.storeId,
             name: "VISIT_ADD",
             grade: grade
           })
@@ -70,7 +70,7 @@ const UserSimulation: Component = () => {
   }
 
   onMount(async () => {
-    setStoreStore(await getStoreById(+params.soreId));
+    setStoreStore(await getStoreById(+params.storeId));
     setAdds(storeStore()!.adds!);
   })
 

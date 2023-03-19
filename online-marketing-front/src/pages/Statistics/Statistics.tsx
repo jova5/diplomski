@@ -34,7 +34,7 @@ const Statistics: Component = () => {
       addsVisits.forEach(item => {
         const add = storeStore()?.adds?.find(i => i.id === item.addId);
         const date = new Date(item.date);
-        ppp.push({
+        ppp.unshift({
           addHeader: add!.header,
           date: date.toLocaleDateString('sr')
         })
@@ -70,7 +70,7 @@ const Statistics: Component = () => {
       const date = new Date(data.date);
       setAddStore(
         produce((adds) => {
-          adds.push({
+          adds.unshift({
             addHeader: add!.header,
             date: date.toLocaleDateString('sr')
           })
